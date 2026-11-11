@@ -53,6 +53,7 @@
       Object.assign(p, { iphone: true, celular: m[1], gen: m[2], pro: m[3] });
       p.log = p.pro && p.gen >= 15; p.log2 = p.pro && p.gen >= 17; p.prores = p.pro && p.gen >= 13;
       p.proraw = p.pro && p.gen >= 12; p.mp48 = (p.pro && p.gen >= 14) || p.gen >= 15;
+      p.abertVar = p.pro && p.gen >= 18;
     } else {
       Object.assign(p, { android: true, celular: c.modeloTexto ? c.modeloTexto : 'seu celular Android', gen: 0, pro: c.tier === 'topo' });
       p.androidLog = c.androidLog || 'nao_sei'; p.log = false; p.log2 = false; p.prores = false; p.proraw = c.tier !== 'basico'; p.mp48 = false;

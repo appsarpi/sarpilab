@@ -45,23 +45,25 @@ ${p.iphone ? seu(`<p>No <b>${p.celular}</b>${p.mp48 ? ', a câmera principal tem
       titulo: 'Exposição: ISO, obturador e abertura',
       corpo: p => `
 <p>Exposição é a quantidade de luz que forma a imagem. Clara demais “estoura” (branco sem detalhe); escura demais “empapa” (preto com ruído).</p>
-${F.triangulo()}
+${F.triangulo(p)}
 <h3>Os três controles</h3>
 ${tabela(['Controle', 'O que faz', 'Efeito colateral'], [
         ['ISO', 'Amplifica o sinal do sensor', 'ISO alto = ruído/granulado'],
         ['Obturador', 'Tempo que o sensor recebe luz', 'Lento = borrão de movimento'],
-        ['Abertura (f/)', 'Tamanho do “furo” da lente', 'No celular é fixa']
+        ['Abertura (f/)', 'Tamanho do “furo” da lente', p.abertVar ? 'f/1.48 (mais luz, fundo desfocado) a f/4 (menos luz, mais coisa em foco)' : 'Na maioria dos celulares é fixa']
       ])}
-<p>Como a abertura do celular é fixa, sobra: <b>mais luz na cena</b>, <b>ISO</b> e <b>obturador</b>. Em foto você pode usar obturador rápido para congelar ação. Em vídeo o obturador fica preso a uma regra (aula de vídeo) — então, quando falta luz, o caminho é <b>acender luz</b>, não subir ISO.</p>
+${p.abertVar ? `<p>Seu <b>${p.celular}</b> é exceção: a câmera principal tem <b>abertura variável</b> (f/1.48, f/1.8, f/2.8 e f/4). Abrir dá mais luz e mais desfoque; fechar escurece e aumenta a área em foco. Nas outras lentes ela continua fixa.</p>
+${seu('<p>Na câmera nativa você ajusta <b>abertura</b>, <b>velocidade do obturador</b>, balanço de branco e vê o <b>histograma</b>, mas <b>não existe controle de ISO</b>: ele fica no automático e compensa o que você travar. Se travar abertura e obturador ao mesmo tempo com pouca luz, o ISO dispara e aparece ruído. Para ISO manual, use o Blackmagic Camera.</p>')}` : `<p>Como a abertura do celular é fixa, sobra: <b>mais luz na cena</b>, <b>ISO</b> e <b>obturador</b>.</p>`}
+<p>Em foto você pode usar obturador rápido para congelar ação. Em vídeo o obturador fica preso a uma regra (aula de vídeo) — então, quando falta luz, o caminho é <b>acender luz</b>, não subir ISO.</p>
 <h3>Trave exposição e foco</h3>
 <p>Na câmera nativa, toque e segure no assunto até aparecer <b>AE/AF Travado</b>. Depois arraste o sol (ícone ao lado do quadrado) para cima ou para baixo para ajustar. Assim a imagem não muda de brilho no meio do vídeo.</p>
 <h3>Leia o histograma</h3>
 ${F.histograma()}
 ${dica('<p>Na dúvida, proteja as altas luzes: céu e pele estourados não voltam na edição; sombras um pouco escuras costumam voltar.</p>')}`,
-      resumo: ['Exposição = ISO + obturador + abertura (fixa no celular).', 'ISO alto gera ruído; obturador lento gera borrão.', 'Toque e segure para travar AE/AF.', 'Proteja as altas luzes: estouro não tem volta.'],
+      resumo: ['Exposição = ISO + obturador + abertura (fixa na maioria dos celulares).', 'ISO alto gera ruído; obturador lento gera borrão.', 'Toque e segure para travar AE/AF.', 'Proteja as altas luzes: estouro não tem volta.'],
       missao: 'Grave 10 s de uma janela com AE/AF travado no céu e outros 10 s travado no interior. Observe o que estoura e o que escurece.',
       quiz: p => [
-        { q: 'No celular, qual elemento do triângulo da exposição normalmente é fixo?', o: ['ISO', 'Obturador', 'Abertura', 'Balanço de branco'], c: 2, e: 'A lente do celular tem abertura fixa.' },
+        { q: 'Na maioria dos celulares, qual elemento do triângulo da exposição é fixo?', o: ['ISO', 'Obturador', 'Abertura', 'Balanço de branco'], c: 2, e: p.abertVar ? 'Na maioria, sim — o seu iPhone 18 Pro é exceção, com abertura variável na câmera principal.' : 'A lente do celular costuma ter abertura fixa.' },
         { q: 'Subir muito o ISO causa…', o: ['Borrão de movimento', 'Ruído/granulado', 'Cores mais quentes', 'Menos estabilização'], c: 1, e: 'ISO amplifica o sinal — e o ruído junto.' },
         { q: 'Num histograma “colado” à direita a imagem está…', o: ['Subexposta', 'Equilibrada', 'Estourada', 'Fora de foco'], c: 2, e: 'A direita representa as altas luzes.' },
         { q: 'O que é mais difícil de recuperar na edição?', o: ['Sombras levemente escuras', 'Altas luzes estouradas', 'Balanço de branco', 'Inclinação do horizonte'], c: 1, e: 'Pixel estourado não guarda informação.' }
@@ -303,7 +305,7 @@ ${F.fluxoApp(p)}
 <h3>Câmera nativa</h3>
 <p>Rápida, confiável e com a melhor estabilização${p.iphone ? ' (modo Ação) e modo Cinematográfico' : ''}. O automático é bom, mas pode mudar exposição, foco e cor no meio do take.</p>
 <h3>Blackmagic Camera (grátis)</h3>
-<p>Controle manual completo: ISO, obturador, balanço de branco, foco, codec e taxa de dados. Ferramentas de profissional: <b>zebra</b> (mostra o que estourou), <b>falsa cor</b>, <b>focus peaking</b>, histograma e LUT de visualização.</p>
+<p>Controle manual completo: ISO, obturador, balanço de branco, foco, codec e taxa de dados. Ferramentas de profissional: <b>zebra</b> (mostra o que estourou), <b>falsa cor</b>, <b>focus peaking</b>, histograma e LUT de visualização — a próxima aula ensina a usar cada uma.</p>
 <h3>Configuração-base sugerida (Blackmagic)</h3>
 ${tabela(['Item', 'Para redes (rápido)', 'Para cor (Log)'], [
         ['Resolução', '4K', '4K'],
@@ -319,6 +321,45 @@ ${dica('<p>Salve esses dois conjuntos como <b>presets</b> no Blackmagic Camera e
         { q: 'Para que serve a zebra?', o: ['Mostrar áreas estouradas', 'Estabilizar', 'Mudar a cor', 'Gravar áudio'], c: 0, e: 'Ela listra as áreas acima de um nível de brilho.' },
         { q: 'Num story espontâneo, qual app é mais prático?', o: ['Blackmagic Camera', 'Câmera nativa', 'DaVinci Resolve', 'Lightroom'], c: 1, e: 'Abre rápido e o automático resolve.' },
         { q: 'Focus peaking ajuda a…', o: ['Ver o que está em foco', 'Reduzir o ruído', 'Medir o áudio', 'Mudar o codec'], c: 0, e: 'Ele destaca as bordas nítidas.' }
+      ]
+    },
+    {
+      id: 'medir-exposicao', modulo: 'm3', nivel: 'intermediário', min: 10, tags: ['config', 'luz'], prereq: ['exposicao', 'apps-camera'],
+      quando: p => p.foco !== 'foto',
+      titulo: 'Histograma, zebra e falsa cor',
+      corpo: p => `
+<p>A tela do celular mente: ela muda de brilho, reflete o sol e, em Log, mostra uma imagem cinza. Para saber se a exposição está certa, use as <b>ferramentas de medição</b> — elas leem o sinal de verdade.</p>
+<h3>1. Histograma</h3>
+${F.histograma()}
+<p>É um gráfico de quantos pixels existem em cada nível de brilho: sombras à esquerda, altas luzes à direita. O que importa são as <b>pontas</b>: dados “colados” na parede direita = estouro; colados na esquerda = preto sem detalhe. Um pico alto e fino perto da direita (parede branca no sol, céu) é sinal de alerta.</p>
+<h3>2. Zebra</h3>
+${F.zebra()}
+<p>A zebra desenha listras por cima de tudo que passou de um nível de brilho que você escolhe. É o jeito mais rápido de ver <b>onde</b> está estourando, não só <b>se</b> está.</p>
+${tabela(['Nível da zebra', 'Para quê'], [
+        ['100%', 'Avisa o que estourou de vez — o padrão mais seguro'],
+        ['90–95%', 'Avisa um pouco antes de estourar'],
+        ['~70%', 'Conferir pele em Rec.709 (listras leves na testa/bochecha = pele bem exposta)']
+      ])}
+${dica('<p>Regra prática: zebra em 100%. Se listrar o rosto ou o assunto, escureça. Se listrar só um reflexo pequeno ou o sol, tudo bem.</p>')}
+<h3>3. Falsa cor</h3>
+${F.falsaCor()}
+<p>A falsa cor troca a imagem por um mapa de cores conforme o brilho. Ela é ótima em <b>Log</b>, porque não depende de como a imagem “parece” na tela. Procure: rosto no rosa ou um pouco acima, nada importante em amarelo/vermelho, sombras sem roxo.</p>
+<h3>Quando está estourando: o que fazer</h3>
+${F.fluxoEstouro(p)}
+${p.abertVar ? seu(`<p>Caso real no <b>${p.celular}</b> com Blackmagic: Apple Log, ISO 55, íris f/4, obturador 1/60 travado, sol do meio-dia — e a parede ainda estoura. Os passos 1 e 2 já estão no limite (ISO mínimo e íris mais fechada). Restam: <b>filtro ND</b> (mantém o 1/60), obturador mais rápido (1/120–1/250) ou trocar para Rec.709.</p>`) :
+          seu(`<p>No <b>${p.celular}</b> a abertura é fixa: depois de chegar ao ISO mínimo, as saídas são <b>filtro ND</b> para celular, obturador mais rápido ou mudar a luz (sombra, horário).</p>`)}
+<h3>Onde ativar</h3>
+<ul><li><b>Blackmagic Camera:</b> histograma, zebra e falsa cor ficam nas ferramentas de monitoramento do app. Ligue zebra em 100% e deixe o histograma sempre visível.</li>
+<li><b>Câmera nativa${p.abertVar ? ' (18 Pro)' : ''}:</b> ${p.abertVar ? 'o histograma está nos controles Pro; não há zebra nem falsa cor.' : 'não tem zebra nem falsa cor — use o Blackmagic quando a exposição importar.'}</li></ul>
+${p.log ? atencao('<p>Em Log, a imagem cinza e “lavada” é normal. Não julgue pelo olho: confie na zebra/falsa cor. Ligar uma LUT de visualização ajuda a enxergar, mas não muda o arquivo.</p>') : ''}`,
+      resumo: ['A tela engana; histograma, zebra e falsa cor medem de verdade.', 'Histograma: cuidado com dados colados na direita.', 'Zebra 100%: listras no assunto = escureça.', 'Falsa cor: pele no rosa, nada importante em vermelho.', 'Estourou com ISO mínimo: ND, obturador mais rápido ou outra luz.'],
+      missao: 'No Blackmagic Camera, ligue zebra em 100% e falsa cor. Grave uma cena ao sol e outra na sombra; ajuste até a zebra sumir do assunto principal.',
+      quiz: p => [
+        { q: 'Num histograma, dados colados na borda direita significam…', o: ['Imagem escura', 'Altas luzes estouradas', 'Cor errada', 'Foco errado'], c: 1, e: 'A direita representa o brilho máximo.' },
+        { q: 'O que a zebra mostra?', o: ['Áreas fora de foco', 'Áreas acima do nível de brilho escolhido', 'O balanço de branco', 'Tremidas'], c: 1, e: 'Ela listra o que passou do limite.' },
+        { q: 'Na falsa cor, a área vermelha indica…', o: ['Pele', 'Sombra', 'Estouro', 'Cinza médio'], c: 2, e: 'Vermelho = altas luzes estouradas.' },
+        { q: 'ISO já no mínimo e ainda estoura, mantendo 1/60. Qual a melhor solução?', o: ['Subir o ISO', 'Filtro ND', 'Mais fps', 'Tirar a LUT'], c: 1, e: 'O ND tira luz sem mudar o obturador.' },
+        { q: 'Por que não confiar só na tela quando grava em Log?', o: ['Porque a imagem parece cinza mesmo bem exposta', 'Porque o Log grava sem cor', 'Porque a zebra não funciona em Log', 'Porque o histograma some'], c: 0, e: 'O Log é plano de propósito; meça com as ferramentas.' }
       ]
     },
     {

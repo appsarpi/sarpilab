@@ -15,7 +15,7 @@
 
   const F = {};
 
-  F.triangulo = () => fig(svg(360, 250,
+  F.triangulo = (p) => fig(svg(360, 250,
     `<polygon points="180,25 330,215 30,215" fill="none" stroke="${C.roxo}" stroke-width="3"/>
      <circle cx="180" cy="25" r="7" fill="${C.ambar}"/><circle cx="330" cy="215" r="7" fill="${C.ambar}"/><circle cx="30" cy="215" r="7" fill="${C.ambar}"/>
      ${t(180, 135, 'EXPOSIÇÃO', { peso: 700, tam: 15 })}
@@ -24,8 +24,9 @@
      ${t(330, 242, 'Obturador', { peso: 700 })}${t(250, 242, '', {})}
      ${t(30, 242, 'Abertura', { peso: 700 })}
      ${t(330, 196, 'tempo / movimento', { cor: C.suave, tam: 11, anc: 'end' })}
-     ${t(30, 196, 'fixa no celular', { cor: C.suave, tam: 11, anc: 'start' })}`, 'Triângulo da exposição'),
-    'Triângulo da exposição. No celular a abertura é fixa, então você controla ISO e obturador (e a luz da cena).');
+     ${t(30, 196, p && p.abertVar ? 'f/1.48 a f/4 no seu' : 'fixa no celular', { cor: C.suave, tam: 11, anc: 'start' })}`, 'Triângulo da exposição'),
+    p && p.abertVar ? 'Triângulo da exposição. Seu iPhone tem abertura variável na câmera principal: você controla os três lados.'
+      : 'Triângulo da exposição. Na maioria dos celulares a abertura é fixa, então você controla ISO e obturador (e a luz da cena).');
 
   F.histograma = () => {
     const curva = (pts, cor) => `<path d="${pts}" fill="${cor}" opacity=".55" stroke="${cor}" stroke-width="1.5"/>`;
@@ -221,6 +222,47 @@
       g += `<rect x="${x}" y="30" width="52" height="44" rx="6" fill="${C.card}" stroke="${C.roxo}"/>${t(x + 26, 50, 'Caixa ' + (i + 1), { tam: 10, peso: 700 })}${t(x + 26, 66, s, { tam: 10, cor: C.suave })}`;
     });
     return fig(svg(360, 100, g + t(8, 20, 'Acertou → sobe de caixa. Errou → volta para a 1.', { anc: 'start', tam: 12 }), 'Revisão espaçada'), '');
+  };
+
+  F.zebra = () => {
+    const listras = Array.from({ length: 16 }, (_, i) => `<line x1="${200 + i * 10}" y1="20" x2="${160 + i * 10}" y2="100" stroke="#000" stroke-width="3" opacity=".55"/>`).join('');
+    return fig(svg(360, 175,
+      `<defs><clipPath id="zc"><path d="M190 20 H340 V100 H230 Q200 70 190 20Z"/></clipPath></defs>
+       <rect x="20" y="20" width="320" height="120" rx="8" fill="#9aa3ad"/>
+       <path d="M190 20 H340 V100 H230 Q200 70 190 20Z" fill="#fbfbfb"/>
+       <g clip-path="url(#zc)">${listras}</g>
+       <rect x="20" y="100" width="320" height="40" fill="#6b5a48"/>
+       <circle cx="90" cy="80" r="22" fill="#c9926f"/>
+       ${t(265, 60, 'ZEBRA', { peso: 700, cor: C.vermelho })}
+       ${t(90, 125, 'pele ok', { tam: 11, cor: '#fff' })}
+       ${t(20, 164, 'Listras só no céu estourado; o rosto está ok.', { anc: 'start', tam: 11, cor: C.suave })}`, 'Zebra'),
+      'A zebra desenha listras por cima das áreas acima do nível escolhido. Ela não é gravada no vídeo.');
+  };
+
+  F.falsaCor = () => {
+    const faixas = [['#7b2fbe', 'roxo', 'preto sem detalhe'], ['#2f6fdc', 'azul', 'sombra'], ['#8a8a8a', 'cinza', 'tons normais'],
+      ['#23b14d', 'verde', 'cinza médio'], ['#f08fc0', 'rosa', 'pele'], ['#f2d21b', 'amarelo', 'quase estourando'], ['#e5352b', 'vermelho', 'estourado']];
+    let g = '';
+    faixas.forEach(([cor, n, d], i) => {
+      const x = 8 + i * 49.5;
+      g += `<rect x="${x}" y="20" width="47" height="34" rx="4" fill="${cor}"/>`;
+      g += t(x + 23.5, 72, n, { tam: 10, peso: 700 });
+      g += t(x + 23.5, 86, d.split(' ')[0], { tam: 9, cor: C.suave });
+      if (d.split(' ')[1]) g += t(x + 23.5, 98, d.split(' ').slice(1).join(' '), { tam: 9, cor: C.suave });
+    });
+    return fig(svg(360, 112, t(8, 12, 'escuro', { anc: 'start', tam: 10, cor: C.suave }) + t(352, 12, 'claro', { anc: 'end', tam: 10, cor: C.suave }) + g, 'Escala de falsa cor'),
+      'Falsa cor pinta a imagem pelo brilho. O que importa: nada de vermelho no que é importante, pele no rosa, nada de roxo nas sombras que você quer ver.');
+  };
+
+  F.fluxoEstouro = (p) => {
+    const passos = ['ISO no mínimo', p && p.abertVar ? 'Fechar a íris (até f/4)' : 'Mudar a posição/horário', 'Colocar filtro ND', 'Obturador mais rápido', 'Trocar Log → Rec.709'];
+    let g = seta('se', 'var(--suave)');
+    passos.forEach((s, i) => {
+      const y = 8 + i * 44;
+      g += `<rect x="70" y="${y}" width="220" height="32" rx="8" fill="${C.card}" stroke="${i === 2 ? C.verde : C.linha}" stroke-width="2"/>${t(180, y + 21, (i + 1) + '. ' + s, { tam: 12, peso: i === 2 ? 700 : 400 })}`;
+      if (i < passos.length - 1) g += `<line x1="180" y1="${y + 32}" x2="180" y2="${y + 43}" stroke="${C.suave}" marker-end="url(#se)"/>`;
+    });
+    return fig(svg(360, 225, g, 'O que fazer quando estoura'), 'Ordem para escurecer a imagem sem estragar o movimento. O ND (em verde) é a solução “certa” em sol forte.');
   };
 
   window.FIG = F;
