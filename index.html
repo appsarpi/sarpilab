@@ -661,7 +661,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         <div class="flex items-center justify-between gap-3 mb-4 bg-gray-50 border border-gray-200 rounded-lg p-2.5">
             <div>
                 <label class="block font-bold text-gray-700 text-sm">Desconto combo (%)</label>
-                <span class="text-[11px] text-gray-500">Opcional: digite um percentual para dar desconto nos serviços de pagamento único. Vazio = sem desconto.</span>
+                <span class="text-[11px] text-gray-500">Opcional: digite um percentual para dar desconto nos serviços avulsos (Lab Express e Visão 360). Vazio = sem desconto.</span>
             </div>
             <input type="number" id="desconto" min="0" max="50" step="1" class="campo w-16 border-2 border-gray-200 p-1.5 rounded-lg text-sm text-right">
         </div>
@@ -708,7 +708,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     <input type="checkbox" id="parc-ativo" class="w-5 h-5 rounded">
                     <span class="font-bold text-gray-700 text-sm">Oferecer parcelamento na proposta</span>
                 </label>
-                <p class="text-[11px] text-gray-500 mt-1">Vale para o total dos serviços de pagamento único, já com desconto, se houver. A mensalidade do Vitrine Lab não é parcelada.</p>
+                <p class="text-[11px] text-gray-500 mt-1">Opcional, só no cartão. Vale para o total dos serviços avulsos, já com desconto, se houver. Desligado, a proposta mostra só o pagamento 50/50. A mensalidade do Vitrine Lab não é parcelada.</p>
 
                 <div id="parc-box" class="mt-3 space-y-3 opacity-50 pointer-events-none">
                     <div class="grid grid-cols-2 gap-3">
@@ -910,9 +910,9 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         { rotulo: 'Imóveis', texto: 'Imóvel bem apresentado vende mais rápido. As imagens aéreas mostram localização e entorno que fotos comuns não alcançam.' }
     ];
 
-    const CONDICOES_PADRAO = 'Pagamento via Pix ou cartão. Lab Express e Visão 360: 50% antes da captação e 50% na entrega. Vitrine Lab: 50% no fechamento (a reunião de alinhamento é marcada após esse pagamento) e 50% no meio do mês.';
+    const CONDICOES_PADRAO = 'Pagamento via Pix ou cartão, em duas partes, conforme o quadro de investimento.';
 
-    const CONDICOES_PARCELADO = 'Lab Express e Visão 360: à vista ou parcelado, conforme as opções acima. Vitrine Lab: 50% no fechamento (a reunião de alinhamento é marcada após esse pagamento) e 50% no meio do mês.';
+    const CONDICOES_PARCELADO = 'Pagamento via Pix ou cartão, em duas partes, conforme o quadro de investimento. No cartão, os serviços avulsos também podem ser parcelados, conforme as opções acima.';
 
     /* ---------- ESTADO SALVO NO NAVEGADOR ---------- */
     const CHAVE = 'sarpi_cfg_v2';
@@ -964,7 +964,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 '<div class="text-right"><div class="flex items-center gap-1">' +
                 '<span class="text-xs text-gray-500 font-bold">R$</span>' +
                 '<input type="number" min="0" step="1" id="preco' + s.id + '" value="' + s.preco + '" class="campo w-20 border-2 border-gray-200 p-1.5 rounded-lg text-sm text-right"></div>' +
-                '<div class="text-[10px] text-gray-400 mt-0.5">' + (s.tipo === 'mensal' ? 'por mês' : 'pagamento único') + '</div></div>';
+                '<div class="text-[10px] text-gray-400 mt-0.5">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div></div>';
             lista.appendChild(linha);
         });
     })();
@@ -1140,13 +1140,35 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             ? 'Parcelas fixas com juros de ' + String(c.juros).replace('.', ',') + '% ao mês.'
             : 'Parcelamento sem juros.';
     }
+    // Pagamento em duas partes, como combinado para cada serviço
+    const MOMENTOS = {
+        unico: ['50% antes da captação, para reservar a data', '50% na entrega do material'],
+        mensal: ['50% no fechamento (a reunião de alinhamento é marcada depois desse pagamento)', '50% no meio do mês']
+    };
+    function blocoPagamento(sel, precoDe, pct) {
+        if (!sel.length) return '';
+        let h = '<div class="mt-3 pt-3 border-t border-purple-200" style="break-inside:avoid">' +
+            '<p class="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-2">Como funciona o pagamento (Pix ou cartão)</p>' +
+            '<table class="w-full text-[12px]" style="border-collapse:collapse">';
+        sel.forEach(s => {
+            const valor = s.tipo === 'mensal' ? precoDe(s) : precoDe(s) * (1 - pct / 100);
+            const primeira = Math.round(valor * 50) / 100;
+            const segunda = Math.round((valor - primeira) * 100) / 100;
+            const m = MOMENTOS[s.tipo] || MOMENTOS.unico;
+            h += '<tr><td colspan="2" class="pt-2 font-bold text-gray-900">' + s.rotulo + (s.tipo === 'mensal' ? ' <span class="font-normal text-gray-500">(todo mês)</span>' : '') + '</td></tr>' +
+                '<tr><td class="py-0.5 pl-3 text-gray-700">' + m[0] + '</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(primeira) + '</td></tr>' +
+                '<tr><td class="py-0.5 pl-3 text-gray-700">' + m[1] + '</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(segunda) + '</td></tr>';
+        });
+        return h + '</table></div>';
+    }
+
     function blocoParcelas(total, temUnico, c) {
         if (!c.ativo || !temUnico || total <= 0) return '';
         const opcoes = calcParcelas(total, c);
         if (!opcoes.length) return '';
         const comJuros = c.tipo === 'com' && c.juros > 0;
         let h = '<div class="mt-3 pt-3 border-t border-purple-200" style="break-inside:avoid">' +
-            '<p class="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-2">Formas de pagamento (pagamento único)</p>' +
+            '<p class="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-2">Opção no cartão: parcelamento (serviços avulsos)</p>' +
             '<p class="text-[13px] text-gray-800 mb-2"><b>À vista:</b> ' + moeda(total) + '</p>' +
             '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">';
         opcoes.forEach(o => {
@@ -1160,7 +1182,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
     function atualizarResumoParcelas(total, temUnico, c) {
         const el = $('parc-resumo');
         if (!temUnico || total <= 0) {
-            el.innerHTML = 'Marque pelo menos um serviço de pagamento único (Lab Express ou Visão 360) na aba Proposta para ver as parcelas.';
+            el.innerHTML = 'Marque pelo menos um serviço avulso (Lab Express ou Visão 360) na aba Proposta para ver as parcelas.';
             return;
         }
         const opcoes = calcParcelas(total, c);
@@ -1250,7 +1272,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 precoBox.classList.remove('hidden');
                 precoBox.innerHTML =
                     '<div class="text-lg font-black text-purple-700 leading-none">' + moeda(precoDe(s)) + '</div>' +
-                    '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'por mês' : 'pagamento único') + '</div>';
+                    '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div>';
                 corpo.innerHTML =
                     '<p class="text-[13px] text-gray-800 leading-relaxed mb-2 font-semibold">' + s.beneficio + '</p>' +
                     '<ul class="lista-entregas">' + s.entregas.map(e => '<li>' + e + '</li>').join('') + '</ul>';
@@ -1295,18 +1317,19 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 h += '<tr class="border-b border-purple-100">' +
                     '<td class="py-2 pr-3"><span class="font-bold text-gray-900">' + s.rotulo + '</span>' +
                     '<span class="block text-[11px] text-gray-500">' + s.curto + '</span></td>' +
-                    '<td class="py-2 px-2 text-[11px] text-gray-500 whitespace-nowrap">' + (s.tipo === 'mensal' ? 'por mês' : 'pagamento único') + '</td>' +
+                    '<td class="py-2 px-2 text-[11px] text-gray-500 whitespace-nowrap">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</td>' +
                     '<td class="py-2 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda(precoDe(s)) + '</td></tr>';
             });
             if (sel.length > 1 || descValor > 0) {
                 if (unicos.length && descValor > 0) {
-                    h += linhaTotal('Subtotal (pagamento único)', moeda(subUnico), false);
+                    h += linhaTotal('Subtotal (serviços avulsos)', moeda(subUnico), false);
                     h += linhaTotal('Desconto combo (' + pct + '%)', '− ' + moeda(descValor), false, 'text-green-700');
                 }
-                if (unicos.length) h += linhaTotal('Total (pagamento único)', moeda(totalUnico), true);
+                if (unicos.length) h += linhaTotal('Total (serviços avulsos)', moeda(totalUnico), true);
                 if (mensais.length) h += linhaTotal('Mensalidade', moeda(totalMensal) + ' /mês', true);
             }
             h += '</table>';
+            h += blocoPagamento(sel, precoDe, pct);
             h += blocoParcelas(totalUnico, unicos.length > 0, cp);
             if (validade) h += '<p class="text-[11px] font-bold text-gray-600 mt-3">Proposta válida até ' + fmtData(validade) + '.</p>';
             invest.innerHTML = h;
@@ -1327,7 +1350,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             if ($('check-svc2').checked) {
                 termos.push('Imagens aéreas dependem de clima e das condições de voo do local. Se houver impedimento, reagendamos sem custo.');
             }
-            if ($('check-svc3').checked) termos.push('Vitrine Lab: mês a mês, sem fidelidade. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
+            if ($('check-svc3').checked) termos.push('Vitrine Lab: captações em Rio das Ostras, em locais definidos na reunião de alinhamento. Mês a mês, sem fidelidade. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
             if (condicoes) termos.push(condicoes);
         }
         const lista = $('pdf-termos-lista');
