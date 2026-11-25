@@ -781,7 +781,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                         </div>
                         <div class="text-right">
                             <h1 class="text-4xl fonte-marca titulo-logo"><span>SARPI LAB</span></h1>
-                            <p class="text-sarpi font-black tracking-widest text-sm uppercase mt-1">Imagens Aéreas & Redes Sociais</p>
+                            <p class="text-sarpi font-black tracking-widest text-sm uppercase mt-1">Criatividade com resultado</p>
                             <a href="https://instagram.com/sarpi.lab" class="text-gray-600 font-bold text-sm mt-1 inline-block" style="text-decoration:none">instagram: @sarpi.lab</a>
                         </div>
                     </div>
@@ -823,7 +823,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 
                     <!-- Chamada para ação -->
                     <div class="mt-6 pt-4 border-t-2 border-gray-200 text-center" style="break-inside:avoid">
-                        <p class="fonte-marca text-xl text-sarpi">VAMOS CONSTRUIR SUA AUTORIDADE JUNTOS.</p>
+                        <p class="fonte-marca text-xl text-sarpi">VAMOS CRESCER JUNTOS.</p>
                         <a id="pdf-cta" href="#" class="hidden mt-3 inline-block bg-purple-600 text-white font-black text-base px-8 py-3 rounded-full uppercase tracking-wider shadow" style="text-decoration:none">
                             Chamar no WhatsApp &rsaquo;
                         </a>
@@ -903,7 +903,8 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         { rotulo: 'Novidade / inauguração', texto: 'Vocês estão lançando uma novidade e precisam de imagens de impacto para lotar a agenda desde o primeiro dia.' },
         { rotulo: 'Constância nas redes', texto: 'O seu perfil precisa de constância e de um padrão visual forte para ser lembrado e gerar pedidos toda semana.' },
         { rotulo: 'Valorizar o espaço', texto: 'O seu espaço entrega mais do que as fotos atuais mostram. Imagens profissionais elevam o valor percebido e sustentam o seu preço.' },
-        { rotulo: 'Evento', texto: 'Este evento é uma oportunidade única de gerar conteúdo que continua vendendo depois que a última pessoa vai embora.' },
+        { rotulo: 'Comércio local', texto: 'O seu negócio já tem clientes fiéis. Um Instagram ativo e bonito faz mais gente da região descobrir e escolher você.' },
+        { rotulo: 'Pousadas e hotéis', texto: 'Quem procura hospedagem escolhe pelas fotos. Imagens profissionais e aéreas mostram o seu espaço e a região antes da reserva.' },
         { rotulo: 'Sem tempo', texto: 'Você precisa do seu tempo para tocar o negócio. Deixando o conteúdo com a gente, o perfil não para e a operação não perde o foco.' },
         { rotulo: 'Imóveis', texto: 'Imóvel bem apresentado vende mais rápido. As imagens aéreas mostram localização e entorno que fotos comuns não alcançam.' }
     ];
@@ -1203,16 +1204,16 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         // 2. Introdução curta, começando pelo cliente
         const intro = $('pdf-intro');
         intro.innerHTML = '';
-        intro.appendChild(document.createTextNode('Preparamos esta proposta para levar '));
+        intro.appendChild(document.createTextNode('Preparamos esta proposta para ajudar '));
         const forte = document.createElement('strong');
         forte.textContent = empresa ? empresa : 'o seu negócio';
         intro.appendChild(forte);
-        intro.appendChild(document.createTextNode(' a atrair os olhares certos, encantar o público e vender mais no ambiente digital.'));
+        intro.appendChild(document.createTextNode(' a ganhar público, admiração e vendas, unindo imagem profissional, conteúdo criativo e estratégia.'));
 
         // 3. Por que essas soluções (opcional; vazio = texto padrão)
         $('pdf-motivo').innerText = motivo
             ? motivo
-            : 'Marcamos abaixo as soluções que acreditamos serem o próximo grande passo para o seu negócio.';
+            : 'Escolhemos as soluções abaixo pensando no momento do seu negócio e no resultado que você quer alcançar.';
 
         // 4. Prova de resultado
         $('pdf-prova-box').classList.toggle('hidden', !prova);
