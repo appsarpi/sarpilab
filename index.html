@@ -457,6 +457,9 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             letter-spacing: 0.5px;
         }
 
+        .selo { display: flex; align-items: center; justify-content: center; }
+        .selo.hidden { display: none; }
+        .modo-pdf .selo-embreve > span { position: relative; top: var(--ajuste-selo, -0.25em); }
         .modo-pdf .badge-recomendado > span { position: relative; top: var(--ajuste-selo, -0.25em); }
         .modo-pdf .titulo-logo > span { position: relative; top: var(--ajuste-pdf, -0.35em); }
         .titulo-logo {
@@ -824,7 +827,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 
                     <!-- Chamada para ação -->
                     <div class="mt-6 pt-4 border-t-2 border-gray-200 text-center" style="break-inside:avoid">
-                        <p class="fonte-marca text-xl text-sarpi">VAMOS CRESCER JUNTOS.</p>
+                        <p class="fonte-marca text-xl text-sarpi">VAMOS TRANSFORMAR CRIATIVIDADE EM RESULTADO.</p>
                         <a id="pdf-cta" href="#" class="hidden mt-3 inline-block bg-purple-600 text-white font-black text-base px-8 py-3 rounded-full uppercase tracking-wider shadow" style="text-decoration:none">
                             Chamar no WhatsApp &rsaquo;
                         </a>
@@ -895,6 +898,13 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 'Mês a mês, sem fidelidade'
             ],
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>'
+        },
+        {
+            id: 4, nome: 'MENTORIA DE EXPANSÃO', rotulo: 'Mentoria de Expansão', curto: 'Em breve',
+            preco: 0, tipo: 'embreve',
+            resumo: 'Mentoria para o seu negócio crescer além do Instagram: estratégia, posicionamento e planejamento de vendas, lado a lado com o Sarpi Lab.',
+            beneficio: '', entregas: [],
+            icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z"></path></svg>'
         }
     ];
 
@@ -955,6 +965,18 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         const lista = $('lista-servicos');
         SERVICOS.forEach(s => {
             const linha = document.createElement('div');
+            if (s.tipo === 'embreve') {
+                linha.className = 'flex items-center gap-2 p-2.5 border rounded-lg bg-gray-50 opacity-70';
+                linha.innerHTML =
+                    '<label class="flex items-start gap-3 flex-1">' +
+                    '<input type="checkbox" id="check-svc' + s.id + '" class="w-5 h-5 mt-0.5 rounded" disabled>' +
+                    '<span><span class="block font-semibold text-gray-800 text-sm">' + s.id + '. ' + s.rotulo + '</span>' +
+                    '<span class="block text-xs text-gray-500">Aparece na proposta como “em breve”</span></span></label>' +
+                    '<input type="hidden" id="preco' + s.id + '" value="0">' +
+                    '<span class="text-[10px] font-black uppercase tracking-wider text-white rounded-full" style="background:#8C52FF;padding:4px 10px">Em breve</span>';
+                lista.appendChild(linha);
+                return;
+            }
             linha.className = 'flex items-center gap-2 p-2.5 border rounded-lg hover:bg-purple-50 transition';
             linha.innerHTML =
                 '<label class="flex items-start gap-3 flex-1 cursor-pointer">' +
@@ -977,9 +999,10 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             card.className = 'card-servico rounded-xl p-5 relative';
             card.id = 'pdf-svc' + s.id;
             card.innerHTML =
-                '<div class="badge-recomendado hidden absolute -top-3 -right-2 text-white text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="background:#8C52FF;display:flex;align-items:center;justify-content:center;height:22px;line-height:1;padding:0 12px"><span>★ Indicado para o seu momento</span></div>' +
+                '<div class="selo badge-recomendado hidden absolute -top-3 -right-2 text-white text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="background:#8C52FF;height:22px;line-height:1;padding:0 12px"><span>★ Indicado para o seu momento</span></div>' +
                 '<div class="flex items-center gap-2 mb-3">' +
                 '<div class="bg-gray-900 p-2 rounded-lg text-white shadow shrink-0">' + s.icone + '</div>' +
+                (s.tipo === 'embreve' ? '<div class="selo selo-embreve absolute -top-3 -right-2 text-white text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="background:#111827;height:22px;line-height:1;padding:0 12px"><span>Em breve</span></div>' : '') +
                 '<h3 class="fonte-marca titulo-logo text-lg whitespace-nowrap"><span>' + s.nome + '</span></h3>' +
                 '<div class="preco-box hidden ml-auto text-right shrink-0 whitespace-nowrap"></div></div>' +
                 '<div class="corpo"></div>';
@@ -1264,7 +1287,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             const card = $('pdf-svc' + s.id);
             card.classList.toggle('card-destaque', marcado);
             card.querySelector('.badge-recomendado').classList.toggle('hidden', !marcado);
-            card.style.order = marcado ? 0 : 1;
+            card.style.order = marcado ? 0 : (s.tipo === 'embreve' ? 2 : 1);
 
             const precoBox = card.querySelector('.preco-box');
             const corpo = card.querySelector('.corpo');
