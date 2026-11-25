@@ -1,6 +1,6 @@
 # sarpilab
 
-- `index.html` — Gerador de propostas do Sarpi Lab (offline).
+- `index.html` — Gerador de propostas do Sarpi Lab (offline), com o catálogo v3.
 - `curso/` — **Sarpi Lab Academy**: curso online personalizado de fotografia e filmagem (celular, drone, edição e redes).
 
 ## Sarpi Lab Academy (`/curso`)
