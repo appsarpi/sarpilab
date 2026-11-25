@@ -457,6 +457,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             letter-spacing: 0.5px;
         }
 
+        .modo-pdf .badge-recomendado > span { position: relative; top: var(--ajuste-selo, -0.25em); }
         .modo-pdf .titulo-logo > span { position: relative; top: var(--ajuste-pdf, -0.35em); }
         .titulo-logo {
             display: inline-block;
@@ -976,7 +977,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             card.className = 'card-servico rounded-xl p-5 relative';
             card.id = 'pdf-svc' + s.id;
             card.innerHTML =
-                '<div class="badge-recomendado hidden absolute -top-3 -right-2 bg-purple-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">★ Direcionado para o seu momento</div>' +
+                '<div class="badge-recomendado hidden absolute -top-3 -right-2 text-white text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="background:#8C52FF;display:flex;align-items:center;justify-content:center;height:22px;line-height:1;padding:0 12px"><span>★ Indicado para o seu negócio</span></div>' +
                 '<div class="flex items-center gap-2 mb-3">' +
                 '<div class="bg-gray-900 p-2 rounded-lg text-white shadow shrink-0">' + s.icone + '</div>' +
                 '<h3 class="fonte-marca titulo-logo text-lg whitespace-nowrap"><span>' + s.nome + '</span></h3>' +
