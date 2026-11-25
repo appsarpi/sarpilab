@@ -640,19 +640,18 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             <label class="font-bold text-gray-700 text-sm">Soluções em foco e investimento de cada uma</label>
         </div>
         <div class="flex flex-wrap gap-2 mb-3">
-            <button type="button" class="chip" data-preset="1,4">Pacote Redes Sociais</button>
+            <button type="button" class="chip" data-preset="3">Pacote Redes Sociais</button>
             <button type="button" class="chip" data-preset="2,1">Pacote Turismo / Imóveis</button>
-            <button type="button" class="chip" data-preset="3,2">Pacote Eventos</button>
-            <button type="button" class="chip" data-preset="">Limpar</button>
+                        <button type="button" class="chip" data-preset="">Limpar</button>
         </div>
         <div class="space-y-2 mb-2" id="lista-servicos"></div>
         <p id="aviso-sobreposicao" class="hidden text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-2 mb-2">
-            A Gestão Lab já inclui 1 diária de captação por mês. Com o Lab Express, a sessão dele conta como extra.
+            O Vitrine Lab já inclui 4 horas de captação por mês. Com o Lab Express junto, a sessão dele conta como captação extra.
         </p>
         <div class="flex items-center justify-between gap-3 mb-4 bg-gray-50 border border-gray-200 rounded-lg p-2.5">
             <div>
                 <label class="block font-bold text-gray-700 text-sm">Desconto combo (%)</label>
-                <span class="text-[11px] text-gray-500">Automático: 5% com 2 serviços, 10% com 3 ou mais. Vale só para pagamento único. Apague para voltar ao automático.</span>
+                <span class="text-[11px] text-gray-500">Opcional: digite um percentual para dar desconto nos serviços de pagamento único. Vazio = sem desconto.</span>
             </div>
             <input type="number" id="desconto" min="0" max="50" step="1" class="campo w-16 border-2 border-gray-200 p-1.5 rounded-lg text-sm text-right">
         </div>
@@ -699,7 +698,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     <input type="checkbox" id="parc-ativo" class="w-5 h-5 rounded">
                     <span class="font-bold text-gray-700 text-sm">Oferecer parcelamento na proposta</span>
                 </label>
-                <p class="text-[11px] text-gray-500 mt-1">Vale para o total dos serviços de pagamento único, já com o desconto combo. A mensalidade da Gestão Lab não é parcelada.</p>
+                <p class="text-[11px] text-gray-500 mt-1">Vale para o total dos serviços de pagamento único, já com desconto, se houver. A mensalidade do Vitrine Lab não é parcelada.</p>
 
                 <div id="parc-box" class="mt-3 space-y-3 opacity-50 pointer-events-none">
                     <div class="grid grid-cols-2 gap-3">
@@ -773,7 +772,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                         </div>
                         <div class="text-right">
                             <h1 class="text-4xl fonte-marca text-gray-900">SARPI LAB</h1>
-                            <p class="text-sarpi font-black tracking-widest text-sm uppercase mt-1">Imagens Aéreas & Gestão</p>
+                            <p class="text-sarpi font-black tracking-widest text-sm uppercase mt-1">Imagens Aéreas & Redes Sociais</p>
                             <a href="https://instagram.com/sarpi.lab" class="text-gray-600 font-bold text-sm mt-1 inline-block" style="text-decoration:none">instagram: @sarpi.lab</a>
                         </div>
                     </div>
@@ -843,60 +842,47 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
     // Preços sugeridos para Rio das Ostras (R$). Dá para ajustar cada um no painel, proposta a proposta.
     const SERVICOS = [
         {
-            id: 1, nome: 'LAB EXPRESS', rotulo: 'Lab Express', curto: '2 h de captação + 4 vídeos curtos',
-            preco: 590, tipo: 'unico',
-            resumo: 'Sessão ágil focada em gerar volume de conteúdo. Entregamos vídeos curtos (Reels/TikTok), estabilizados e dinâmicos, desenhados especificamente para prender a atenção do público e vender rápido no dia a dia.',
-            beneficio: 'Volume de conteúdo para prender a atenção e vender rápido no dia a dia.',
+            id: 1, nome: 'LAB EXPRESS', rotulo: 'Lab Express', curto: '2 h de captação + 15 fotos + 1 reel',
+            preco: 357, tipo: 'unico',
+            resumo: 'Sessão ágil de foto e vídeo com iPhone 18 Pro e estabilizador. Você recebe todo o material bruto, as melhores fotos tratadas e um reel pronto para postar no dia seguinte.',
+            beneficio: 'Conteúdo profissional pronto para postar em 24 horas.',
             entregas: [
-                '2 horas de captação no local (iPhone + estabilizador)',
-                '4 vídeos verticais editados (Reels/TikTok), até 45 s cada',
-                '10 fotos tratadas',
-                'Entrega em até 3 dias úteis',
-                'Sessão sem drone'
+                '2 horas de captação: foto, vídeo ou os dois (iPhone 18 Pro + estabilizador)',
+                'Todo o material bruto',
+                '15 fotos tratadas, selecionadas pelo Sarpi Lab',
+                'Bônus: 1 reel editado para o Instagram',
+                'Reel + 5 fotos em até 24 horas; o restante em até 3 dias úteis',
+                'Hora extra: R$ 180'
             ],
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>'
         },
         {
-            id: 2, nome: 'VISÃO 360º', rotulo: 'Visão 360º', curto: '3 h com drone + 1 vídeo cinematográfico',
-            preco: 1100, tipo: 'unico',
-            resumo: 'Captação Premium. Através de imagens aéreas imersivas e takes de detalhes no solo, nós mostramos a verdadeira grandeza do seu espaço, gerando desejo e elevando o valor da sua marca antes mesmo do cliente visitar.',
-            beneficio: 'Mostra a verdadeira grandeza do seu espaço e eleva o valor da marca antes da visita.',
+            id: 2, nome: 'VISÃO 360', rotulo: 'Visão 360', curto: '2 h de drone + 1 vídeo + 3 fotos aéreas',
+            preco: 497, tipo: 'unico',
+            resumo: 'Imagens aéreas que mostram a verdadeira grandeza do seu espaço, a localização e o entorno. Ideal para imóveis, pousadas e hotéis gerarem desejo antes mesmo da visita.',
+            beneficio: 'Mostra o seu espaço de cima e gera desejo antes da visita.',
             entregas: [
-                '3 horas de captação: drone + takes de solo estabilizados',
-                '1 vídeo cinematográfico de até 90 s, com colorização',
-                '12 fotos tratadas (aéreas e de solo)',
-                '1 versão vertical de 20 s para Reels',
-                'Entrega em até 7 dias úteis'
+                '2 horas de captação com drone',
+                '1 vídeo aéreo editado para o Instagram',
+                '3 fotos aéreas tratadas',
+                'Todo o material bruto',
+                'Vídeo em até 24 horas; o restante em até 3 dias úteis'
             ],
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9.5" y="10" width="5" height="4" rx="1"></rect><path d="M9.5 10.5L6.5 7.5M14.5 10.5l3-3M9.5 13.5l-3 3M14.5 13.5l3 3"></path><circle cx="5.5" cy="6.5" r="2"></circle><circle cx="18.5" cy="6.5" r="2"></circle><circle cx="5.5" cy="17.5" r="2"></circle><circle cx="18.5" cy="17.5" r="2"></circle></svg>'
         },
         {
-            id: 3, nome: 'COBERTURA', rotulo: 'Cobertura Dinâmica', curto: '4 h de evento + aftermovie de 1 min',
-            preco: 1200, tipo: 'unico',
-            resumo: 'Registro cinematográfico de ação focado em esportes, eventos e inaugurações. Unimos takes aéreos vibrantes com câmeras lentas emocionantes para capturar e eternizar a verdadeira energia do seu ambiente.',
-            beneficio: 'Captura e eterniza a energia do evento, com takes aéreos e câmeras lentas.',
+            id: 3, nome: 'VITRINE LAB', rotulo: 'Vitrine Lab', curto: 'Mensal: 4 h de captação + 12 postagens',
+            preco: 597, tipo: 'mensal',
+            resumo: 'O seu Instagram em movimento o mês inteiro. Planejamos o calendário editorial, captamos, editamos e acompanhamos os resultados com você, para o perfil ganhar seguidores e clientes.',
+            beneficio: 'Um perfil movimentado o mês todo, com estratégia e acompanhamento.',
             entregas: [
-                '4 horas de cobertura (meio período)',
-                '1 aftermovie de 1 minuto',
-                '5 takes curtos para Stories (até 15 s)',
-                '20 fotos tratadas',
-                'Drone, se o local permitir',
-                'Entrega em até 5 dias úteis'
-            ],
-            icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>'
-        },
-        {
-            id: 4, nome: 'GESTÃO LAB', rotulo: 'Gestão Lab', curto: 'Mensal: estratégia, captação e 8 posts',
-            preco: 1490, tipo: 'mensal',
-            resumo: 'A terceirização completa para quem busca resultados. Você foca em administrar o negócio, e o Sarpi Lab assume a responsabilidade de planejar, captar mensalmente, editar e postar com estratégia de funil de vendas.',
-            beneficio: 'Você foca no negócio, e o Sarpi Lab planeja, capta, edita e posta todo mês.',
-            entregas: [
-                '1 reunião mensal de estratégia (1 hora)',
-                '1 diária de captação por mês (até 8 horas)',
-                '8 posts editados por mês (4 vídeos + 4 fotos ou carrosséis)',
-                'Planejamento, agendamento e postagem',
-                'Relatório mensal de resultados',
-                'Contrato mínimo de 3 meses'
+                'Reunião de alinhamento (cerca de 1 hora): locais, objetivos e quem posta',
+                'Calendário editorial do mês',
+                '4 horas de captação com iPhone 18 Pro e iluminação (podem ser 2 h + 2 h em locais diferentes)',
+                '12 postagens editadas: 6 reels + 6 fotos ou carrosséis',
+                'Pasta com todo o material captado',
+                'Reunião quinzenal e reunião de resultados (30 a 45 min cada)',
+                'Mês a mês, sem fidelidade'
             ],
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>'
         }
@@ -913,9 +899,9 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         { rotulo: 'Imóveis', texto: 'Imóvel bem apresentado vende mais rápido. As imagens aéreas mostram localização e entorno que fotos comuns não alcançam.' }
     ];
 
-    const CONDICOES_PADRAO = 'Pagamento: 50% para reservar a data e 50% na entrega, via Pix ou cartão. A mensalidade da Gestão Lab é paga no início de cada mês.';
+    const CONDICOES_PADRAO = 'Pagamento via Pix ou cartão. Lab Express e Visão 360: 50% antes da captação e 50% na entrega. Vitrine Lab: 50% no fechamento (a reunião de alinhamento é marcada após esse pagamento) e 50% no meio do mês.';
 
-    const CONDICOES_PARCELADO = 'Pagamento à vista ou parcelado, conforme as opções acima. A mensalidade da Gestão Lab é paga no início de cada mês.';
+    const CONDICOES_PARCELADO = 'Lab Express e Visão 360: à vista ou parcelado, conforme as opções acima. Vitrine Lab: 50% no fechamento (a reunião de alinhamento é marcada após esse pagamento) e 50% no meio do mês.';
 
     /* ---------- ESTADO SALVO NO NAVEGADOR ---------- */
     const CHAVE = 'sarpi_cfg_v2';
@@ -966,7 +952,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 '<span class="block text-xs text-gray-500">' + s.curto + '</span></span></label>' +
                 '<div class="text-right"><div class="flex items-center gap-1">' +
                 '<span class="text-xs text-gray-500 font-bold">R$</span>' +
-                '<input type="number" min="0" step="10" id="preco' + s.id + '" value="' + s.preco + '" class="campo w-20 border-2 border-gray-200 p-1.5 rounded-lg text-sm text-right"></div>' +
+                '<input type="number" min="0" step="1" id="preco' + s.id + '" value="' + s.preco + '" class="campo w-20 border-2 border-gray-200 p-1.5 rounded-lg text-sm text-right"></div>' +
                 '<div class="text-[10px] text-gray-400 mt-0.5">' + (s.tipo === 'mensal' ? 'por mês' : 'pagamento único') + '</div></div>';
             lista.appendChild(linha);
         });
@@ -1163,7 +1149,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
     function atualizarResumoParcelas(total, temUnico, c) {
         const el = $('parc-resumo');
         if (!temUnico || total <= 0) {
-            el.innerHTML = 'Marque pelo menos um serviço de pagamento único (Lab Express, Visão 360º ou Cobertura) na aba Proposta para ver as parcelas.';
+            el.innerHTML = 'Marque pelo menos um serviço de pagamento único (Lab Express ou Visão 360) na aba Proposta para ver as parcelas.';
             return;
         }
         const opcoes = calcParcelas(total, c);
@@ -1269,7 +1255,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         const mensais = sel.filter(s => s.tipo === 'mensal');
         const subUnico = unicos.reduce((t, s) => t + precoDe(s), 0);
         const totalMensal = mensais.reduce((t, s) => t + precoDe(s), 0);
-        const auto = sel.length >= 3 ? 10 : (sel.length === 2 ? 5 : 0);
+        const auto = 0; // catálogo v3: sem desconto combo automático
         if (!descontoManual) $('desconto').value = auto;
         const pct = Math.min(50, Math.max(0, Number($('desconto').value) || 0));
         const descValor = Math.round(subUnico * pct) / 100;
@@ -1283,7 +1269,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         atualizarResumoParcelas(totalUnico, unicos.length > 0, cp);
 
         // Aviso de sobreposição no formulário
-        $('aviso-sobreposicao').classList.toggle('hidden', !($('check-svc1').checked && $('check-svc4').checked));
+        $('aviso-sobreposicao').classList.toggle('hidden', !($('check-svc1').checked && $('check-svc3').checked));
 
         // 8. Caixa de investimento (só aparece se houver serviço marcado)
         const invest = $('pdf-invest-box');
@@ -1322,13 +1308,15 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         // 9. Condições
         const termos = [];
         if (temSel) {
-            termos.push('Atendimento em Rio das Ostras e região. Deslocamento fora da cidade sob consulta.');
-            termos.push('Hora extra de captação: R$ 100 por hora.');
-            termos.push('Inclui 1 rodada de ajustes por entrega.');
-            if ($('check-svc2').checked || $('check-svc3').checked) {
+            termos.push('Deslocamento incluso em Rio das Ostras. Fora da cidade, sob consulta.');
+            if ($('check-svc1').checked) termos.push('Hora extra de captação: R$ 180 por hora.');
+            if ($('check-svc1').checked || $('check-svc2').checked) {
+                termos.push('Ajustes: 1 rodada para trocar até 5 fotos por outras do material bruto e ajustar o vídeo ou reel. O pedido deve ser feito em até 5 dias úteis após a entrega completa, e o ajuste é entregue em até 5 dias úteis. Fotos tratadas extras são cobradas à parte.');
+            }
+            if ($('check-svc2').checked) {
                 termos.push('Imagens aéreas dependem de clima e das condições de voo do local. Se houver impedimento, reagendamos sem custo.');
             }
-            if ($('check-svc4').checked) termos.push('Gestão Lab: contrato mínimo de 3 meses.');
+            if ($('check-svc3').checked) termos.push('Vitrine Lab: mês a mês, sem fidelidade. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
             if (condicoes) termos.push(condicoes);
         }
         const lista = $('pdf-termos-lista');
