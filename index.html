@@ -582,17 +582,38 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 
         /* SAIBA MAIS + PÁGINA DE REGRAS */
         .saiba-mais { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; color: #6D28D9; text-decoration: none; border-bottom: 2px solid #C4B5FD; padding-bottom: 1px; }
-        .regra-bloco { border: 1px solid #E5E7EB; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; break-inside: avoid; page-break-inside: avoid; }
-        .regra-bloco.indicado { border: 2px solid #8C52FF; background: #FAF7FF; }
-        .lista-regras { list-style: none; margin: 8px 0 0; padding: 0; }
-        .lista-regras li { position: relative; padding-left: 14px; margin-bottom: 5px; font-size: 12px; line-height: 1.4; color: #1f2937; }
-        .lista-regras li::before { content: '•'; position: absolute; left: 2px; color: #8C52FF; font-weight: 900; }
+        .pagina-servico { break-before: page; page-break-before: always; }
+        .fluxo { display: flex; align-items: stretch; gap: 0; margin: 6px 0 18px; }
+        .passo { flex: 1 1 0; background: #F5F3FF; border: 2px solid #DDD6FE; border-top: 6px solid #8C52FF; border-radius: 14px; padding: 10px 8px 12px; text-align: center; }
+        .passo .num { font-size: 10px; font-weight: 900; letter-spacing: 0.12em; color: #8C52FF; margin-bottom: 4px; }
+        .passo .pt { font-size: 12.5px; font-weight: 900; color: #111827; line-height: 1.2; }
+        .passo .pd { font-size: 11px; color: #4B5563; margin-top: 4px; line-height: 1.3; }
+        .seta { flex: 0 0 18px; display: flex; align-items: center; justify-content: center; color: #8C52FF; font-weight: 900; font-size: 20px; }
+        .chip-pag { display: inline-block; white-space: nowrap; margin-top: 6px; background: #FDE047; color: #111827; font-size: 10px; font-weight: 900; border-radius: 999px; padding: 2px 8px; letter-spacing: 0.04em; }
+        .fases { display: flex; gap: 10px; margin: 6px 0 18px; }
+        .fase { flex: 1 1 0; border-radius: 14px; overflow: hidden; border: 2px solid #DDD6FE; background: #FFFFFF; }
+        .fase-topo { background: #8C52FF; color: #fff; font-weight: 900; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; padding: 8px 10px; text-align: center; }
+        .fase-item { margin: 8px; background: #F5F3FF; border-radius: 10px; padding: 8px 10px; }
+        .fase-item .pt { font-size: 12.5px; font-weight: 900; color: #111827; }
+        .fase-item .pd { font-size: 11px; color: #4B5563; margin-top: 2px; line-height: 1.3; }
+        .recebe { display: flex; gap: 10px; margin-bottom: 16px; }
+        .recebe-item { flex: 1 1 0; border-radius: 14px; background: #111827; color: #fff; padding: 12px; text-align: center; }
+        .recebe-item .n { font-size: 26px; font-weight: 900; color: #C4B5FD; line-height: 1; }
+        .recebe-item .l { font-size: 11.5px; font-weight: 700; margin-top: 6px; line-height: 1.25; }
+        .saber { background: #FEFCE8; border: 1px solid #FACC15; border-left: 5px solid #EAB308; border-radius: 12px; padding: 10px 14px; }
+        .saber li { font-size: 12px; color: #422006; margin: 3px 0; font-weight: 600; }
+        /* No PDF (html2canvas) o texto desce um pouco: compensa nos selos e caixas pequenas */
+        .modo-pdf .chip-pag { padding: 0 8px 6px; }
+        .modo-pdf .fase-item { padding-bottom: 13px; }
+        .modo-pdf .fase-topo { padding: 4px 10px 12px; }
+        .modo-pdf .passo { padding-bottom: 16px; }
+        .rotulo-sec { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.12em; color: #8C52FF; margin-bottom: 8px; }
         .voltar-proposta { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; color: #6D28D9; text-decoration: none; }
 
         /* Na tela, mostra onde começa a página 2 */
         @media screen {
-            #pdf-p3 { margin-top: 30px; padding-top: 26px; border-top: 2px dashed #C4B5FD; position: relative; }
-            #pdf-p3::before { content: 'REGRAS DOS SERVIÇOS'; position: absolute; top: -9px; left: 0; background: #fff; padding-right: 8px; font-size: 10px; font-weight: 900; letter-spacing: 2px; color: #8C52FF; }
+            .pagina-servico { margin-top: 30px; padding-top: 26px; border-top: 2px dashed #C4B5FD; position: relative; }
+            .pagina-servico::before { content: 'SAIBA MAIS'; position: absolute; top: -9px; left: 0; background: #fff; padding-right: 8px; font-size: 10px; font-weight: 900; letter-spacing: 2px; color: #8C52FF; }
             #pdf-p2.nova-pagina {
                 margin-top: 30px;
                 padding-top: 26px;
@@ -632,7 +653,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 box-shadow: none;
             }
             #pdf-p2.nova-pagina { break-before: page; page-break-before: always; }
-            #pdf-p3 { break-before: page; page-break-before: always; }
+            .pagina-servico { break-before: page; page-break-before: always; }
             @page { size: A4 portrait; margin: 10mm; }
         }
     </style>
@@ -930,14 +951,8 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     </div>
                 </div>
 
-                <!-- PÁGINA DE REGRAS (abre pelo "Saiba mais" de cada serviço) -->
-                <div id="pdf-p3">
-                    <div class="flex items-center justify-between mb-4 pb-2 border-b-4 border-purple-500">
-                        <h2 class="fonte-marca titulo-logo text-2xl"><span>COMO CADA SERVIÇO FUNCIONA</span></h2>
-                        <a href="#pdf-p1" class="voltar-proposta" data-pagina="1">‹ Voltar para a proposta</a>
-                    </div>
-                    <div id="pdf-regras"></div>
-                </div>
+                <!-- PÁGINAS "SAIBA MAIS": uma por serviço, com fluxo visual -->
+                <div id="pdf-p3"></div>
             </div>
         </div>
     </div>
@@ -969,14 +984,17 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 'Em até 3 dias úteis: o vídeo bônus + as 8 fotos tratadas',
                 'Hora extra: R$ 180'
             ],
-            regras: [
-                'Captação|1 hora no local: foto, vídeo ou os dois. Em Rio das Ostras, com deslocamento incluso. Fora da cidade, sob consulta.',
-                'Hora extra|R$ 180 por hora, combinada antes da captação.',
-                'O que você recebe|Todo o material bruto + 8 fotos tratadas, selecionadas pela Sarpi Lab + 1 vídeo editado para o Instagram de bônus.',
-                'Prazos|Material bruto, sem edição, em até 24 h. Vídeo bônus e fotos tratadas em até 3 dias úteis.',
-                'Ajustes|1 rodada: troca de até 5 fotos por outras do material bruto e ajuste do vídeo bônus. O pedido é feito em até 5 dias úteis após a entrega completa, e o ajuste é entregue em até 5 dias úteis. Fotos tratadas extras são cobradas à parte.',
-                'Pagamento|50% antes da captação, para reservar a data, e 50% na entrega do material.'
-            ],
+            pagina: {
+                fluxo: [
+                    { t: 'Reserva', d: 'Você paga 50% e garante a data', pag: '50%' },
+                    { t: 'Captação', d: '1 hora no local: foto, vídeo ou os dois' },
+                    { t: 'Em 24 h', d: 'Todo o material bruto, sem edição' },
+                    { t: 'Em até 3 dias úteis', d: '8 fotos tratadas + vídeo bônus', pag: '50%' },
+                    { t: 'Ajuste', d: '1 rodada, se precisar' }
+                ],
+                recebe: [['∞', 'Material bruto completo'], ['8', 'Fotos tratadas'], ['1', 'Vídeo para o Instagram (bônus)']],
+                saber: ['Deslocamento incluso em Rio das Ostras', 'Hora extra: R$ 180', 'Ajuste: troca de até 5 fotos + ajuste do vídeo, pedido em até 5 dias úteis']
+            },
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>'
         },
         {
@@ -991,14 +1009,17 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 'Em até 24 h: todo o material bruto, sem edição',
                 'Em até 3 dias úteis: o vídeo bônus + as 3 fotos aéreas tratadas'
             ],
-            regras: [
-                'Captação|1 hora no local, com até 3 voos. Inclui planejar os ângulos e trocar as baterias. Em Rio das Ostras, com deslocamento incluso. Fora da cidade, sob consulta.',
-                'O que você recebe|Todo o material bruto + 3 fotos aéreas tratadas + 1 vídeo aéreo editado para o Instagram de bônus.',
-                'Prazos|Material bruto, sem edição, em até 24 h. Vídeo bônus e fotos tratadas em até 3 dias úteis.',
-                'Clima|Voos dependem do clima e das condições do local. Se houver impedimento, reagendamos sem custo.',
-                'Ajustes|1 rodada: troca de até 5 fotos por outras do material bruto e ajuste do vídeo bônus. O pedido é feito em até 5 dias úteis após a entrega completa, e o ajuste é entregue em até 5 dias úteis.',
-                'Pagamento|50% antes da captação, para reservar a data, e 50% na entrega do material.'
-            ],
+            pagina: {
+                fluxo: [
+                    { t: 'Reserva', d: 'Você paga 50% e garante a data', pag: '50%' },
+                    { t: 'Voo', d: '1 hora no local, com até 3 voos' },
+                    { t: 'Em 24 h', d: 'Todo o material bruto, sem edição' },
+                    { t: 'Em até 3 dias úteis', d: '3 fotos aéreas + vídeo bônus', pag: '50%' },
+                    { t: 'Ajuste', d: '1 rodada, se precisar' }
+                ],
+                recebe: [['∞', 'Material bruto completo'], ['3', 'Fotos aéreas tratadas'], ['1', 'Vídeo aéreo para o Instagram (bônus)']],
+                saber: ['Clima ruim ou voo proibido no local? Reagendamos sem custo', 'Deslocamento incluso em Rio das Ostras', 'Ajuste: troca de até 5 fotos + ajuste do vídeo, pedido em até 5 dias úteis']
+            },
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9.5" y="10" width="5" height="4" rx="1"></rect><path d="M9.5 10.5L6.5 7.5M14.5 10.5l3-3M9.5 13.5l-3 3M14.5 13.5l3 3"></path><circle cx="5.5" cy="6.5" r="2"></circle><circle cx="18.5" cy="6.5" r="2"></circle><circle cx="5.5" cy="17.5" r="2"></circle><circle cx="18.5" cy="17.5" r="2"></circle></svg>'
         },
         {
@@ -1015,16 +1036,26 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 'BÔNUS: reunião na metade do mês para ajustar o que for preciso',
                 'Por mês, sem fidelidade'
             ],
-            regras: [
-                'Duração|Por mês, sem fidelidade. Você renova se quiser.',
-                'Como começa|Depois do pagamento da 1ª parte, marcamos a reunião de alinhamento (cerca de 1 h), onde definimos objetivos, locais das captações e quem faz as postagens.',
-                'Calendário editorial|A Sarpi Lab monta o calendário do mês e você aprova antes. As captações só são marcadas depois da aprovação, e o calendário já traz a data da primeira postagem.',
-                'Mudanças no calendário|Depois de aprovado, o calendário é revisado na reunião do meio do mês. Remarcar uma captação pode alterar as datas das postagens.',
-                'Captação|4 horas no mês (podem ser 2 h + 2 h em locais diferentes), em Rio das Ostras, com deslocamento incluso.',
-                'Postagens|12 postagens editadas: 6 vídeos + 6 fotos ou carrosséis. São editadas só as postagens do calendário; o restante do material vai bruto para a pasta.',
-                'Reuniões|Bônus: reunião no meio do mês (30 a 45 min) para ajustar o que for preciso. No fim do mês, reunião de resultados (30 a 45 min).',
-                'Pagamento|50% no fechamento e 50% no meio do mês.'
-            ],
+            pagina: {
+                fases: [
+                    { t: 'Início do mês', itens: [
+                        { t: 'Fechamento', d: 'Você paga 50%', pag: '50%' },
+                        { t: 'Reunião de alinhamento', d: 'Cerca de 1 h: objetivos, locais e quem posta' },
+                        { t: 'Calendário editorial', d: 'A Sarpi Lab monta e você aprova' },
+                        { t: 'Captações', d: '4 h no mês (pode ser 2 h + 2 h)' }
+                    ] },
+                    { t: 'Meio do mês', itens: [
+                        { t: 'Reunião de ajuste', d: 'Bônus: 30 a 45 min para ajustar o que for preciso', pag: '50%' },
+                        { t: 'Postagens no ar', d: '3 por semana, conforme o calendário' }
+                    ] },
+                    { t: 'Fim do mês', itens: [
+                        { t: 'Reunião de resultados', d: '30 a 45 min: o que funcionou e próximos passos' },
+                        { t: 'Renova se quiser', d: 'Sem fidelidade' }
+                    ] }
+                ],
+                recebe: [['12', 'Postagens editadas no mês'], ['6+6', 'Vídeos + fotos ou carrosséis'], ['∞', 'Pasta com todo o material']],
+                saber: ['Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião do meio do mês', 'Remarcar uma captação pode mudar as datas das postagens']
+            },
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>'
         },
         {
@@ -1159,7 +1190,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 '<h3 class="fonte-marca titulo-logo text-lg whitespace-nowrap"><span>' + s.nome + '</span></h3>' +
                 '<div class="preco-box hidden ml-auto text-right shrink-0 whitespace-nowrap"></div></div>' +
                 '<div class="corpo"></div>' +
-                (s.regras ? '<a class="saiba-mais" href="#regras-svc' + s.id + '" data-pagina="regras">Saiba mais: como funciona ›</a>' : '') +
+                (s.pagina ? '<a class="saiba-mais" href="#saiba-svc' + s.id + '" data-pagina="svc' + s.id + '">Saiba mais: como funciona ›</a>' : '') +
                 (s.tipo === 'embreve' ? '<div class="mt-3"><span class="selo-embreve text-white text-[10px] font-black rounded-full uppercase tracking-wider" style="display:inline-flex;align-items:center;background:#8C52FF;height:22px;line-height:1;padding:0 14px"><span>★ Em breve</span></span></div>' : '');
             grid.appendChild(card);
         });
@@ -1364,12 +1395,6 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 (mensais.length ? ' <span class="font-normal text-gray-500">(com o 1º mês do ' + mensais.map(s => s.rotulo).join(' e ') + ')</span>' : '') + '</td></tr>' +
                 '<tr><td class="py-0.5 pl-3 text-gray-700">' + pg.pct + '% ' + pg.quando1 + '</td>' + celPg(c[0], p[0]) + '</tr>' +
                 '<tr><td class="py-0.5 pl-3 text-gray-700">' + (100 - pg.pct) + '% ' + pg.quando2 + '</td>' + celPg(c[1], p[1]) + '</tr>';
-            mensais.forEach(s => {
-                const mc = partes(precoDe(s), 50), mp = partes(precoPix(s), 50);
-                h += '<tr><td colspan="3" class="pt-3 font-bold text-gray-900">Se renovar o ' + s.rotulo + ' para o mês seguinte <span class="font-normal text-gray-500">(sem fidelidade)</span></td></tr>' +
-                    '<tr><td class="py-0.5 pl-3 text-gray-700">50% no início do mês</td>' + celPg(mc[0], mp[0]) + '</tr>' +
-                    '<tr><td class="py-0.5 pl-3 text-gray-700">50% no meio do mês</td>' + celPg(mc[1], mp[1]) + '</tr>';
-            });
             return h + '</table></div>';
         }
         let h = topo;
@@ -1633,15 +1658,18 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     const porMes = Math.round(base * (1 - pctPac / 100));
                     const total3 = porMes * 3;
                     const pix3 = Math.round(precoPix(s) * (1 - pctPac / 100)) * 3;
-                    const td = 'style="padding:4px 0 4px 12px;text-align:right;white-space:nowrap"';
-                    h += '<div class="nota-promo" style="margin-top:14px;padding:10px 14px;break-inside:avoid">' +
-                        '<p style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 6px">★ Extra: pacote de 3 meses do ' + s.rotulo + '</p>' +
-                        '<table style="width:100%;border-collapse:collapse;font-size:12.5px">' +
-                        '<tr style="font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:#854D0E"><td></td><td ' + td + '>Por mês</td><td ' + td + '>Em 3 meses</td></tr>' +
-                        '<tr style="border-top:1px solid #FDE68A"><td style="padding:4px 0">Por mês, separado</td><td ' + td + '>' + moeda(base) + '</td><td ' + td + '>' + moeda(base * 3) + '</td></tr>' +
-                        '<tr style="border-top:1px solid #FDE68A;font-weight:900;color:#111827"><td style="padding:4px 0">Pacote de 3 meses (−' + pctPac + '%)</td><td ' + td + '><span class="preco-promo">' + moeda(porMes) + '</span></td><td ' + td + '>' + moeda(total3) + '</td></tr>' +
-                        '</table>' +
-                        '<p style="font-size:11px;margin:6px 0 0;font-weight:700">Pacote pago no 1º mês' + (pix3 < total3 ? ' • no Pix: ' + moeda(pix3) : '') + ' • economia de ' + moeda(base * 3 - total3) + '</p></div>';
+                    const caixaOp = (destaque) => 'style="flex:1 1 0;border-radius:12px;padding:10px 12px;' + (destaque ? 'background:#FFFFFF;border:2px solid #EAB308' : 'background:#FFFBEB;border:1px solid #FDE68A') + '"';
+                    h += '<div class="nota-promo" style="margin-top:14px;padding:10px 12px;break-inside:avoid">' +
+                        '<p style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 8px">★ Extra: escolha como fechar o ' + s.rotulo + '</p>' +
+                        '<div style="display:flex;gap:10px">' +
+                        '<div ' + caixaOp(false) + '><p style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.06em;color:#854D0E;margin:0">Por mês</p>' +
+                        '<p style="font-size:20px;font-weight:900;color:#111827;margin:4px 0 0;line-height:1">' + moeda(base) + '</p>' +
+                        '<p style="font-size:11px;font-weight:600;color:#422006;margin:6px 0 0">Paga um mês de cada vez e renova se quiser.</p></div>' +
+                        '<div ' + caixaOp(true) + '><p style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.06em;color:#854D0E;margin:0">Pacote de 3 meses (−' + pctPac + '%)</p>' +
+                        '<p style="font-size:20px;font-weight:900;color:#111827;margin:4px 0 0;line-height:1"><span class="preco-promo">' + moeda(total3) + '</span></p>' +
+                        '<p style="font-size:11px;font-weight:600;color:#422006;margin:6px 0 0"><b>Pago de uma vez, no fechamento da proposta.</b> Sai a ' + moeda(porMes) + ' por mês' +
+                        (pix3 < total3 ? '; no Pix, ' + moeda(pix3) : '') + '. Economia de ' + moeda(base * 3 - total3) + '.</p></div>' +
+                        '</div></div>';
                 });
             }
             if (validade) h += '<p class="text-[11px] font-bold text-gray-600 mt-3">Proposta válida até ' + fmtData(validade) + '.</p>';
@@ -1675,14 +1703,33 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         });
         $('pdf-termos').classList.toggle('hidden', termos.length === 0);
 
-        // 9b. Página de regras: indicados primeiro, depois os demais
-        const ordem = SERVICOS.filter(x => x.regras).sort((a, b) => ($('check-svc' + b.id).checked ? 1 : 0) - ($('check-svc' + a.id).checked ? 1 : 0));
-        $('pdf-regras').innerHTML = ordem.map(x => {
-            const ind = $('check-svc' + x.id).checked;
-            return '<div class="regra-bloco' + (ind ? ' indicado' : '') + '" id="regras-svc' + x.id + '">' +
-                '<div class="flex items-center justify-between gap-3"><h3 class="fonte-marca titulo-logo text-lg"><span>' + x.nome + '</span></h3>' +
-                '<span class="text-[12px] font-black text-purple-700 whitespace-nowrap">' + moeda(precoDe(x)) + ' <span class="text-[10px] text-gray-500 uppercase tracking-wider">' + (x.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</span></span></div>' +
-                '<ul class="lista-regras">' + x.regras.map(r => { const p = r.split('|'); return '<li><b>' + p[0] + ':</b> ' + p[1] + '</li>'; }).join('') + '</ul></div>';
+        // 9b. Páginas "Saiba mais": uma por serviço (indicados primeiro), com fluxo visual
+        const ordem = SERVICOS.filter(x => x.pagina).sort((a, b) => ($('check-svc' + b.id).checked ? 1 : 0) - ($('check-svc' + a.id).checked ? 1 : 0));
+        const cardPasso = (p, n) => '<div class="passo"><div class="num">PASSO ' + n + '</div><div class="pt">' + p.t + '</div><div class="pd">' + p.d + '</div>' +
+            (p.pag ? '<span class="chip-pag">PAGA ' + p.pag + '</span>' : '') + '</div>';
+        $('pdf-p3').innerHTML = ordem.map(x => {
+            const pg = x.pagina;
+            let h = '<div class="pagina-servico" id="saiba-svc' + x.id + '">' +
+                '<div class="flex items-center justify-between mb-5 border-b-4 border-purple-500" style="padding-bottom:18px">' +
+                '<div class="flex items-center gap-3"><div class="bg-gray-900 p-2 rounded-lg text-white shadow shrink-0">' + x.icone + '</div>' +
+                '<h2 class="fonte-marca titulo-logo text-2xl whitespace-nowrap"><span>' + x.nome + '</span></h2></div>' +
+                '<div class="text-right"><div class="text-xl font-black text-purple-700 leading-none">' + moeda(precoDe(x)) + '</div>' +
+                '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (x.tipo === 'mensal' ? 'por mês, sem fidelidade' : 'serviço avulso') + '</div></div></div>' +
+                '<p class="rotulo-sec">Como funciona, passo a passo</p>';
+            if (pg.fluxo) {
+                h += '<div class="fluxo">' + pg.fluxo.map((p, k) => (k ? '<div class="seta">›</div>' : '') + cardPasso(p, k + 1)).join('') + '</div>';
+            } else {
+                let n = 0;
+                h += '<div class="fases">' + pg.fases.map(f => '<div class="fase"><div class="fase-topo">' + f.t + '</div>' +
+                    f.itens.map(it => '<div class="fase-item"><div class="pt">' + (++n) + '. ' + it.t + '</div><div class="pd">' + it.d + '</div>' +
+                        (it.pag ? '<span class="chip-pag">PAGA ' + it.pag + '</span>' : '') + '</div>').join('') + '</div>').join('') + '</div>';
+            }
+            h += '<p class="rotulo-sec">O que você recebe</p><div class="recebe">' +
+                pg.recebe.map(r => '<div class="recebe-item"><div class="n">' + r[0] + '</div><div class="l">' + r[1] + '</div></div>').join('') + '</div>' +
+                '<div class="saber"><p class="rotulo-sec" style="color:#A16207;margin-bottom:4px">Bom saber</p><ul style="margin:0;padding-left:16px">' +
+                pg.saber.map(t => '<li>' + t + '</li>').join('') + '</ul></div>' +
+                '<div class="mt-5 text-center"><a href="#pdf-p1" class="voltar-proposta" data-pagina="1">‹ Voltar para a proposta</a></div></div>';
+            return h;
         }).join('');
 
         // 10. Página 2 só começa em folha nova quando há investimento
@@ -1766,8 +1813,12 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         const quebra = $('pdf-p2').classList.contains('nova-pagina');
         const origens = [$('pdf-p1'), $('pdf-p2')];
         const paginas = quebra ? [[origens[0]], [origens[1]]] : [[origens[0], origens[1]]];
-        paginas.push([$('pdf-p3')]);              // última página: regras de cada serviço ("Saiba mais")
-        const paginaRegras = paginas.length;
+        // Páginas "Saiba mais": uma por serviço, no fim do PDF
+        const paginaDe = { '1': 1 };
+        $('pdf-p3').querySelectorAll('.pagina-servico').forEach(pgSvc => {
+            paginas.push([pgSvc]);
+            paginaDe['svc' + pgSvc.id.replace('saiba-svc', '')] = paginas.length;
+        });
 
         const palco = document.createElement('div');
         palco.style.cssText = 'position:fixed;left:-10000px;top:0;width:' + LARG + 'px;background:#fff;';
@@ -1781,6 +1832,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 const c = s.cloneNode(true);
                 c.removeAttribute('id');
                 c.classList.remove('nova-pagina');
+                c.classList.remove('pagina-servico');
                 caixa.appendChild(c);
             });
             palco.appendChild(caixa);
@@ -1813,7 +1865,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 caixa.querySelectorAll('a[data-pagina]').forEach(a => {
                     const r = a.getBoundingClientRect();
                     if (!r.width || !r.height) return;
-                    const destino = a.dataset.pagina === 'regras' ? paginaRegras : 1;
+                    const destino = paginaDe[a.dataset.pagina] || 1;
                     pdf.link(x + (r.left - base.left) * mm, y + (r.top - base.top) * mm, r.width * mm, r.height * mm, { pageNumber: destino });
                 });
             }
