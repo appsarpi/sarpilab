@@ -750,7 +750,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                             <option value="no fim do mês">no fim do mês</option>
                         </select>
                     </div>
-                    <p class="text-[11px] text-gray-500">Soma todos os serviços (avulsos já com desconto, se houver, + a primeira mensalidade). Nos meses seguintes, a mensalidade segue 50% no início e 50% no meio do mês.</p>
+                    <p class="text-[11px] text-gray-500">Soma todos os serviços (avulsos já com desconto, se houver, + o 1º mês do Vitrine Lab). Se o cliente renovar o Vitrine Lab, cada novo mês segue 50% no início e 50% no meio do mês.</p>
                 </div>
                 <p id="pag-aviso-um" class="text-[11px] text-gray-500 mt-2">Vale só quando a proposta tem 2 ou mais serviços marcados. Com um serviço só, o pagamento segue o padrão dele.</p>
             </div>
@@ -760,7 +760,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     <input type="checkbox" id="parc-ativo" class="w-5 h-5 rounded">
                     <span class="font-bold text-gray-700 text-sm">Oferecer parcelamento na proposta</span>
                 </label>
-                <p class="text-[11px] text-gray-500 mt-1">Opcional, só no cartão. Vale para o total dos serviços avulsos, já com desconto, se houver. Desligado, a proposta mostra só o pagamento 50/50. A mensalidade do Vitrine Lab não é parcelada.</p>
+                <p class="text-[11px] text-gray-500 mt-1">Opcional, só no cartão. Vale para o total dos serviços avulsos, já com desconto, se houver. Desligado, a proposta mostra só o pagamento 50/50. O Vitrine Lab não é parcelado.</p>
 
                 <div id="parc-box" class="mt-3 space-y-3 opacity-50 pointer-events-none">
                     <div class="grid grid-cols-2 gap-3">
@@ -907,7 +907,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
     // se o valor digitado ficar diferente da tabela, o gerador mostra um alerta. Abaixo da tabela, dá para
     // sinalizar como promoção (ex.: "Preço de lançamento"), que aparece em amarelo na proposta.
     // Referência: 4 h no Lab Express (R$ 197 + 3 h extras de R$ 180) = R$ 737. O Vitrine Lab (R$ 697) sai um pouco
-    // abaixo disso mesmo incluindo calendário, 12 postagens editadas e reuniões: é o incentivo para fechar o mensal.
+    // abaixo disso mesmo incluindo calendário, 12 postagens editadas e reuniões: é o incentivo para fechar o Vitrine Lab.
     const SERVICOS = [
         {
             id: 1, nome: 'LAB EXPRESS', rotulo: 'Lab Express', curto: '1 h de captação + 8 fotos + vídeo bônus',
@@ -939,7 +939,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9.5" y="10" width="5" height="4" rx="1"></rect><path d="M9.5 10.5L6.5 7.5M14.5 10.5l3-3M9.5 13.5l-3 3M14.5 13.5l3 3"></path><circle cx="5.5" cy="6.5" r="2"></circle><circle cx="18.5" cy="6.5" r="2"></circle><circle cx="5.5" cy="17.5" r="2"></circle><circle cx="18.5" cy="17.5" r="2"></circle></svg>'
         },
         {
-            id: 3, nome: 'VITRINE LAB', rotulo: 'Vitrine Lab', curto: 'Mensal: 4 h de captação + 12 postagens',
+            id: 3, nome: 'VITRINE LAB', rotulo: 'Vitrine Lab', curto: '4 h de captação + 12 postagens',
             preco: 697, tipo: 'mensal',
             resumo: 'O seu Instagram em movimento o mês inteiro. Planejamos o calendário editorial, captamos, editamos e acompanhamos os resultados com você, para o perfil ganhar seguidores e clientes.',
             beneficio: 'Um perfil movimentado o mês todo, com estratégia e acompanhamento.',
@@ -1041,7 +1041,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 '<div class="text-right"><div class="flex items-center gap-1">' +
                 '<span class="text-xs text-gray-500 font-bold">R$</span>' +
                 '<input type="number" min="0" step="1" id="preco' + s.id + '" value="' + s.preco + '" class="campo w-20 border-2 border-gray-200 p-1.5 rounded-lg text-sm text-right"></div>' +
-                '<div class="text-[10px] text-gray-400 mt-0.5">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div></div>';
+                '<div class="text-[10px] text-gray-400 mt-0.5">' + (s.tipo === 'mensal' ? 'mês a mês' : 'serviço avulso') + '</div></div>';
             lista.appendChild(linha);
 
             // Alerta de preço fora da tabela + sinalização de promoção (aparece só quando o preço muda)
@@ -1271,7 +1271,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 '<tr><td class="py-0.5 pl-3 text-gray-700">' + (100 - pg.pct) + '% ' + pg.quando2 + '</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(segunda) + '</td></tr>';
             mensais.forEach(s => {
                 const v = precoDe(s), a = Math.round(v * 50) / 100;
-                h += '<tr><td colspan="2" class="pt-3 font-bold text-gray-900">A partir do 2º mês: ' + s.rotulo + ' <span class="font-normal text-gray-500">(todo mês)</span></td></tr>' +
+                h += '<tr><td colspan="2" class="pt-3 font-bold text-gray-900">Se renovar o ' + s.rotulo + ' para o mês seguinte <span class="font-normal text-gray-500">(sem fidelidade)</span></td></tr>' +
                     '<tr><td class="py-0.5 pl-3 text-gray-700">50% no início do mês</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(a) + '</td></tr>' +
                     '<tr><td class="py-0.5 pl-3 text-gray-700">50% no meio do mês</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(Math.round((v - a) * 100) / 100) + '</td></tr>';
             });
@@ -1285,7 +1285,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             const primeira = Math.round(valor * 50) / 100;
             const segunda = Math.round((valor - primeira) * 100) / 100;
             const m = MOMENTOS[s.tipo] || MOMENTOS.unico;
-            h += '<tr><td colspan="2" class="pt-2 font-bold text-gray-900">' + s.rotulo + (s.tipo === 'mensal' ? ' <span class="font-normal text-gray-500">(todo mês)</span>' : '') + '</td></tr>' +
+            h += '<tr><td colspan="2" class="pt-2 font-bold text-gray-900">' + s.rotulo + (s.tipo === 'mensal' ? ' <span class="font-normal text-gray-500">(mês a mês, sem fidelidade)</span>' : '') + '</td></tr>' +
                 '<tr><td class="py-0.5 pl-3 text-gray-700">' + m[0] + '</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(primeira) + '</td></tr>' +
                 '<tr><td class="py-0.5 pl-3 text-gray-700">' + m[1] + '</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(segunda) + '</td></tr>';
         });
@@ -1448,7 +1448,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 precoBox.innerHTML =
                     (promo && promo.de ? '<div class="preco-de">de ' + moeda(promo.de) + '</div>' : '') +
                     '<div class="text-lg font-black text-purple-700 leading-none' + (promo ? ' preco-promo' : '') + '">' + (promo && promo.de ? 'por ' : '') + moeda(precoDe(s)) + '</div>' +
-                    '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div>';
+                    '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'mês a mês' : 'serviço avulso') + '</div>';
                 corpo.innerHTML =
                     '<p class="text-[13px] text-gray-800 leading-relaxed mb-2 font-semibold">' + s.beneficio + '</p>' +
                     '<ul class="lista-entregas">' + s.entregas.map(e => e.startsWith('BÔNUS:') ? '<li class="bonus"><b>Bônus:</b>' + e.slice(6) + '</li>' : '<li>' + e + '</li>').join('') + '</ul>' +
@@ -1462,7 +1462,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     precoBox.classList.remove('hidden');
                     precoBox.innerHTML =
                         '<div class="text-base font-black text-gray-800 leading-none">' + moeda(precoDe(s)) + '</div>' +
-                        '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div>';
+                        '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'mês a mês' : 'serviço avulso') + '</div>';
                 }
                 corpo.innerHTML = '<p class="text-[13px] text-gray-800 leading-relaxed">' + s.resumo + '</p>';
             }
@@ -1510,7 +1510,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     '<td class="py-2 pr-3"><span class="font-bold text-gray-900">' + s.rotulo + '</span>' +
                     '<span class="block text-[11px] text-gray-500">' + s.curto + '</span>' +
                     (promo ? '<span class="tag-promo">★ ' + escHtml(promo.rotulo) + '</span>' : '') + '</td>' +
-                    '<td class="py-2 px-2 text-[11px] text-gray-500 whitespace-nowrap">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</td>' +
+                    '<td class="py-2 px-2 text-[11px] text-gray-500 whitespace-nowrap">' + (s.tipo === 'mensal' ? 'mês a mês' : 'serviço avulso') + '</td>' +
                     '<td class="py-2 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' +
                     (promo && promo.de ? '<div class="preco-de">de ' + moeda(promo.de) + '</div>' : '') +
                     '<span' + (promo ? ' class="preco-promo"' : '') + '>' + moeda(precoDe(s)) + '</span></td></tr>';
@@ -1521,7 +1521,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     h += linhaTotal('Desconto combo (' + pct + '%)', '− ' + moeda(descValor), false, 'text-green-700');
                 }
                 if (unicos.length) h += linhaTotal('Total (serviços avulsos)', moeda(totalUnico), true);
-                if (mensais.length) h += linhaTotal('Mensalidade', moeda(totalMensal) + ' /mês', true);
+                if (mensais.length) h += linhaTotal('Vitrine Lab (mês a mês, sem fidelidade)', moeda(totalMensal), true);
             }
             h += '</table>';
             h += blocoPagamento(sel, precoDe, pct);
