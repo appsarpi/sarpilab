@@ -1503,7 +1503,8 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 promoDe[s.id] = {
                     rotulo: $('promo-rotulo' + s.id).value.trim() || 'Promoção',
                     msg: $('promo-msg' + s.id).value.trim(),
-                    de: $('promo-de' + s.id).checked ? noCartao(s.preco) : 0
+                    de: $('promo-de' + s.id).checked ? noCartao(s.preco) : 0,
+                    dePix: s.preco
                 };
             }
         });
@@ -1621,12 +1622,18 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         // 8. Caixa de investimento (só aparece se houver serviço marcado)
         const invest = $('pdf-invest-box');
         if (temSel) {
-            const linhaTotal = (rotulo, valor, destaque, cor) =>
+            // Coluna do Pix no investimento (quando há taxa da maquininha)
+            const comPix = taxaMaq() > 0;
+            const corPix = 'color:#047857';
+            const linhaTotal = (rotulo, valor, destaque, cor, valorPix) =>
                 '<tr><td colspan="2" class="pt-2 text-right ' + (destaque ? 'text-sm font-black text-gray-900' : 'text-[12px] text-gray-600') + '">' + rotulo + '</td>' +
-                '<td class="pt-2 pl-3 text-right whitespace-nowrap ' + (destaque ? 'text-lg font-black text-purple-700' : 'text-[12px] font-bold ' + (cor || 'text-gray-800')) + '">' + valor + '</td></tr>';
+                '<td class="pt-2 pl-3 text-right whitespace-nowrap ' + (destaque ? 'text-lg font-black text-purple-700' : 'text-[12px] font-bold ' + (cor || 'text-gray-800')) + '">' + valor + '</td>' +
+                (comPix ? '<td class="pt-2 pl-3 text-right whitespace-nowrap ' + (destaque ? 'text-lg font-black' : 'text-[12px] font-bold') + '" style="' + corPix + '">' + valorPix + '</td>' : '') + '</tr>';
 
             let h = '<p class="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-2">Investimento</p>' +
-                '<table class="w-full text-[13px]" style="border-collapse:collapse">';
+                '<table class="w-full text-[13px]" style="border-collapse:collapse">' +
+                (comPix ? '<tr><td></td><td></td><td class="pl-3 text-right text-[10px] font-black uppercase tracking-wider text-gray-500 whitespace-nowrap">No cartão</td>' +
+                    '<td class="pl-3 text-right text-[10px] font-black uppercase tracking-wider whitespace-nowrap" style="' + corPix + '">No Pix</td></tr>' : '');
             sel.forEach(s => {
                 const promo = promoDe[s.id];
                 h += '<tr class="border-b border-purple-100"' + (promo ? ' style="background:#FEFCE8"' : '') + '>' +
@@ -1636,14 +1643,19 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     '<td class="py-2 px-2 text-[11px] text-gray-500 whitespace-nowrap">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</td>' +
                     '<td class="py-2 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' +
                     (promo && promo.de ? '<div class="preco-de">de ' + moeda(promo.de) + '</div>' : '') +
-                    '<span' + (promo ? ' class="preco-promo"' : '') + '>' + moeda(precoDe(s)) + '</span></td></tr>';
+                    '<span' + (promo ? ' class="preco-promo"' : '') + '>' + moeda(precoDe(s)) + '</span></td>' +
+                    (comPix ? '<td class="py-2 pl-3 text-right font-black whitespace-nowrap" style="' + corPix + '">' +
+                        (promo && promo.de ? '<div class="preco-de">de ' + moeda(promo.dePix) + '</div>' : '') + moeda(precoPix(s)) + '</td>' : '') + '</tr>';
             });
+            const subUnicoPix = unicos.reduce((t, s) => t + precoPix(s), 0);
+            const totalMensalPix = mensais.reduce((t, s) => t + precoPix(s), 0);
+            const descPix = Math.round(subUnicoPix * pct) / 100;
             if (sel.length > 1 || descValor > 0) {
                 if (unicos.length && descValor > 0) {
-                    h += linhaTotal('Subtotal', moeda(subUnico + totalMensal), false);
-                    h += linhaTotal('Desconto combo (' + pct + '%)', '− ' + moeda(descValor), false, 'text-green-700');
+                    h += linhaTotal('Subtotal', moeda(subUnico + totalMensal), false, '', moeda(subUnicoPix + totalMensalPix));
+                    h += linhaTotal('Desconto combo (' + pct + '%)', '− ' + moeda(descValor), false, 'text-green-700', '− ' + moeda(descPix));
                 }
-                h += linhaTotal('Total', moeda(totalUnico + totalMensal), true);
+                h += linhaTotal('Total', moeda(totalUnico + totalMensal), true, '', moeda(subUnicoPix - descPix + totalMensalPix));
             }
             h += '</table>';
 
