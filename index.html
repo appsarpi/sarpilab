@@ -637,7 +637,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .ciclo-sub { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #6B7280; margin: 4px 0 8px; }
         .ciclo-item { padding: 9px 0; border-top: 1px solid #F3F4F6; }
         .nn-p { color: #8C52FF; }
-        .ciclo-item.presente { background: #FEFCE8; border: 1.5px solid #FACC15; border-radius: 10px; padding: 9px 11px 11px; margin: 4px 0; }
+        .ciclo-item.presente { background: #FEF9C3; border: 0; border-left: 4px solid #EAB308; border-radius: 0; padding: 9px 11px 11px; margin: 4px 0; }
         .ciclo-item.presente + .ciclo-item { border-top: 0; }
         .numeros { display: flex; }
         .numero { flex: 1 1 0; padding: 0 14px; border-left: 1px solid #E5E7EB; }
@@ -647,7 +647,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .numero .l { font-size: 12px; font-weight: 600; color: #1F2937; line-height: 1.35; margin-top: 4px; }
         .bons p { font-size: 12.5px; color: #1F2937; line-height: 1.45; margin: 0; padding: 7px 0 7px 14px; border-bottom: 1px solid #F3F4F6; position: relative; }
         .bons p::before { content: '•'; position: absolute; left: 0; top: 7px; color: #8C52FF; font-weight: 900; }
-        .ed-bloco { margin-top: 22px; border-radius: 14px; padding: 4px 18px 16px; }
+        .ed-bloco { margin-top: 22px; border-radius: 0; padding: 4px 18px 16px; }
         .ed-bloco .sec { margin-top: 14px; }
         .ed-bloco.lilas { background: #F5F3FF; border-top: 4px solid #8C52FF; }
         .ed-bloco.lilas .sec { border-bottom-color: #DDD6FE; }
@@ -655,12 +655,12 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .ed-bloco.cinza { background: #F9FAFB; border: 1px solid #F3F4F6; }
         .ed-bloco.cinza .bons p { border-bottom-color: #EEF0F3; }
         /* FECHAMENTO DA PROPOSTA */
-        .cta-final { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; background: #F5F3FF; border-top: 4px solid #8C52FF; border-radius: 14px; padding: 18px 22px; }
+        .cta-final { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; background: #F5F3FF; border-top: 4px solid #8C52FF; border-radius: 0; padding: 18px 22px; }
         .cta-kicker { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.16em; color: #8C52FF; margin: 0 0 4px; }
         .cta-frase { font-size: 19px; font-weight: 900; color: #111827; line-height: 1.2; margin: 0; }
         .cta-sub { font-size: 12.5px; color: #4B5563; margin: 4px 0 0; }
         .cta-acao { text-align: center; flex-shrink: 0; }
-        .cta-whats { display: inline-block; background: #25D366; color: #FFFFFF; font-weight: 900; font-size: 14px; letter-spacing: 0.02em; border-radius: 8px; padding: 11px 18px; text-decoration: none; white-space: nowrap; }
+        .cta-whats { display: inline-block; background: #25D366; color: #FFFFFF; font-weight: 900; font-size: 14px; letter-spacing: 0.02em; border-radius: 2px; padding: 11px 18px; text-decoration: none; white-space: nowrap; }
         .cta-whats.hidden { display: none; }
         .modo-pdf .cta-whats > span { position: relative; top: -0.2em; }
         .cta-num { font-size: 11.5px; font-weight: 700; color: #4B5563; margin: 6px 0 0; }
@@ -985,7 +985,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     <div id="pdf-p2-topo" class="hidden mb-4 pb-2 border-b border-gray-200 text-[11px] font-bold uppercase tracking-widest text-gray-500"></div>
 
                     <!-- Investimento -->
-                    <div id="pdf-invest-box" class="mt-6 bg-purple-50 border border-purple-200 rounded-xl px-5 py-4 hidden"></div>
+                    <div id="pdf-invest-box" class="mt-6 bg-purple-50 px-5 py-4 hidden" style="border-top:4px solid #8C52FF"></div>
 
                     <!-- Condições -->
                     <div id="pdf-termos" class="mt-4 hidden">
@@ -1736,12 +1736,12 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     // Duas opções lado a lado, com a mesma estrutura: rótulo, preço por mês, Pix e como paga
                     const pixMes = Math.round(precoPix(s) * (1 - pctPac / 100));
                     const temPixPac = precoPix(s) < base;
-                    const caixaOp = (destaque) => 'style="flex:1 1 0;border-radius:12px;padding:10px 12px;text-align:center;background:#FFFFFF;border:2px solid ' + (destaque ? '#EAB308' : '#FDE68A') + '"';
+                    const caixaOp = (destaque) => 'style="flex:1 1 0;border-radius:0;padding:10px 12px;text-align:center;background:#FFFFFF;border:2px solid ' + (destaque ? '#EAB308' : '#FDE68A') + '"';
                     const rot = (t) => '<p style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.06em;color:#854D0E;margin:0">' + t + '</p>';
                     const grande = (v, cor) => '<p style="font-size:20px;font-weight:900;color:' + cor + ';margin:5px 0 0;line-height:1">' + moeda(v) + '<span style="font-size:11px;font-weight:700"> /mês</span></p>';
                     const pixL = (v) => temPixPac ? '<p style="font-size:11px;font-weight:800;color:#047857;margin:4px 0 0">No Pix: ' + moeda(v) + ' /mês</p>' : '';
                     const como = (t) => '<p style="font-size:11px;font-weight:600;color:#422006;margin:6px 0 0">' + t + '</p>';
-                    h += '<div style="margin-top:14px;padding:12px;background:#FEF9C3;border:1px solid #FACC15;border-radius:12px;color:#713F12;break-inside:avoid">' +
+                    h += '<div style="margin-top:14px;padding:12px;background:#FEF9C3;border:1px solid #FACC15;border-radius:0;color:#713F12;break-inside:avoid">' +
                         '<p style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;text-align:center">★ Extra: simule como fechar o ' + s.rotulo + '</p>' +
                         '<div style="display:flex;gap:10px">' +
                         '<div ' + caixaOp(false) + '>' + rot('Por mês') + grande(base, '#111827') + pixL(precoPix(s)) + como('Paga um mês por vez, sem fidelidade') + '</div>' +
