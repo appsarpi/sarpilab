@@ -480,6 +480,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .tag-promo { display: inline-block; background: #FDE047; color: #111827; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; border-radius: 999px; padding: 2px 8px; margin-top: 3px; }
         .nota-promo { background: #FEF9C3; border: 1px solid #FACC15; border-left: 4px solid #EAB308; border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 700; color: #713F12; margin-top: 8px; line-height: 1.35; }
         .modo-pdf .titulo-logo > span { position: relative; top: var(--ajuste-pdf, -0.35em); }
+        .modo-pdf .card-servico .titulo-logo > span { top: -0.48em !important; }
         .titulo-logo {
             display: inline-block;
             color: #FFFFFF;
@@ -1321,7 +1322,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             card.id = 'pdf-svc' + s.id;
             const temPremium = SERVICOS.some(v => v.variante === s.id);
             card.innerHTML =
-                (temPremium ? '<div class="selo selo-premium text-[10px] font-black rounded-full uppercase tracking-wider" style="position:absolute;bottom:-11px;right:12px;background:#D4A017;color:#FFFFFF;border:1px solid #A16207;height:22px;line-height:1;padding:0 12px;display:flex;align-items:center"><span></span></div>' : '') +
+                (temPremium ? '<div class="selo selo-premium font-black rounded-full" style="position:absolute;bottom:-11px;right:12px;max-width:calc(100% - 24px);font-size:10px;white-space:nowrap;background:#D4A017;color:#FFFFFF;border:1px solid #A16207;height:22px;line-height:1;padding:0 12px;display:flex;align-items:center"><span></span></div>' : '') +
                 '<div class="selo badge-recomendado hidden absolute -top-3 -right-2 text-white text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="background:#8C52FF;height:22px;line-height:1;padding:0 12px"><span>★ Indicado para o seu momento</span></div>' +
                 '<div class="selo badge-promo hidden text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="position:absolute;bottom:-11px;left:12px;background:#FDE047;color:#111827;border:1px solid #EAB308;height:22px;line-height:1;padding:0 12px"><span class="promo-texto"></span></div>' +
                 '<div class="flex items-center gap-2 mb-3">' +
@@ -1702,11 +1703,11 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             const promo = marcado ? promoDe[s.id] : null;
             card.classList.toggle('card-destaque', marcado && !promo);
             card.classList.toggle('card-promo', !!promo);
-            card.classList.toggle('card-premium', premiumMarcado);
+            card.classList.remove('card-premium'); // Premium indicado: o card continua roxo; o destaque é a estrela dourada
             const seloPrem = card.querySelector('.selo-premium');
             if (seloPrem) {
                 const dif = varPrem ? precoDe(varPrem) - precoDe(s0) : 0;
-                seloPrem.querySelector('span').textContent = premiumMarcado ? '★ Pacote Premium' : '★ Pacote Premium + ' + moeda(dif) + '/mês';
+                seloPrem.querySelector('span').textContent = premiumMarcado ? '★ Pacote Premium' : '★ Quer mais? Premium com vídeos de autoridade + ' + moeda(dif);
             }
             card.querySelector('.badge-recomendado').classList.toggle('hidden', !marcado);
             const seloPromo = card.querySelector('.badge-promo');
@@ -1730,7 +1731,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 corpo.innerHTML =
                     '<ul class="lista-entregas">' + s.entregas.map(e => e.startsWith('BÔNUS:') ? '<li class="bonus"><b>Bônus:</b>' + e.slice(6) + '</li>' : '<li>' + e + '</li>').join('') + '</ul>' +
                     (promo ? '<div class="nota-promo">★ ' + escHtml(promo.rotulo) + (promo.msg ? ': ' + escHtml(promo.msg) : '') + '</div>' : '') +
-                    (varPrem && !premiumMarcado ? linhaPremium() : '');
+                    '';
             } else {
                 // Não marcado: mostra o resumo e também o preço (o cliente tem curiosidade); "em breve" fica sem preço
                 if (s.tipo === 'embreve') {
@@ -1742,8 +1743,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                         '<div class="text-base font-black text-gray-800 leading-none">' + moeda(precoDe(s)) + '</div>' +
                         '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div>';
                 }
-                corpo.innerHTML = '<p class="text-[13px] text-gray-800 leading-relaxed">' + s0.resumo + '</p>' +
-                    (varPrem ? linhaPremium() : '');
+                corpo.innerHTML = '<p class="text-[13px] text-gray-800 leading-relaxed">' + s0.resumo + '</p>';
             }
         });
 
