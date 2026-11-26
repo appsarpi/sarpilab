@@ -596,7 +596,6 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .fase-item { margin: 8px; background: #F5F3FF; border-radius: 10px; padding: 8px 10px; }
         .fase-item.presente { background: #FEFCE8; border: 2px solid #EAB308; }
         .chip-presente { display: inline-block; white-space: nowrap; background: #FDE047; color: #111827; border: 1px solid #EAB308; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; border-radius: 999px; padding: 2px 8px; margin-bottom: 4px; }
-        .modo-pdf .chip-presente { padding: 0 8px 5px; }
         .fase-item .pt { font-size: 12.5px; font-weight: 900; color: #111827; }
         .fase-item .pd { font-size: 11px; color: #4B5563; margin-top: 2px; line-height: 1.3; }
         .recebe { display: flex; gap: 10px; margin: 16px 0 16px; }
@@ -606,16 +605,18 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .recebe-item.bonus { background: #FEFCE8; border: 2px solid #EAB308; }
         .recebe-item.bonus .n { color: #CA8A04; }
         .selo-bonus { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); white-space: nowrap; background: #FDE047; color: #111827; border: 1px solid #EAB308; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; border-radius: 999px; padding: 2px 10px; }
-        .modo-pdf .selo-bonus { padding: 0 10px 5px; }
         .recebe-item .l { font-size: 11.5px; font-weight: 700; color: #1F2937; margin-top: 6px; line-height: 1.25; }
         .saber { background: #FEFCE8; border: 1px solid #FACC15; border-left: 5px solid #EAB308; border-radius: 12px; padding: 10px 14px; }
         .saber li { font-size: 12px; color: #422006; margin: 3px 0; font-weight: 600; }
         /* No PDF (html2canvas) o texto desce um pouco: compensa nos selos e caixas pequenas */
-        .modo-pdf .chip-pag { padding: 0 8px 6px; }
-        .modo-pdf .fase-item { padding-bottom: 13px; }
+        .modo-pdf .fase-item { padding-bottom: 16px; }
         .modo-pdf .fase-topo { padding: 4px 10px 12px; }
         .modo-pdf .passo { padding-bottom: 16px; }
         .modo-pdf .recebe-item { padding-bottom: 16px; }
+        /* Selos: altura fixa e texto centralizado; no PDF o texto sobe um pouco para compensar */
+        .chip-pag, .selo-bonus, .chip-presente { display: inline-flex !important; align-items: center; justify-content: center; height: 20px; padding: 0 10px !important; line-height: 1; }
+        .chip-pag { margin-top: 9px !important; }
+        .modo-pdf .chip-pag > span, .modo-pdf .selo-bonus > span, .modo-pdf .chip-presente > span { position: relative; top: -0.42em; }
         .rotulo-sec { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.12em; color: #8C52FF; margin-bottom: 8px; }
         .voltar-proposta { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; color: #6D28D9; text-decoration: none; }
 
@@ -1003,7 +1004,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     { t: 'Ajuste', d: 'Você pede em até 5 dias úteis; entregamos em até 5 dias úteis' }
                 ],
                 recebe: [['~150', 'Fotos brutas por hora, em média (estimativa), além dos vídeos'], ['8', 'Fotos tratadas'], ['1', 'Vídeo editado para o Instagram, de até 50 segundos', 'bonus']],
-                saber: ['Deslocamento incluso em Rio das Ostras', 'Hora extra: R$ 180', 'Ajuste (1 rodada): troca de até 5 fotos + ajuste do vídeo. Prazos contam da entrega das fotos tratadas']
+                saber: ['Deslocamento incluso em Rio das Ostras', 'Hora extra: R$ 180', 'Ajuste (1 rodada): troca de até 5 fotos + ajuste do vídeo. Pedidos após 5 dias úteis da entrega não são atendidos']
             },
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>'
         },
@@ -1029,7 +1030,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     { t: 'Ajuste', d: 'Você pede em até 5 dias úteis; entregamos em até 5 dias úteis' }
                 ],
                 recebe: [['~40', 'Fotos aéreas brutas na hora, em média (estimativa), além dos vídeos'], ['3', 'Fotos aéreas tratadas'], ['1', 'Vídeo aéreo editado para o Instagram, de até 50 segundos', 'bonus']],
-                saber: ['Clima ruim ou voo proibido no local? Reagendamos sem custo', 'Deslocamento incluso em Rio das Ostras', 'Ajuste (1 rodada): troca de até 5 fotos + ajuste do vídeo. Prazos contam da entrega das fotos tratadas']
+                saber: ['Clima ruim ou voo proibido no local? Reagendamos sem custo', 'Deslocamento incluso em Rio das Ostras', 'Ajuste (1 rodada): troca de até 5 fotos + ajuste do vídeo. Pedidos após 5 dias úteis da entrega não são atendidos']
             },
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9.5" y="10" width="5" height="4" rx="1"></rect><path d="M9.5 10.5L6.5 7.5M14.5 10.5l3-3M9.5 13.5l-3 3M14.5 13.5l3 3"></path><circle cx="5.5" cy="6.5" r="2"></circle><circle cx="18.5" cy="6.5" r="2"></circle><circle cx="5.5" cy="17.5" r="2"></circle><circle cx="18.5" cy="17.5" r="2"></circle></svg>'
         },
@@ -1711,7 +1712,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             termos.push('Deslocamento incluso em Rio das Ostras. Fora da cidade, sob consulta.');
             if ($('check-svc1').checked) termos.push('Hora extra de captação: R$ 180 por hora.');
             if ($('check-svc1').checked || $('check-svc2').checked) {
-                termos.push('Ajustes: 1 rodada para trocar até 5 fotos por outras do material bruto e ajustar o vídeo bônus. O cliente pede o ajuste em até 5 dias úteis após receber as fotos tratadas e o vídeo, e a Sarpi Lab entrega o ajuste em até 5 dias úteis após o pedido. Fotos tratadas extras são cobradas à parte.');
+                termos.push('Ajustes: 1 rodada para trocar até 5 fotos por outras do material bruto e ajustar o vídeo bônus. O cliente pede o ajuste em até 5 dias úteis após receber as fotos tratadas e o vídeo, e a Sarpi Lab entrega o ajuste em até 5 dias úteis após o pedido. Fora desse prazo, o ajuste não é feito. Fotos tratadas extras são cobradas à parte.');
             }
             if ($('check-svc2').checked) {
                 termos.push('Imagens aéreas dependem de clima e das condições de voo do local. Se houver impedimento, reagendamos sem custo.');
@@ -1731,7 +1732,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         // 9b. Páginas "Saiba mais": uma por serviço (indicados primeiro), com fluxo visual
         const ordem = SERVICOS.filter(x => x.pagina).sort((a, b) => ($('check-svc' + b.id).checked ? 1 : 0) - ($('check-svc' + a.id).checked ? 1 : 0));
         const cardPasso = (p, n) => '<div class="passo"><div class="num">PASSO ' + n + '</div><div class="pt">' + p.t + '</div><div class="pd">' + p.d + '</div>' +
-            (p.pag ? '<span class="chip-pag">PAGA ' + p.pag + '</span>' : '') + '</div>';
+            (p.pag ? '<span class="chip-pag"><span>PAGA ' + p.pag + '</span></span>' : '') + '</div>';
         $('pdf-p3').innerHTML = ordem.map(x => {
             const pg = x.pagina;
             let h = '<div class="pagina-servico" id="saiba-svc' + x.id + '">' +
@@ -1746,11 +1747,11 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             } else {
                 let n = 0;
                 h += '<div class="fases">' + pg.fases.map(f => '<div class="fase"><div class="fase-topo">' + f.t + '</div>' +
-                    f.itens.map(it => '<div class="fase-item' + (it.presente ? ' presente' : '') + '">' + (it.presente ? '<span class="chip-presente">★ De presente</span>' : '') + '<div class="pt">' + (++n) + '. ' + it.t + '</div>' + (it.d ? '<div class="pd">' + it.d + '</div>' : '') +
-                        (it.pag ? '<span class="chip-pag">PAGA ' + it.pag + '</span>' : '') + '</div>').join('') + '</div>').join('') + '</div>';
+                    f.itens.map(it => '<div class="fase-item' + (it.presente ? ' presente' : '') + '">' + (it.presente ? '<span class="chip-presente"><span>★ De presente</span></span>' : '') + '<div class="pt">' + (++n) + '. ' + it.t + '</div>' + (it.d ? '<div class="pd">' + it.d + '</div>' : '') +
+                        (it.pag ? '<span class="chip-pag"><span>PAGA ' + it.pag + '</span></span>' : '') + '</div>').join('') + '</div>').join('') + '</div>';
             }
             h += '<p class="rotulo-sec">O que você recebe</p><div class="recebe">' +
-                pg.recebe.map(r => '<div class="recebe-item' + (r[2] === 'bonus' ? ' bonus' : '') + '">' + (r[2] === 'bonus' ? '<span class="selo-bonus">★ De presente</span>' : '') + '<div class="n">' + r[0] + '</div><div class="l">' + r[1] + '</div></div>').join('') + '</div>' +
+                pg.recebe.map(r => '<div class="recebe-item' + (r[2] === 'bonus' ? ' bonus' : '') + '">' + (r[2] === 'bonus' ? '<span class="selo-bonus"><span>★ De presente</span></span>' : '') + '<div class="n">' + r[0] + '</div><div class="l">' + r[1] + '</div></div>').join('') + '</div>' +
                 '<div class="saber"><p class="rotulo-sec" style="color:#A16207;margin-bottom:4px">Bom saber</p><ul style="margin:0;padding-left:16px">' +
                 pg.saber.map(t => '<li>' + t + '</li>').join('') + '</ul></div>' +
                 '<div class="mt-5 text-center"><a href="#pdf-p1" class="voltar-proposta" data-pagina="1">‹ Voltar para a proposta</a></div></div>';
