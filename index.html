@@ -1049,24 +1049,24 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             ],
             pagina: {
                 fases: [
-                    { t: 'Início do mês', itens: [
+                    { t: 'Início • dia 1', itens: [
                         { t: 'Fechamento', d: 'Você paga 50%', pag: '50%' },
                         { t: 'Reunião de alinhamento', d: 'Cerca de 1 h: objetivos, locais e quem posta' },
-                        { t: 'Calendário editorial', d: 'A Sarpi Lab monta, com o formato de cada postagem, e você aprova' },
+                        { t: 'Calendário editorial', d: 'A Sarpi Lab monta e você aprova. As datas já contam a captação + até 3 dias úteis de edição' },
                         { t: 'Captações', d: '4 h no mês (pode ser 2 h + 2 h). Material bruto na pasta em até 3 dias úteis após cada captação' }
                     ] },
-                    { t: 'Meio do mês', itens: [
+                    { t: 'Meio • dia 15', itens: [
                         { t: 'Reunião de ajuste', d: '30 a 45 min para ajustar o que for preciso', presente: true },
                         { t: 'Postagens no ar', d: '3 por semana, conforme o calendário' },
                         { t: 'Você paga os outros 50%', d: '', pag: '50%' }
                     ] },
-                    { t: 'Fim do mês', itens: [
+                    { t: 'Fim • dia 30', itens: [
                         { t: 'Reunião de resultados', d: '30 a 45 min: o que funcionou e próximos passos' },
                         { t: 'Renova se quiser', d: 'Sem fidelidade' }
                     ] }
                 ],
                 recebe: [['12', 'Postagens editadas: fotos, vídeos ou carrosséis, conforme o calendário aprovado'], ['12', 'Sugestões de legenda, uma para cada postagem'], ['~600', 'Fotos brutas no mês na pasta (em média 150 por hora, estimativa)']],
-                saber: ['Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião do meio do mês', 'Remarcar uma captação pode mudar as datas das postagens']
+                saber: ['O ciclo é de 30 dias, contados a partir da reunião de alinhamento; as 12 postagens saem dentro desse período', 'Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião do meio do mês', 'Remarcar uma captação pode mudar as datas das postagens']
             },
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>'
         },
@@ -1716,7 +1716,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             if ($('check-svc2').checked) {
                 termos.push('Imagens aéreas dependem de clima e das condições de voo do local. Se houver impedimento, reagendamos sem custo.');
             }
-            if ($('check-svc3').checked) termos.push('Vitrine Lab: captações em Rio das Ostras, em locais definidos na reunião de alinhamento. Por mês, sem fidelidade. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
+            if ($('check-svc3').checked) termos.push('Vitrine Lab: ciclo de 30 dias, contados a partir da reunião de alinhamento, sem fidelidade. Captações em Rio das Ostras, em locais definidos na reunião de alinhamento. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
             if (condicoes) termos.push(condicoes);
         }
         const lista = $('pdf-termos-lista');
