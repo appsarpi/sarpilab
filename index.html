@@ -1051,7 +1051,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             card.id = 'pdf-svc' + s.id;
             card.innerHTML =
                 '<div class="selo badge-recomendado hidden absolute -top-3 -right-2 text-white text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="background:#8C52FF;height:22px;line-height:1;padding:0 12px"><span>★ Indicado para o seu momento</span></div>' +
-                '<div class="selo badge-promo hidden text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="position:absolute;top:-12px;right:-8px;background:#FDE047;color:#111827;border:1px solid #EAB308;height:22px;line-height:1;padding:0 12px"><span class="promo-texto"></span></div>' +
+                '<div class="selo badge-promo hidden text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="position:absolute;bottom:-11px;left:12px;background:#FDE047;color:#111827;border:1px solid #EAB308;height:22px;line-height:1;padding:0 12px"><span class="promo-texto"></span></div>' +
                 '<div class="flex items-center gap-2 mb-3">' +
                 '<div class="bg-gray-900 p-2 rounded-lg text-white shadow shrink-0">' + s.icone + '</div>' +
                 '<h3 class="fonte-marca titulo-logo text-lg whitespace-nowrap"><span>' + s.nome + '</span></h3>' +
@@ -1380,7 +1380,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             const promo = marcado ? promoDe[s.id] : null;
             card.classList.toggle('card-destaque', marcado && !promo);
             card.classList.toggle('card-promo', !!promo);
-            card.querySelector('.badge-recomendado').classList.toggle('hidden', !marcado || !!promo);
+            card.querySelector('.badge-recomendado').classList.toggle('hidden', !marcado);
             const seloPromo = card.querySelector('.badge-promo');
             seloPromo.classList.toggle('hidden', !promo);
             seloPromo.querySelector('.promo-texto').textContent = promo ? '★ ' + promo.rotulo : '';
@@ -1399,8 +1399,16 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     '<ul class="lista-entregas">' + s.entregas.map(e => e.startsWith('BÔNUS:') ? '<li class="bonus"><b>Bônus:</b>' + e.slice(6) + '</li>' : '<li>' + e + '</li>').join('') + '</ul>' +
                     (promo ? '<div class="nota-promo">★ ' + escHtml(promo.rotulo) + (promo.msg ? ': ' + escHtml(promo.msg) : '') + '</div>' : '');
             } else {
-                precoBox.classList.add('hidden');
-                precoBox.innerHTML = '';
+                // Não marcado: mostra o resumo e também o preço (o cliente tem curiosidade); "em breve" fica sem preço
+                if (s.tipo === 'embreve') {
+                    precoBox.classList.add('hidden');
+                    precoBox.innerHTML = '';
+                } else {
+                    precoBox.classList.remove('hidden');
+                    precoBox.innerHTML =
+                        '<div class="text-base font-black text-gray-800 leading-none">' + moeda(precoDe(s)) + '</div>' +
+                        '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div>';
+                }
                 corpo.innerHTML = '<p class="text-[13px] text-gray-800 leading-relaxed">' + s.resumo + '</p>';
             }
         });
