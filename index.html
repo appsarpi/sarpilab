@@ -548,6 +548,19 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .card-premium .preco-box .text-purple-700, .ed-cab.premium .text-purple-700 { color: #A16207 !important; }
         .ed-cab.premium { border-bottom-color: #D4A017; }
         .numero.premium .n { color: #B8860B; }
+        .op-pacotes { margin-top: 10px; border-top: 1px solid #E5E7EB; }
+        .op-pacote { padding: 7px 0; border-bottom: 1px solid #F3F4F6; }
+        .op-pacote.gold { background: #FFFBEB; border-left: 3px solid #D4A017; padding: 7px 8px; }
+        .op-topo { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+        .op-nome { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; color: #4B5563; }
+        .op-pacote.gold .op-nome { color: #A16207; }
+        .op-pacote.ind .op-nome { color: #6D28D9; }
+        .op-pacote.gold.ind .op-nome { color: #A16207; }
+        .op-ind { font-size: 10px; letter-spacing: 0.04em; }
+        .op-preco { font-size: 13px; font-weight: 900; color: #111827; white-space: nowrap; }
+        .op-pacote.gold .op-preco { color: #A16207; }
+        .op-mes { font-size: 10px; font-weight: 700; color: #6B7280; }
+        .op-txt { font-size: 11.5px; color: #422006; line-height: 1.35; margin: 3px 0 0; }
         .card-destaque {
             border: 2px solid #8C52FF !important;
             background-color: #F5F3FF !important;
@@ -663,6 +676,9 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .ed-bloco.lilas { background: #F5F3FF; border-top: 4px solid #8C52FF; }
         .ed-bloco.lilas .sec { border-bottom-color: #DDD6FE; }
         .ed-bloco.lilas .numero { border-left-color: #DDD6FE; }
+        .ed-bloco.premium { background: #FFFBEB; border-left: 4px solid #D4A017; }
+        .ed-bloco.premium .sec { color: #A16207; border-bottom-color: #FDE68A; }
+        .prem-txt { font-size: 13px; color: #422006; line-height: 1.5; margin: 0; }
         .ed-bloco.cinza { background: #F9FAFB; border: 1px solid #F3F4F6; }
         .ed-bloco.cinza .bons p { border-bottom-color: #EEF0F3; }
         /* FECHAMENTO DA PROPOSTA */
@@ -1098,7 +1114,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9.5" y="10" width="5" height="4" rx="1"></rect><path d="M9.5 10.5L6.5 7.5M14.5 10.5l3-3M9.5 13.5l-3 3M14.5 13.5l3 3"></path><circle cx="5.5" cy="6.5" r="2"></circle><circle cx="18.5" cy="6.5" r="2"></circle><circle cx="5.5" cy="17.5" r="2"></circle><circle cx="18.5" cy="17.5" r="2"></circle></svg>'
         },
         {
-            id: 3, nome: 'VITRINE LAB', nivel: 'Pacote Básico', rotulo: 'Vitrine Lab Básico', curto: '3 h de captação + 12 postagens',
+            id: 3, nome: 'VITRINE LAB', nivel: 'Pacote Básico', extraPremium: 'mais 1 hora de gravação para 2 vídeos falados, com roteiro, iluminação e áudio feitos pela Sarpi Lab, para o perfil ganhar voz, confiança e autoridade', rotulo: 'Vitrine Lab Básico', curto: '3 h de captação + 12 postagens',
             preco: 697, tipo: 'mensal',
             resumo: 'O seu Instagram em movimento o mês inteiro. Planejamos o calendário editorial, captamos, editamos e acompanhamos os resultados com você, para o perfil ganhar seguidores e clientes.',
             beneficio: 'Um perfil movimentado o mês todo, com estratégia e acompanhamento.',
@@ -1135,7 +1151,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>'
         },
         {
-            id: 5, nome: 'VITRINE LAB', nivel: 'Pacote Premium', premium: true, rotulo: 'Vitrine Lab Premium', curto: '4 h de captação + 12 postagens + 2 vídeos falados',
+            id: 5, variante: 3, nome: 'VITRINE LAB', nivel: 'Pacote Premium', premium: true, rotulo: 'Vitrine Lab Premium', curto: '4 h de captação + 12 postagens + 2 vídeos falados',
             preco: 947, tipo: 'mensal',
             resumo: 'Tudo do Vitrine Lab Básico, mais 2 vídeos falados com você ou a sua equipe, com roteiro, iluminação e áudio feitos pela Sarpi Lab, para o perfil ganhar voz, confiança e autoridade.',
             beneficio: 'O perfil movimentado o mês todo e você falando direto com o seu cliente.',
@@ -1247,11 +1263,12 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 lista.appendChild(linha);
                 return;
             }
-            linha.className = 'flex items-center gap-2 p-2.5 border rounded-lg hover:bg-purple-50 transition';
+            linha.className = 'flex items-center gap-2 p-2.5 border rounded-lg hover:bg-purple-50 transition' + (s.variante ? ' ml-6' : '');
+            if (s.variante) linha.style.cssText = 'border-color:#D4A017;background:#FFFBEB';
             linha.innerHTML =
                 '<label class="flex items-start gap-3 flex-1 cursor-pointer">' +
                 '<input type="checkbox" id="check-svc' + s.id + '" class="w-5 h-5 mt-0.5 rounded">' +
-                '<span><span class="block font-semibold text-gray-800 text-sm">' + s.id + '. ' + s.rotulo + '</span>' +
+                '<span><span class="block font-semibold text-gray-800 text-sm">' + (s.variante ? '↳ ★ Pacote Premium' : s.id + '. ' + s.rotulo + (s.nivel ? ' (Básico)' : '')) + '</span>' +
                 '<span class="block text-xs text-gray-500">' + s.curto + '</span></span></label>' +
                 '<div class="text-right"><div class="flex items-center gap-1">' +
                 '<span class="text-xs text-gray-500 font-bold">R$</span>' +
@@ -1276,6 +1293,12 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 '</div></div>';
             lista.appendChild(extra);
         });
+        // Vitrine Lab: Básico e Premium não podem ser marcados juntos
+        SERVICOS.filter(v => v.variante).forEach(v => {
+            const a = $('check-svc' + v.id), b = $('check-svc' + v.variante);
+            a.addEventListener('change', () => { if (a.checked) b.checked = false; });
+            b.addEventListener('change', () => { if (b.checked) a.checked = false; });
+        });
         // Botão "voltar ao preço de tabela"
         lista.addEventListener('click', function (e) {
             const b = e.target.closest('[data-tabela]');
@@ -1290,13 +1313,13 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
     (function montarCards() {
         const grid = $('pdf-servicos');
         SERVICOS.forEach(s => {
+            if (s.variante) return; // o Premium aparece dentro do card do Vitrine Lab
             const card = document.createElement('div');
             card.className = 'card-servico rounded-xl p-5 relative' + (s.premium ? ' card-premium' : '');
             card.id = 'pdf-svc' + s.id;
             card.innerHTML =
                 '<div class="selo badge-recomendado hidden absolute -top-3 -right-2 text-white text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="background:#8C52FF;height:22px;line-height:1;padding:0 12px"><span>★ Indicado para o seu momento</span></div>' +
                 '<div class="selo badge-promo hidden text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="position:absolute;bottom:-11px;left:12px;background:#FDE047;color:#111827;border:1px solid #EAB308;height:22px;line-height:1;padding:0 12px"><span class="promo-texto"></span></div>' +
-                (s.nivel ? '<p class="nivel-pacote">' + (s.premium ? '★ ' : '') + s.nivel + '</p>' : '') +
                 '<div class="flex items-center gap-2 mb-3">' +
                 '<div class="bg-gray-900 p-2 rounded-lg text-white shadow shrink-0">' + s.icone + '</div>' +
                 '<h3 class="fonte-marca titulo-logo text-lg whitespace-nowrap"><span>' + s.nome + '</span></h3>' +
@@ -1661,13 +1684,30 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             boxFotos.classList.add('hidden');
         }
 
+        // Opções de pacote dentro do card do Vitrine Lab (Básico e Premium)
+        const opcoesPacote = (b, pr, premInd, marc) => {
+            const linha = (rot, preco, ind, gold, txt) =>
+                '<div class="op-pacote' + (gold ? ' gold' : '') + (ind ? ' ind' : '') + '">' +
+                '<div class="op-topo"><span class="op-nome">' + rot + (ind ? ' <span class="op-ind">• indicado</span>' : '') + '</span>' +
+                '<span class="op-preco">' + moeda(preco) + '<span class="op-mes">/mês</span></span></div>' +
+                (txt ? '<p class="op-txt">' + txt + '</p>' : '') + '</div>';
+            return '<div class="op-pacotes">' +
+                linha('Pacote Básico', precoDe(b), marc && !premInd, false, '') +
+                linha('★ Pacote Premium', precoDe(pr), marc && premInd, true, 'Tudo do Básico, ' + b.extraPremium + '.') + '</div>';
+        };
+
         // 6. Cards: marcados mostram preço e entregas; os demais mostram a descrição
-        SERVICOS.forEach(s => {
-            const marcado = $('check-svc' + s.id).checked;
-            const card = $('pdf-svc' + s.id);
+        SERVICOS.forEach(s0 => {
+            if (s0.variante) return;
+            const varPrem = SERVICOS.find(v => v.variante === s0.id);
+            const premiumMarcado = !!(varPrem && $('check-svc' + varPrem.id).checked);
+            const s = premiumMarcado ? varPrem : s0;          // dados do pacote indicado
+            const marcado = $('check-svc' + s0.id).checked || premiumMarcado;
+            const card = $('pdf-svc' + s0.id);
             const promo = marcado ? promoDe[s.id] : null;
             card.classList.toggle('card-destaque', marcado && !promo);
             card.classList.toggle('card-promo', !!promo);
+            card.classList.toggle('card-premium', premiumMarcado);
             card.querySelector('.badge-recomendado').classList.toggle('hidden', !marcado);
             const seloPromo = card.querySelector('.badge-promo');
             seloPromo.classList.toggle('hidden', !promo);
@@ -1683,9 +1723,10 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     '<div class="text-lg font-black text-purple-700 leading-none' + (promo ? ' preco-promo' : '') + '">' + (promo && promo.de ? 'por ' : '') + moeda(precoDe(s)) + '</div>' +
                     '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div>';
                 corpo.innerHTML =
-                    '<p class="text-[13px] text-gray-800 leading-relaxed mb-2 font-semibold">' + s.beneficio + '</p>' +
-                    '<ul class="lista-entregas">' + s.entregas.map(e => e.startsWith('BÔNUS:') ? '<li class="bonus"><b>Bônus:</b>' + e.slice(6) + '</li>' : '<li>' + e + '</li>').join('') + '</ul>' +
-                    (promo ? '<div class="nota-promo">★ ' + escHtml(promo.rotulo) + (promo.msg ? ': ' + escHtml(promo.msg) : '') + '</div>' : '');
+                    '<p class="text-[13px] text-gray-800 leading-relaxed mb-2 font-semibold">' + s0.beneficio + '</p>' +
+                    '<ul class="lista-entregas">' + s0.entregas.map(e => e.startsWith('BÔNUS:') ? '<li class="bonus"><b>Bônus:</b>' + e.slice(6) + '</li>' : '<li>' + e + '</li>').join('') + '</ul>' +
+                    (promo ? '<div class="nota-promo">★ ' + escHtml(promo.rotulo) + (promo.msg ? ': ' + escHtml(promo.msg) : '') + '</div>' : '') +
+                    (varPrem ? opcoesPacote(s0, varPrem, premiumMarcado, true) : '');
             } else {
                 // Não marcado: mostra o resumo e também o preço (o cliente tem curiosidade); "em breve" fica sem preço
                 if (s.tipo === 'embreve') {
@@ -1697,7 +1738,8 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                         '<div class="text-base font-black text-gray-800 leading-none">' + moeda(precoDe(s)) + '</div>' +
                         '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div>';
                 }
-                corpo.innerHTML = '<p class="text-[13px] text-gray-800 leading-relaxed">' + s.resumo + '</p>';
+                corpo.innerHTML = '<p class="text-[13px] text-gray-800 leading-relaxed">' + s0.resumo + '</p>' +
+                    (varPrem ? opcoesPacote(s0, varPrem, false, false) : '');
             }
         });
 
@@ -1831,11 +1873,14 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         $('pdf-termos').classList.toggle('hidden', termos.length === 0);
 
         // 9b. Páginas "Saiba mais": uma por serviço (indicados primeiro), em estilo editorial, sem caixas
-        const ordem = SERVICOS.filter(x => x.pagina).sort((a, b) => ($('check-svc' + b.id).checked ? 1 : 0) - ($('check-svc' + a.id).checked ? 1 : 0));
+        const ordem = SERVICOS.filter(x => x.pagina && !x.variante).sort((a, b) => ($('check-svc' + b.id).checked ? 1 : 0) - ($('check-svc' + a.id).checked ? 1 : 0));
         const dd2 = (n) => (n < 10 ? '0' : '') + n;
         const notaPag = (v) => v ? '<p class="nota-pag">● Paga ' + v + '</p>' : '';
         const notaPres = (b) => b ? '<p class="nota-presente">★ De presente</p>' : '';
-        $('pdf-p3').innerHTML = ordem.map(x => {
+        $('pdf-p3').innerHTML = ordem.map(x0 => {
+            const vP = SERVICOS.find(v => v.variante === x0.id);
+            const premInd = !!(vP && $('check-svc' + vP.id).checked);
+            const x = premInd ? Object.assign({}, vP, { id: x0.id }) : x0;   // página do pacote indicado
             const pg = x.pagina;
             let h = '<div class="pagina-servico" id="saiba-svc' + x.id + '">' +
                 '<div class="ed-topo">Sarpi Lab  •  Como funciona</div>' +
@@ -1859,7 +1904,8 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             h += '<div class="ed-bloco lilas"><p class="sec">O que você recebe</p><div class="numeros">' +
                 pg.recebe.map(r => '<div class="numero' + (r[2] === 'bonus' ? ' bonus' : '') + (r[2] === 'premium' ? ' premium' : '') + '">' +
                     '<div class="n">' + r[0] + '</div><div class="l">' + r[1] + '</div>' + (r[2] === 'bonus' ? '<p class="nota-presente" style="margin-top:5px">★ De presente</p>' : '') + (r[2] === 'premium' ? '<p class="nota-presente" style="margin-top:5px">★ Exclusivo Premium</p>' : '') + '</div>').join('') + '</div>' +
-                '</div><div class="ed-bloco cinza"><p class="sec">Bom saber</p><div class="bons">' + pg.saber.map(t => '<p>' + t + '</p>').join('') + '</div></div>' +
+                '</div>' + (vP && !premInd ? '<div class="ed-bloco premium"><p class="sec">★ Pacote Premium</p><p class="prem-txt">Tudo do Básico, ' + x0.extraPremium + '. <b>' + moeda(precoDe(vP)) + '/mês</b> (4 h de captação no ciclo).</p></div>' : '') +
+                '<div class="ed-bloco cinza"><p class="sec">Bom saber</p><div class="bons">' + pg.saber.map(t => '<p>' + t + '</p>').join('') + '</div></div>' +
                 '<div class="ed-rodape"><a href="#pdf-p1" class="voltar-proposta" data-pagina="1">‹ Voltar para a proposta</a><span>@sarpi.lab</span></div></div>';
             return h;
         }).join('');
