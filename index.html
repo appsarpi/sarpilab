@@ -727,6 +727,35 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         <!-- ABA PAGAMENTO -->
         <div id="aba-pagamento" class="hidden">
             <div class="mb-4 border border-gray-200 rounded-lg p-3">
+                <p class="font-bold text-gray-700 text-sm">Forma de pagamento com mais de um serviço</p>
+                <div class="mt-2 space-y-1">
+                    <label class="flex items-center gap-2 text-sm text-gray-800 cursor-pointer"><input type="radio" name="pag-modo" value="separado" checked> Separado por serviço (cada um com as suas datas)</label>
+                    <label class="flex items-center gap-2 text-sm text-gray-800 cursor-pointer"><input type="radio" name="pag-modo" value="junto"> Total junto, em 2 partes</label>
+                </div>
+                <div id="pag-junto-box" class="hidden mt-3 space-y-2">
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="pag-pct" min="10" max="90" step="5" value="50" class="campo w-16 border-2 border-gray-200 p-1.5 rounded-lg text-sm text-right">
+                        <span class="text-sm text-gray-700 font-bold">%</span>
+                        <select id="pag-1" class="campo flex-1 border-2 border-gray-200 p-1.5 rounded-lg text-sm bg-white">
+                            <option value="antes da primeira captação, para reservar a data">antes da primeira captação</option>
+                            <option value="no fechamento da proposta">no fechamento da proposta</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span id="pag-pct2" class="w-16 text-sm text-right font-bold text-gray-700 pr-1">50</span>
+                        <span class="text-sm text-gray-700 font-bold">%</span>
+                        <select id="pag-2" class="campo flex-1 border-2 border-gray-200 p-1.5 rounded-lg text-sm bg-white">
+                            <option value="no meio do mês">no meio do mês</option>
+                            <option value="na entrega do material">na entrega do material</option>
+                            <option value="no fim do mês">no fim do mês</option>
+                        </select>
+                    </div>
+                    <p class="text-[11px] text-gray-500">Soma todos os serviços (avulsos já com desconto, se houver, + a primeira mensalidade). Nos meses seguintes, a mensalidade segue 50% no início e 50% no meio do mês.</p>
+                </div>
+                <p id="pag-aviso-um" class="text-[11px] text-gray-500 mt-2">Vale só quando a proposta tem 2 ou mais serviços marcados. Com um serviço só, o pagamento segue o padrão dele.</p>
+            </div>
+
+            <div class="mb-4 border border-gray-200 rounded-lg p-3">
                 <label class="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" id="parc-ativo" class="w-5 h-5 rounded">
                     <span class="font-bold text-gray-700 text-sm">Oferecer parcelamento na proposta</span>
@@ -1220,8 +1249,34 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         unico: ['50% antes da captação, para reservar a data', '50% na entrega do material'],
         mensal: ['50% no fechamento (a reunião de alinhamento é marcada depois desse pagamento)', '50% no meio do mês']
     };
+    function lerPag() {
+        const m = document.querySelector('input[name="pag-modo"]:checked');
+        const pct = Math.min(90, Math.max(10, Math.round(Number($('pag-pct').value) || 50)));
+        return { junto: !!m && m.value === 'junto', pct: pct, quando1: $('pag-1').value, quando2: $('pag-2').value };
+    }
     function blocoPagamento(sel, precoDe, pct) {
         if (!sel.length) return '';
+        const pg = lerPag();
+        if (pg.junto && sel.length > 1) {
+            const total = sel.reduce((t, s) => t + (s.tipo === 'mensal' ? precoDe(s) : precoDe(s) * (1 - pct / 100)), 0);
+            const primeira = Math.round(total * pg.pct) / 100;
+            const segunda = Math.round((total - primeira) * 100) / 100;
+            const mensais = sel.filter(s => s.tipo === 'mensal');
+            let h = '<div class="mt-3 pt-3 border-t border-purple-200" style="break-inside:avoid">' +
+                '<p class="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-2">Como funciona o pagamento (Pix ou cartão)</p>' +
+                '<table class="w-full text-[12px]" style="border-collapse:collapse">' +
+                '<tr><td colspan="2" class="pt-2 font-bold text-gray-900">Todos os serviços juntos: ' + moeda2(total) +
+                (mensais.length ? ' <span class="font-normal text-gray-500">(com o 1º mês do ' + mensais.map(s => s.rotulo).join(' e ') + ')</span>' : '') + '</td></tr>' +
+                '<tr><td class="py-0.5 pl-3 text-gray-700">' + pg.pct + '% ' + pg.quando1 + '</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(primeira) + '</td></tr>' +
+                '<tr><td class="py-0.5 pl-3 text-gray-700">' + (100 - pg.pct) + '% ' + pg.quando2 + '</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(segunda) + '</td></tr>';
+            mensais.forEach(s => {
+                const v = precoDe(s), a = Math.round(v * 50) / 100;
+                h += '<tr><td colspan="2" class="pt-3 font-bold text-gray-900">A partir do 2º mês: ' + s.rotulo + ' <span class="font-normal text-gray-500">(todo mês)</span></td></tr>' +
+                    '<tr><td class="py-0.5 pl-3 text-gray-700">50% no início do mês</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(a) + '</td></tr>' +
+                    '<tr><td class="py-0.5 pl-3 text-gray-700">50% no meio do mês</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(Math.round((v - a) * 100) / 100) + '</td></tr>';
+            });
+            return h + '</table></div>';
+        }
         let h = '<div class="mt-3 pt-3 border-t border-purple-200" style="break-inside:avoid">' +
             '<p class="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-2">Como funciona o pagamento (Pix ou cartão)</p>' +
             '<table class="w-full text-[12px]" style="border-collapse:collapse">';
@@ -1423,6 +1478,12 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         const pct = Math.min(50, Math.max(0, Number($('desconto').value) || 0));
         const descValor = Math.round(subUnico * pct) / 100;
         const totalUnico = subUnico - descValor;
+
+        // Forma de pagamento com mais de um serviço (aba Pagamento)
+        const pgUi = lerPag();
+        $('pag-junto-box').classList.toggle('hidden', !pgUi.junto);
+        $('pag-pct2').textContent = 100 - pgUi.pct;
+        $('pag-aviso-um').classList.toggle('hidden', sel.length > 1);
 
         // Parcelamento (aba Pagamento)
         const cp = lerParc();
