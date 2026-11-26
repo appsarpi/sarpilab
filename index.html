@@ -1058,7 +1058,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     { t: 'Meio do mês', itens: [
                         { t: 'Reunião de ajuste', d: '30 a 45 min para ajustar o que for preciso', presente: true },
                         { t: 'Postagens no ar', d: '3 por semana, conforme o calendário' },
-                        { t: '2ª parte do pagamento', d: 'Você paga os outros 50%', pag: '50%' }
+                        { t: 'Você paga os outros 50%', d: '', pag: '50%' }
                     ] },
                     { t: 'Fim do mês', itens: [
                         { t: 'Reunião de resultados', d: '30 a 45 min: o que funcionou e próximos passos' },
@@ -1746,7 +1746,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             } else {
                 let n = 0;
                 h += '<div class="fases">' + pg.fases.map(f => '<div class="fase"><div class="fase-topo">' + f.t + '</div>' +
-                    f.itens.map(it => '<div class="fase-item' + (it.presente ? ' presente' : '') + '">' + (it.presente ? '<span class="chip-presente">★ De presente</span>' : '') + '<div class="pt">' + (++n) + '. ' + it.t + '</div><div class="pd">' + it.d + '</div>' +
+                    f.itens.map(it => '<div class="fase-item' + (it.presente ? ' presente' : '') + '">' + (it.presente ? '<span class="chip-presente">★ De presente</span>' : '') + '<div class="pt">' + (++n) + '. ' + it.t + '</div>' + (it.d ? '<div class="pd">' + it.d + '</div>' : '') +
                         (it.pag ? '<span class="chip-pag">PAGA ' + it.pag + '</span>' : '') + '</div>').join('') + '</div>').join('') + '</div>';
             }
             h += '<p class="rotulo-sec">O que você recebe</p><div class="recebe">' +
