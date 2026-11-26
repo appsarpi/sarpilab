@@ -1154,7 +1154,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                         { t: 'Fechamento', d: 'Você paga {P1}', pag: '{P1}' },
                         { t: 'Reunião de alinhamento', d: 'Cerca de 1 h: objetivos, locais e quem posta' },
                         { t: 'Calendário editorial', d: 'A Sarpi Lab monta e você aprova. As datas já contam a captação + até 3 dias úteis de edição' },
-                        { t: 'Captações', cap: true, d: '3 h no ciclo: em 1 dia (3 h seguidas) ou em 2 dias diferentes (1h30 cada). No Premium, + 1 h para os vídeos de autoridade. Material bruto na pasta em até 3 dias úteis após cada captação' }
+                        { t: 'Captações', cap: true, d: '3 h no ciclo: em 1 dia (3 h seguidas) ou em 2 dias diferentes (1h30 cada). No Premium, a 1 h dos vídeos de autoridade entra num desses dias: 1 dia de 4 h ou 2 dias de 1h30 e 2h30. Material bruto na pasta em até 3 dias úteis após cada captação' }
                     ] },
                     { t: 'Meio • dia 15', itens: [
                         { t: 'Reunião de ajuste', d: '30 a 45 min para ajustar o que for preciso', presente: true },
@@ -1178,7 +1178,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             beneficio: 'O perfil movimentado o mês todo e você falando direto com o seu cliente.',
             entregas: [
                 'Calendário editorial',
-                '4 h de captação: as 3 h do Básico + 1 h para os vídeos de autoridade',
+                '4 h de captação: 1 dia de 4 h ou 2 dias (1h30 + 2h30)',
                 '14 postagens editadas (12 + 2 vídeos de autoridade)',
                 'Reuniões de alinhamento e de resultados',
                 'BÔNUS: reunião de ajuste na metade do ciclo',
@@ -1191,7 +1191,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                         { t: 'Fechamento', d: 'Você paga {P1}', pag: '{P1}' },
                         { t: 'Reunião de alinhamento', d: 'Cerca de 1 h: objetivos, locais e quem posta' },
                         { t: 'Calendário e roteiros', d: 'A Sarpi Lab monta o calendário e o roteiro dos 2 vídeos de autoridade, e você aprova' },
-                        { t: 'Captações', d: '2 sessões de 1h30 + 1 h para os vídeos de autoridade (4 h no ciclo). Material bruto em até 3 dias úteis após cada captação' }
+                        { t: 'Captações', d: '4 h no ciclo: 1 dia de 4 h ou 2 dias de 1h30 e 2h30 (a 1 h dos vídeos de autoridade entra num dos dias). Material bruto em até 3 dias úteis após cada captação' }
                     ] },
                     { t: 'Meio • dia 15', itens: [
                         { t: 'Reunião de ajuste', d: '30 a 45 min para ajustar o que for preciso', presente: true },
@@ -1204,7 +1204,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     ] }
                 ],
                 recebe: [['12', 'Postagens editadas, conforme o calendário aprovado'], ['2', 'Vídeos de autoridade com roteiro, iluminação e áudio', 'premium'], ['12', 'Sugestões de legenda, uma para cada postagem'], ['~450', 'Fotos brutas no mês na pasta (estimativa)']],
-                saber: ['Os 2 vídeos de autoridade são gravados em 1 hora de captação própria, com roteiro aprovado antes', 'O ciclo é de 30 dias corridos, contados a partir da reunião de alinhamento; as 12 postagens saem dentro desse período', 'Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião da metade do ciclo', 'Mudança de local ou horário de captação ou reunião: até 24 h antes. Se a captação não acontecer, o calendário e as postagens daquele período são afetados, mas o pagamento da 2ª parte segue na data combinada', 'Clima ou outro imprevisto fora do controle de qualquer das partes: reagendamos sem custo']
+                saber: ['Os 2 vídeos de autoridade são gravados em 1 hora a mais, no mesmo dia de uma das captações, com roteiro aprovado antes', 'O ciclo é de 30 dias corridos, contados a partir da reunião de alinhamento; as 12 postagens saem dentro desse período', 'Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião da metade do ciclo', 'Mudança de local ou horário de captação ou reunião: até 24 h antes. Se a captação não acontecer, o calendário e as postagens daquele período são afetados, mas o pagamento da 2ª parte segue na data combinada', 'Clima ou outro imprevisto fora do controle de qualquer das partes: reagendamos sem custo']
             },
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>'
         },
@@ -1936,7 +1936,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     '<p class="cmp-item">3 h de captação: 1 dia (3 h) ou 2 dias (1h30 cada)</p><p class="cmp-item">12 postagens editadas</p></div>' +
                     '<div class="cmp-col gold' + (premInd ? ' ind' : '') + '"><p class="cmp-nome">★ Pacote Premium' + (premInd ? ' • indicado' : '') + '</p>' +
                     '<p class="cmp-preco">+ ' + moeda(precoDe(vP) - precoDe(x0)) + '<span>/mês</span></p>' +
-                    '<p class="cmp-item">Tudo do Básico</p><p class="cmp-item">+ 1 h de gravação: 2 vídeos de autoridade</p><p class="cmp-item">+ roteiro, microfone e iluminação pela Sarpi Lab</p><p class="cmp-item">= 4 h de captação e 14 postagens</p></div>' +
+                    '<p class="cmp-item">Tudo do Básico</p><p class="cmp-item">+ 1 h de gravação de 2 vídeos de autoridade, no mesmo dia da captação</p><p class="cmp-item">+ roteiro, microfone e iluminação pela Sarpi Lab</p><p class="cmp-item">= 4 h de captação (1 dia de 4 h ou 2 dias: 1h30 + 2h30) e 14 postagens</p></div>' +
                     '</div><p class="cmp-def"><b>★ O que são vídeos de autoridade?</b> Vídeos curtos em que você (ou alguém da sua equipe) fala direto com o seu cliente: dicas, bastidores, diferenciais e respostas às dúvidas mais comuns. Eles mostram quem está por trás do negócio e geram confiança. A Sarpi Lab cuida de tudo: escreve o roteiro com você, leva microfone e iluminação, grava e edita. Você só precisa aparecer.</p></div>' : '') +
                 '<p class="sec">Passo a passo</p>';
             if (pg.fluxo) {
