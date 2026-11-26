@@ -463,6 +463,22 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .selo.hidden { display: none; }
         .modo-pdf .selo-embreve > span { position: relative; top: -0.35em; }
         .modo-pdf .badge-recomendado > span { position: relative; top: var(--ajuste-selo, -0.25em); }
+        .modo-pdf .badge-promo > span { position: relative; top: var(--ajuste-selo, -0.25em); }
+
+        /* ALERTA DE PREÇO FORA DA TABELA E PROMOÇÃO */
+        .alerta-preco { border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 700; line-height: 1.35; }
+        .alerta-preco.abaixo { background: #FEF3C7; border: 1px solid #F59E0B; color: #78350F; }
+        .alerta-preco.acima { background: #DBEAFE; border: 1px solid #3B82F6; color: #1E3A8A; }
+        .campo.preco-abaixo { border-color: #F59E0B !important; background: #FFFBEB; }
+        .campo.preco-acima { border-color: #3B82F6 !important; background: #EFF6FF; }
+        .promo-box { background: #FEFCE8; border: 1px dashed #EAB308; border-radius: 8px; padding: 8px 10px; margin-top: 6px; }
+        .promo-box input[type="checkbox"] { accent-color: #CA8A04; }
+        .btn-tabela { font-size: 11px; font-weight: 700; text-decoration: underline; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; margin-left: 6px; }
+        .card-promo { border: 2px solid #EAB308 !important; background-color: #FEFCE8 !important; }
+        .preco-promo { background: #FDE047; color: #111827 !important; border-radius: 6px; padding: 2px 6px; display: inline-block; }
+        .preco-de { font-size: 11px; font-weight: 700; color: #6B7280; text-decoration: line-through; margin-bottom: 2px; }
+        .tag-promo { display: inline-block; background: #FDE047; color: #111827; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; border-radius: 999px; padding: 2px 8px; margin-top: 3px; }
+        .nota-promo { background: #FEF9C3; border: 1px solid #FACC15; border-left: 4px solid #EAB308; border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 700; color: #713F12; margin-top: 8px; line-height: 1.35; }
         .modo-pdf .titulo-logo > span { position: relative; top: var(--ajuste-pdf, -0.35em); }
         .titulo-logo {
             display: inline-block;
@@ -757,6 +773,8 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             </div>
         </div><!-- fim da aba Pagamento -->
 
+        <div id="alerta-precos" class="alerta-preco abaixo hidden mb-3"></div>
+
         <button id="btn-pdf" onclick="salvarPDF()" class="w-full bg-sarpi text-white font-bold text-lg py-4 rounded-lg hover:bg-purple-700 transition shadow-lg flex justify-center items-center gap-2">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
             <span id="btn-pdf-rotulo">Salvar Proposta em PDF</span>
@@ -856,11 +874,15 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
     // WhatsApp único da proposta (só números, com DDD). Para trocar no futuro, mude aqui.
     const WHATSAPP = '21990260472';
 
-    // Preços sugeridos para Rio das Ostras (R$). Dá para ajustar cada um no painel, proposta a proposta.
+    // PREÇOS DE TABELA para Rio das Ostras (R$). Dá para ajustar cada um no painel, proposta a proposta:
+    // se o valor digitado ficar diferente da tabela, o gerador mostra um alerta. Abaixo da tabela, dá para
+    // sinalizar como promoção (ex.: "Preço de lançamento"), que aparece em amarelo na proposta.
+    // Referência: 4 h no Lab Express (R$ 297 + 2 h extras de R$ 180) = R$ 657, abaixo do Vitrine Lab (R$ 697),
+    // que além das 4 h inclui calendário, 12 postagens editadas e reuniões.
     const SERVICOS = [
         {
             id: 1, nome: 'LAB EXPRESS', rotulo: 'Lab Express', curto: '2 h de captação + 15 fotos + vídeo bônus',
-            preco: 357, tipo: 'unico',
+            preco: 297, tipo: 'unico',
             resumo: 'Sessão ágil de foto e vídeo. Você recebe todo o material bruto em até 24 horas e, em até 3 dias úteis, as fotos tratadas e um vídeo editado de bônus.',
             beneficio: 'Material em mãos em 24 horas e conteúdo editado em até 3 dias.',
             entregas: [
@@ -889,7 +911,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         },
         {
             id: 3, nome: 'VITRINE LAB', rotulo: 'Vitrine Lab', curto: 'Mensal: 4 h de captação + 12 postagens',
-            preco: 597, tipo: 'mensal',
+            preco: 697, tipo: 'mensal',
             resumo: 'O seu Instagram em movimento o mês inteiro. Planejamos o calendário editorial, captamos, editamos e acompanhamos os resultados com você, para o perfil ganhar seguidores e clientes.',
             beneficio: 'Um perfil movimentado o mês todo, com estratégia e acompanhamento.',
             entregas: [
@@ -992,6 +1014,31 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 '<input type="number" min="0" step="1" id="preco' + s.id + '" value="' + s.preco + '" class="campo w-20 border-2 border-gray-200 p-1.5 rounded-lg text-sm text-right"></div>' +
                 '<div class="text-[10px] text-gray-400 mt-0.5">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div></div>';
             lista.appendChild(linha);
+
+            // Alerta de preço fora da tabela + sinalização de promoção (aparece só quando o preço muda)
+            const extra = document.createElement('div');
+            extra.id = 'extra-svc' + s.id;
+            extra.className = 'hidden';
+            extra.innerHTML =
+                '<div id="alerta-svc' + s.id + '" class="alerta-preco"></div>' +
+                '<div id="promo-box' + s.id + '" class="promo-box hidden">' +
+                '<label class="flex items-center gap-2 cursor-pointer text-sm font-bold text-yellow-900">' +
+                '<input type="checkbox" id="promo-ativo' + s.id + '" class="w-4 h-4"> Sinalizar como promoção na proposta</label>' +
+                '<div id="promo-campos' + s.id + '" class="hidden mt-2 space-y-2">' +
+                '<input type="text" id="promo-rotulo' + s.id + '" value="Preço de lançamento" maxlength="40" class="campo w-full border-2 border-gray-200 p-1.5 rounded-lg text-sm" placeholder="Selo (ex.: Preço de lançamento)">' +
+                '<input type="text" id="promo-msg' + s.id + '" maxlength="160" class="campo w-full border-2 border-gray-200 p-1.5 rounded-lg text-sm" placeholder="Mensagem opcional (ex.: válido para os 3 primeiros meses)">' +
+                '<label class="flex items-center gap-2 cursor-pointer text-xs text-gray-700">' +
+                '<input type="checkbox" id="promo-de' + s.id + '" class="w-4 h-4" checked> Mostrar o preço de tabela riscado (de R$ ' + s.preco + ' por...)</label>' +
+                '</div></div>';
+            lista.appendChild(extra);
+        });
+        // Botão "voltar ao preço de tabela"
+        lista.addEventListener('click', function (e) {
+            const b = e.target.closest('[data-tabela]');
+            if (!b) return;
+            const s = SERVICOS.find(x => x.id === Number(b.dataset.tabela));
+            $('preco' + s.id).value = s.preco;
+            renderizar();
         });
     })();
 
@@ -1004,6 +1051,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             card.id = 'pdf-svc' + s.id;
             card.innerHTML =
                 '<div class="selo badge-recomendado hidden absolute -top-3 -right-2 text-white text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="background:#8C52FF;height:22px;line-height:1;padding:0 12px"><span>★ Indicado para o seu momento</span></div>' +
+                '<div class="selo badge-promo hidden text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="position:absolute;top:-12px;right:-8px;background:#FDE047;color:#111827;border:1px solid #EAB308;height:22px;line-height:1;padding:0 12px"><span class="promo-texto"></span></div>' +
                 '<div class="flex items-center gap-2 mb-3">' +
                 '<div class="bg-gray-900 p-2 rounded-lg text-white shadow shrink-0">' + s.icone + '</div>' +
                 '<h3 class="fonte-marca titulo-logo text-lg whitespace-nowrap"><span>' + s.nome + '</span></h3>' +
@@ -1248,6 +1296,46 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         const precoDe = (s) => Math.max(0, Number($('preco' + s.id).value) || 0);
         const temSel = sel.length > 0;
 
+        // 0. Alerta de preço fora da tabela + promoção
+        const promoDe = {};
+        const mudancas = [];
+        SERVICOS.forEach(s => {
+            if (s.tipo === 'embreve') return;
+            const atual = precoDe(s);
+            const dif = atual - s.preco;
+            const campo = $('preco' + s.id);
+            campo.classList.toggle('preco-abaixo', dif < 0);
+            campo.classList.toggle('preco-acima', dif > 0);
+            $('extra-svc' + s.id).classList.toggle('hidden', dif === 0);
+            const alerta = $('alerta-svc' + s.id);
+            const promoAtiva = dif < 0 && $('promo-ativo' + s.id).checked;
+            $('promo-box' + s.id).classList.toggle('hidden', dif >= 0);
+            $('promo-campos' + s.id).classList.toggle('hidden', !promoAtiva);
+            if (dif !== 0) {
+                const pctDif = s.preco ? Math.round(Math.abs(dif) / s.preco * 100) : 0;
+                alerta.className = 'alerta-preco ' + (dif < 0 ? 'abaixo' : 'acima');
+                alerta.innerHTML = (dif < 0 ? '⚠ Abaixo da tabela: ' : '⚠ Acima da tabela: ') +
+                    moeda(s.preco) + ' → ' + moeda(atual) + ' (' + (dif < 0 ? '−' : '+') + moeda(Math.abs(dif)) + ', ' + pctDif + '%)' +
+                    '<button type="button" class="btn-tabela" data-tabela="' + s.id + '">voltar para ' + moeda(s.preco) + '</button>';
+                if ($('check-svc' + s.id).checked) {
+                    mudancas.push(s.rotulo + ': ' + moeda(s.preco) + ' → ' + moeda(atual) + (promoAtiva ? ' (promoção: ' + ($('promo-rotulo' + s.id).value.trim() || 'Promoção') + ')' : ''));
+                }
+            }
+            if (promoAtiva) {
+                promoDe[s.id] = {
+                    rotulo: $('promo-rotulo' + s.id).value.trim() || 'Promoção',
+                    msg: $('promo-msg' + s.id).value.trim(),
+                    de: $('promo-de' + s.id).checked ? s.preco : 0
+                };
+            }
+        });
+        const banner = $('alerta-precos');
+        banner.classList.toggle('hidden', mudancas.length === 0);
+        banner.innerHTML = mudancas.length
+            ? '⚠ Atenção: esta proposta tem preço fora da tabela.<br>' + mudancas.map(m => '• ' + m).join('<br>')
+            : '';
+        const escHtml = (t) => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
         // 1. Saudação
         $('pdf-client').innerText = nome ? 'Olá, ' + nome + '!' : 'Olá!';
 
@@ -1289,8 +1377,13 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         SERVICOS.forEach(s => {
             const marcado = $('check-svc' + s.id).checked;
             const card = $('pdf-svc' + s.id);
-            card.classList.toggle('card-destaque', marcado);
-            card.querySelector('.badge-recomendado').classList.toggle('hidden', !marcado);
+            const promo = marcado ? promoDe[s.id] : null;
+            card.classList.toggle('card-destaque', marcado && !promo);
+            card.classList.toggle('card-promo', !!promo);
+            card.querySelector('.badge-recomendado').classList.toggle('hidden', !marcado || !!promo);
+            const seloPromo = card.querySelector('.badge-promo');
+            seloPromo.classList.toggle('hidden', !promo);
+            seloPromo.querySelector('.promo-texto').textContent = promo ? '★ ' + promo.rotulo : '';
             card.style.order = marcado ? 0 : (s.tipo === 'embreve' ? 2 : 1);
 
             const precoBox = card.querySelector('.preco-box');
@@ -1298,11 +1391,13 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             if (marcado) {
                 precoBox.classList.remove('hidden');
                 precoBox.innerHTML =
-                    '<div class="text-lg font-black text-purple-700 leading-none">' + moeda(precoDe(s)) + '</div>' +
+                    (promo && promo.de ? '<div class="preco-de">de ' + moeda(promo.de) + '</div>' : '') +
+                    '<div class="text-lg font-black text-purple-700 leading-none' + (promo ? ' preco-promo' : '') + '">' + (promo && promo.de ? 'por ' : '') + moeda(precoDe(s)) + '</div>' +
                     '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div>';
                 corpo.innerHTML =
                     '<p class="text-[13px] text-gray-800 leading-relaxed mb-2 font-semibold">' + s.beneficio + '</p>' +
-                    '<ul class="lista-entregas">' + s.entregas.map(e => e.startsWith('BÔNUS:') ? '<li class="bonus"><b>Bônus:</b>' + e.slice(6) + '</li>' : '<li>' + e + '</li>').join('') + '</ul>';
+                    '<ul class="lista-entregas">' + s.entregas.map(e => e.startsWith('BÔNUS:') ? '<li class="bonus"><b>Bônus:</b>' + e.slice(6) + '</li>' : '<li>' + e + '</li>').join('') + '</ul>' +
+                    (promo ? '<div class="nota-promo">★ ' + escHtml(promo.rotulo) + (promo.msg ? ': ' + escHtml(promo.msg) : '') + '</div>' : '');
             } else {
                 precoBox.classList.add('hidden');
                 precoBox.innerHTML = '';
@@ -1341,11 +1436,15 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             let h = '<p class="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-2">Investimento</p>' +
                 '<table class="w-full text-[13px]" style="border-collapse:collapse">';
             sel.forEach(s => {
-                h += '<tr class="border-b border-purple-100">' +
+                const promo = promoDe[s.id];
+                h += '<tr class="border-b border-purple-100"' + (promo ? ' style="background:#FEFCE8"' : '') + '>' +
                     '<td class="py-2 pr-3"><span class="font-bold text-gray-900">' + s.rotulo + '</span>' +
-                    '<span class="block text-[11px] text-gray-500">' + s.curto + '</span></td>' +
+                    '<span class="block text-[11px] text-gray-500">' + s.curto + '</span>' +
+                    (promo ? '<span class="tag-promo">★ ' + escHtml(promo.rotulo) + '</span>' : '') + '</td>' +
                     '<td class="py-2 px-2 text-[11px] text-gray-500 whitespace-nowrap">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</td>' +
-                    '<td class="py-2 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda(precoDe(s)) + '</td></tr>';
+                    '<td class="py-2 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' +
+                    (promo && promo.de ? '<div class="preco-de">de ' + moeda(promo.de) + '</div>' : '') +
+                    '<span' + (promo ? ' class="preco-promo"' : '') + '>' + moeda(precoDe(s)) + '</span></td></tr>';
             });
             if (sel.length > 1 || descValor > 0) {
                 if (unicos.length && descValor > 0) {
