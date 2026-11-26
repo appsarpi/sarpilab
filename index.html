@@ -804,11 +804,11 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                         <span class="text-sm text-gray-700 font-bold">%</span>
                         <select id="pag-2" class="campo flex-1 border-2 border-gray-200 p-1.5 rounded-lg text-sm bg-white">
                             <option value="na entrega do material bruto" selected>na entrega do material bruto</option>
-                            <option value="no meio do mês">no meio do mês</option>
-                            <option value="no fim do mês">no fim do mês</option>
+                            <option value="na metade do ciclo (dia 15)">na metade do ciclo (dia 15)</option>
+                            <option value="no fim do ciclo (dia 30)">no fim do ciclo (dia 30)</option>
                         </select>
                     </div>
-                    <p class="text-[11px] text-gray-500">Soma todos os serviços (avulsos já com desconto, se houver, + o 1º mês do Vitrine Lab). Se o cliente renovar o Vitrine Lab, cada novo mês segue 50% no início e 50% no meio do mês.</p>
+                    <p class="text-[11px] text-gray-500">Soma todos os serviços (avulsos já com desconto, se houver, + o 1º mês do Vitrine Lab). Se o cliente renovar o Vitrine Lab, cada novo ciclo segue 50% no início e 50% na metade do ciclo.</p>
                 </div>
                 <p id="pag-aviso-um" class="text-[11px] text-gray-500 mt-2">Vale só quando a proposta tem 2 ou mais serviços marcados. Com um serviço só, o pagamento segue o padrão dele.</p>
             </div>
@@ -1044,8 +1044,8 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 '4 horas de captação (podem ser 2 h + 2 h em locais diferentes)',
                 '12 postagens editadas (fotos, vídeos ou carrosséis, conforme o calendário aprovado), com sugestão de legenda',
                 'Pasta com todo o material captado',
-                'Reunião de alinhamento e reunião de resultados no fim do mês',
-                'BÔNUS: reunião na metade do mês para ajustar o que for preciso',
+                'Reunião de alinhamento e reunião de resultados no fim do ciclo',
+                'BÔNUS: reunião na metade do ciclo para ajustar o que for preciso',
                 'Por mês, sem fidelidade'
             ],
             pagina: {
@@ -1067,7 +1067,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     ] }
                 ],
                 recebe: [['12', 'Postagens editadas: fotos, vídeos ou carrosséis, conforme o calendário aprovado'], ['12', 'Sugestões de legenda, uma para cada postagem'], ['~600', 'Fotos brutas no mês na pasta (em média 150 por hora, estimativa)']],
-                saber: ['O ciclo é de 30 dias corridos, contados a partir da reunião de alinhamento; as 12 postagens saem dentro desse período', 'Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião do meio do mês', 'Mudança de local ou horário de captação ou reunião: até 24 h antes. Se a captação não acontecer, o calendário e as postagens daquele período são afetados', 'Clima ou outro imprevisto fora do controle de qualquer das partes: reagendamos sem custo']
+                saber: ['O ciclo é de 30 dias corridos, contados a partir da reunião de alinhamento; as 12 postagens saem dentro desse período', 'Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião da metade do ciclo', 'Mudança de local ou horário de captação ou reunião: até 24 h antes. Se a captação não acontecer, o calendário e as postagens daquele período são afetados, mas o pagamento da metade do ciclo segue na mesma data', 'Clima ou outro imprevisto fora do controle de qualquer das partes: reagendamos sem custo']
             },
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>'
         },
@@ -1365,7 +1365,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
     // Pagamento em duas partes, como combinado para cada serviço
     const MOMENTOS = {
         unico: ['50% antes da captação, para reservar a data', '50% na entrega do material'],
-        mensal: ['50% no fechamento (a reunião de alinhamento é marcada depois desse pagamento)', '50% no meio do mês']
+        mensal: ['50% no fechamento (a reunião de alinhamento é marcada depois desse pagamento)', '50% na metade do ciclo (dia 15)']
     };
     function lerPag() {
         const m = document.querySelector('input[name="pag-modo"]:checked');
@@ -1719,7 +1719,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             if ($('check-svc2').checked) {
                 termos.push('Imagens aéreas dependem de clima e das condições de voo do local. Se houver impedimento, reagendamos sem custo.');
             }
-            if ($('check-svc3').checked) termos.push('Vitrine Lab: ciclo de 30 dias corridos, contados a partir da reunião de alinhamento, sem fidelidade. Mudanças de local ou horário de captações e reuniões devem ser pedidas até 24 horas antes. Se uma captação não acontecer por pedido do cliente, o calendário editorial e as postagens que dependem dela são afetados. Captações em Rio das Ostras, em locais definidos na reunião de alinhamento. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
+            if ($('check-svc3').checked) termos.push('Vitrine Lab: ciclo de 30 dias corridos, contados a partir da reunião de alinhamento, sem fidelidade. Mudanças de local ou horário de captações e reuniões devem ser pedidas até 24 horas antes. Se uma captação não acontecer por pedido do cliente, o calendário editorial e as postagens que dependem dela são afetados. A 2ª parte do pagamento continua sendo feita na metade do ciclo (dia 15). Captações em Rio das Ostras, em locais definidos na reunião de alinhamento. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
             if (condicoes) termos.push(condicoes);
         }
         const lista = $('pdf-termos-lista');
