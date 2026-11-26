@@ -1096,9 +1096,9 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             pagina: {
                 equip: 'iPhone 18 Pro',
                 fluxo: [
-                    { t: 'Reserva', d: 'Você paga 50% e define local, data e horário', pag: '50%' },
+                    { t: 'Reserva', d: 'Você paga {P1} e define local, data e horário', pag: '{P1}' },
                     { t: 'Captação', d: '1 hora no local: foto, vídeo ou os dois' },
-                    { t: 'Em 24 h', d: 'Todo o material bruto, sem edição', pag: '50%' },
+                    { t: 'Em 24 h', d: 'Todo o material bruto, sem edição', pag: '{P2}' },
                     { t: 'Em até 3 dias úteis', d: '8 fotos tratadas + vídeo bônus' },
                     { t: 'Ajuste', d: 'Você pede em até 5 dias úteis; entregamos em até 5 dias úteis' }
                 ],
@@ -1123,9 +1123,9 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             pagina: {
                 equip: 'drone',
                 fluxo: [
-                    { t: 'Reserva', d: 'Você paga 50% e define local, data e horário', pag: '50%' },
+                    { t: 'Reserva', d: 'Você paga {P1} e define local, data e horário', pag: '{P1}' },
                     { t: 'Voo', d: '1 hora no local, incluindo a preparação pré-voo, com até 3 voos' },
-                    { t: 'Em 24 h', d: 'Todo o material bruto, sem edição', pag: '50%' },
+                    { t: 'Em 24 h', d: 'Todo o material bruto, sem edição', pag: '{P2}' },
                     { t: 'Em até 3 dias úteis', d: '3 fotos aéreas + vídeo bônus' },
                     { t: 'Ajuste', d: 'Você pede em até 5 dias úteis; entregamos em até 5 dias úteis' }
                 ],
@@ -1151,7 +1151,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 equip: 'iPhone 18 Pro',
                 fases: [
                     { t: 'Início • dia 1', itens: [
-                        { t: 'Fechamento', d: 'Você paga 50%', pag: '50%' },
+                        { t: 'Fechamento', d: 'Você paga {P1}', pag: '{P1}' },
                         { t: 'Reunião de alinhamento', d: 'Cerca de 1 h: objetivos, locais e quem posta' },
                         { t: 'Calendário editorial', d: 'A Sarpi Lab monta e você aprova. As datas já contam a captação + até 3 dias úteis de edição' },
                         { t: 'Captações', d: '3 h no ciclo: em 1 dia (3 h seguidas) ou em 2 dias diferentes (1h30 cada). No Premium, + 1 h para os vídeos de autoridade. Material bruto na pasta em até 3 dias úteis após cada captação' }
@@ -1159,7 +1159,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     { t: 'Meio • dia 15', itens: [
                         { t: 'Reunião de ajuste', d: '30 a 45 min para ajustar o que for preciso', presente: true },
                         { t: 'Postagens no ar', d: '3 por semana, conforme o calendário' },
-                        { t: 'Você paga os outros 50%', d: '', pag: '50%' }
+                        { t: 'Você paga os outros {P2}', d: '', pag: '{P2}' }
                     ] },
                     { t: 'Fim • dia 30', itens: [
                         { t: 'Reunião de resultados', d: '30 a 45 min: o que funcionou e próximos passos' },
@@ -1188,7 +1188,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 equip: 'iPhone 18 Pro',
                 fases: [
                     { t: 'Início • dia 1', itens: [
-                        { t: 'Fechamento', d: 'Você paga 50%', pag: '50%' },
+                        { t: 'Fechamento', d: 'Você paga {P1}', pag: '{P1}' },
                         { t: 'Reunião de alinhamento', d: 'Cerca de 1 h: objetivos, locais e quem posta' },
                         { t: 'Calendário e roteiros', d: 'A Sarpi Lab monta o calendário e o roteiro dos 2 vídeos de autoridade, e você aprova' },
                         { t: 'Captações', d: '2 sessões de 1h30 + 1 h para os vídeos de autoridade (4 h no ciclo). Material bruto em até 3 dias úteis após cada captação' }
@@ -1196,7 +1196,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     { t: 'Meio • dia 15', itens: [
                         { t: 'Reunião de ajuste', d: '30 a 45 min para ajustar o que for preciso', presente: true },
                         { t: 'Postagens no ar', d: '3 por semana, conforme o calendário' },
-                        { t: 'Você paga os outros 50%', d: '', pag: '50%' }
+                        { t: 'Você paga os outros {P2}', d: '', pag: '{P2}' }
                     ] },
                     { t: 'Fim • dia 30', itens: [
                         { t: 'Reunião de resultados', d: '30 a 45 min: o que funcionou e próximos passos' },
@@ -1909,7 +1909,11 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         const marcadoOuVariante = (x) => $('check-svc' + x.id).checked || SERVICOS.some(v => v.variante === x.id && $('check-svc' + v.id).checked);
         const ordem = SERVICOS.filter(x => x.pagina && !x.variante).sort((a, b) => (marcadoOuVariante(b) ? 1 : 0) - (marcadoOuVariante(a) ? 1 : 0));
         const dd2 = (n) => (n < 10 ? '0' : '') + n;
-        const notaPag = (v) => v ? '<p class="nota-pag">● Paga ' + v + '</p>' : '';
+        // Porcentagens do pagamento: seguem a aba Pagamento quando o total é pago junto (2+ serviços); senão, 50/50
+        const pgSM = lerPag();
+        const pct1 = (pgSM.junto && sel.length > 1) ? pgSM.pct : 50;
+        const fx = (t) => (t || '').replace(/\{P1\}/g, pct1 + '%').replace(/\{P2\}/g, (100 - pct1) + '%');
+        const notaPag = (v) => v ? '<p class="nota-pag">● Paga ' + fx(v) + '</p>' : '';
         const notaPres = (b) => b ? '<p class="nota-presente">★ De presente</p>' : '';
         $('pdf-p3').innerHTML = ordem.map(x0 => {
             const vP = SERVICOS.find(v => v.variante === x0.id);
@@ -1934,14 +1938,14 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 '<p class="sec">Passo a passo</p>';
             if (pg.fluxo) {
                 h += '<div class="linha-tempo">' + pg.fluxo.map((p, k) =>
-                    '<div class="etapa"><div class="nn">' + dd2(k + 1) + '</div><div class="tt">' + p.t + '</div><div class="dd">' + p.d + '</div>' + notaPag(p.pag) + '</div>').join('') + '</div>';
+                    '<div class="etapa"><div class="nn">' + dd2(k + 1) + '</div><div class="tt">' + fx(p.t) + '</div><div class="dd">' + fx(p.d) + '</div>' + notaPag(p.pag) + '</div>').join('') + '</div>';
             } else {
                 let n = 0;
                 h += '<div class="ciclo">' + pg.fases.map(f => {
                     const partes = f.t.split('•');
                     return '<div class="ciclo-col"><div class="ciclo-dia">' + (partes[1] || f.t).trim().replace(/^d/, 'D') + '</div><div class="ciclo-sub">' + partes[0].trim() + ' do ciclo</div>' +
-                        f.itens.map(it => '<div class="ciclo-item' + (it.presente ? ' presente' : '') + '">' + notaPres(it.presente) + '<div class="tt"><span class="nn-p">' + dd2(++n) + '</span> ' + it.t + '</div>' +
-                            (it.d ? '<div class="dd">' + it.d + '</div>' : '') + notaPag(it.pag) + '</div>').join('') + '</div>';
+                        f.itens.map(it => '<div class="ciclo-item' + (it.presente ? ' presente' : '') + '">' + notaPres(it.presente) + '<div class="tt"><span class="nn-p">' + dd2(++n) + '</span> ' + fx(it.t) + '</div>' +
+                            (it.d ? '<div class="dd">' + fx(it.d) + '</div>' : '') + notaPag(it.pag) + '</div>').join('') + '</div>';
                 }).join('') + '</div>';
             }
             h += '<div class="ed-bloco lilas"><p class="sec">O que você recebe</p><div class="numeros">' +
