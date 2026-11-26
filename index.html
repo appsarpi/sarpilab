@@ -770,7 +770,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         </div>
         <div class="space-y-2 mb-2" id="lista-servicos"></div>
         <p id="aviso-sobreposicao" class="hidden text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-2 mb-2">
-            O Vitrine Lab já inclui 4 horas de captação por mês. Com o Lab Express junto, a sessão dele conta como captação extra.
+            O Vitrine Lab já inclui 3 horas de captação por mês. Com o Lab Express junto, a sessão dele conta como captação extra.
         </p>
         <div class="flex items-center justify-between gap-3 mb-4 bg-gray-50 border border-gray-200 rounded-lg p-2.5">
             <div>
@@ -1030,8 +1030,8 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
     // PREÇOS DE TABELA para Rio das Ostras (R$). Dá para ajustar cada um no painel, proposta a proposta:
     // se o valor digitado ficar diferente da tabela, o gerador mostra um alerta. Abaixo da tabela, dá para
     // sinalizar como promoção (ex.: "Preço de lançamento"), que aparece em amarelo na proposta.
-    // Referência: 4 h no Lab Express (R$ 197 + 3 h extras de R$ 180) = R$ 737. O Vitrine Lab (R$ 697) sai um pouco
-    // abaixo disso mesmo incluindo calendário, 12 postagens editadas e reuniões: é o incentivo para fechar o Vitrine Lab.
+    // Referência: 3 h no Lab Express (R$ 197 + 2 h extras de R$ 180) = R$ 557. O Vitrine Lab (R$ 697) cobra a mais pelo
+    // calendário, 12 postagens editadas, legendas e reuniões.
     const SERVICOS = [
         {
             momentos: ['50% antes da captação, para reservar a data', '50% em até 24 h, na entrega do material bruto'],
@@ -1087,13 +1087,13 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9.5" y="10" width="5" height="4" rx="1"></rect><path d="M9.5 10.5L6.5 7.5M14.5 10.5l3-3M9.5 13.5l-3 3M14.5 13.5l3 3"></path><circle cx="5.5" cy="6.5" r="2"></circle><circle cx="18.5" cy="6.5" r="2"></circle><circle cx="5.5" cy="17.5" r="2"></circle><circle cx="18.5" cy="17.5" r="2"></circle></svg>'
         },
         {
-            id: 3, nome: 'VITRINE LAB', rotulo: 'Vitrine Lab', curto: '4 h de captação + 12 postagens',
+            id: 3, nome: 'VITRINE LAB', rotulo: 'Vitrine Lab', curto: '3 h de captação + 12 postagens',
             preco: 697, tipo: 'mensal',
             resumo: 'O seu Instagram em movimento o mês inteiro. Planejamos o calendário editorial, captamos, editamos e acompanhamos os resultados com você, para o perfil ganhar seguidores e clientes.',
             beneficio: 'Um perfil movimentado o mês todo, com estratégia e acompanhamento.',
             entregas: [
                 'Calendário editorial do mês',
-                '4 horas de captação (podem ser 2 h + 2 h em locais diferentes)',
+                '3 horas de captação, em 2 sessões de 1h30 (podem ser em locais diferentes)',
                 '12 postagens editadas (fotos, vídeos ou carrosséis, conforme o calendário aprovado), com sugestão de legenda',
                 'Pasta com todo o material captado',
                 'Reunião de alinhamento e reunião de resultados no fim do ciclo',
@@ -1106,7 +1106,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                         { t: 'Fechamento', d: 'Você paga 50%', pag: '50%' },
                         { t: 'Reunião de alinhamento', d: 'Cerca de 1 h: objetivos, locais e quem posta' },
                         { t: 'Calendário editorial', d: 'A Sarpi Lab monta e você aprova. As datas já contam a captação + até 3 dias úteis de edição' },
-                        { t: 'Captações', d: '4 h no mês (pode ser 2 h + 2 h). Material bruto na pasta em até 3 dias úteis após cada captação' }
+                        { t: 'Captações', d: '2 sessões de 1h30 (3 h no mês). Material bruto na pasta em até 3 dias úteis após cada captação' }
                     ] },
                     { t: 'Meio • dia 15', itens: [
                         { t: 'Reunião de ajuste', d: '30 a 45 min para ajustar o que for preciso', presente: true },
@@ -1118,7 +1118,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                         { t: 'Renova se quiser', d: 'Sem fidelidade' }
                     ] }
                 ],
-                recebe: [['12', 'Postagens editadas: fotos, vídeos ou carrosséis, conforme o calendário aprovado'], ['12', 'Sugestões de legenda, uma para cada postagem'], ['~600', 'Fotos brutas no mês na pasta (em média 150 por hora, estimativa)']],
+                recebe: [['12', 'Postagens editadas: fotos, vídeos ou carrosséis, conforme o calendário aprovado'], ['12', 'Sugestões de legenda, uma para cada postagem'], ['~450', 'Fotos brutas no mês na pasta (em média 150 por hora, estimativa)']],
                 saber: ['O ciclo é de 30 dias corridos, contados a partir da reunião de alinhamento; as 12 postagens saem dentro desse período', 'Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião da metade do ciclo', 'Mudança de local ou horário de captação ou reunião: até 24 h antes. Se a captação não acontecer, o calendário e as postagens daquele período são afetados, mas o pagamento da metade do ciclo segue na mesma data', 'Clima ou outro imprevisto fora do controle de qualquer das partes: reagendamos sem custo']
             },
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>'
