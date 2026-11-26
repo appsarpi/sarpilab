@@ -597,9 +597,9 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .fase-item .pt { font-size: 12.5px; font-weight: 900; color: #111827; }
         .fase-item .pd { font-size: 11px; color: #4B5563; margin-top: 2px; line-height: 1.3; }
         .recebe { display: flex; gap: 10px; margin-bottom: 16px; }
-        .recebe-item { flex: 1 1 0; border-radius: 14px; background: #111827; color: #fff; padding: 12px; text-align: center; }
-        .recebe-item .n { font-size: 26px; font-weight: 900; color: #C4B5FD; line-height: 1; }
-        .recebe-item .l { font-size: 11.5px; font-weight: 700; margin-top: 6px; line-height: 1.25; }
+        .recebe-item { flex: 1 1 0; border-radius: 14px; background: #FFFFFF; border: 2px solid #DDD6FE; padding: 12px; text-align: center; }
+        .recebe-item .n { font-size: 26px; font-weight: 900; color: #8C52FF; line-height: 1; }
+        .recebe-item .l { font-size: 11.5px; font-weight: 700; color: #1F2937; margin-top: 6px; line-height: 1.25; }
         .saber { background: #FEFCE8; border: 1px solid #FACC15; border-left: 5px solid #EAB308; border-radius: 12px; padding: 10px 14px; }
         .saber li { font-size: 12px; color: #422006; margin: 3px 0; font-weight: 600; }
         /* No PDF (html2canvas) o texto desce um pouco: compensa nos selos e caixas pequenas */
@@ -607,6 +607,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .modo-pdf .fase-item { padding-bottom: 13px; }
         .modo-pdf .fase-topo { padding: 4px 10px 12px; }
         .modo-pdf .passo { padding-bottom: 16px; }
+        .modo-pdf .recebe-item { padding-bottom: 16px; }
         .rotulo-sec { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.12em; color: #8C52FF; margin-bottom: 8px; }
         .voltar-proposta { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; color: #6D28D9; text-decoration: none; }
 
@@ -1658,17 +1659,18 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     const porMes = Math.round(base * (1 - pctPac / 100));
                     const total3 = porMes * 3;
                     const pix3 = Math.round(precoPix(s) * (1 - pctPac / 100)) * 3;
-                    const caixaOp = (destaque) => 'style="flex:1 1 0;border-radius:12px;padding:10px 12px;' + (destaque ? 'background:#FFFFFF;border:2px solid #EAB308' : 'background:#FFFBEB;border:1px solid #FDE68A') + '"';
-                    h += '<div class="nota-promo" style="margin-top:14px;padding:10px 12px;break-inside:avoid">' +
-                        '<p style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 8px">★ Extra: escolha como fechar o ' + s.rotulo + '</p>' +
+                    const caixaOp = (destaque) => 'style="flex:1 1 0;border-radius:12px;padding:10px 12px;text-align:center;' + (destaque ? 'background:#FFFFFF;border:2px solid #EAB308' : 'background:#FFFFFF;border:2px solid #FDE68A') + '"';
+                    const nb = (t) => '<span style="white-space:nowrap">' + t + '</span>';
+                    h += '<div style="margin-top:14px;padding:12px;background:#FEF9C3;border:1px solid #FACC15;border-radius:12px;color:#713F12;break-inside:avoid">' +
+                        '<p style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;text-align:center">★ Extra: escolha como fechar o ' + s.rotulo + '</p>' +
                         '<div style="display:flex;gap:10px">' +
                         '<div ' + caixaOp(false) + '><p style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.06em;color:#854D0E;margin:0">Por mês</p>' +
                         '<p style="font-size:20px;font-weight:900;color:#111827;margin:4px 0 0;line-height:1">' + moeda(base) + '</p>' +
                         '<p style="font-size:11px;font-weight:600;color:#422006;margin:6px 0 0">Paga um mês de cada vez e renova se quiser.</p></div>' +
                         '<div ' + caixaOp(true) + '><p style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.06em;color:#854D0E;margin:0">Pacote de 3 meses (−' + pctPac + '%)</p>' +
-                        '<p style="font-size:20px;font-weight:900;color:#111827;margin:4px 0 0;line-height:1"><span class="preco-promo">' + moeda(total3) + '</span></p>' +
-                        '<p style="font-size:11px;font-weight:600;color:#422006;margin:6px 0 0"><b>Pago de uma vez, no fechamento da proposta.</b> Sai a ' + moeda(porMes) + ' por mês' +
-                        (pix3 < total3 ? '; no Pix, ' + moeda(pix3) : '') + '. Economia de ' + moeda(base * 3 - total3) + '.</p></div>' +
+                        '<p style="font-size:20px;font-weight:900;color:#A16207;margin:4px 0 0;line-height:1">' + moeda(total3) + '</p>' +
+                        '<p style="font-size:11px;font-weight:600;color:#422006;margin:6px 0 0"><b>Pago de uma vez, no fechamento da proposta.</b> Sai a ' + nb(moeda(porMes)) + ' por mês' +
+                        (pix3 < total3 ? '; no Pix, ' + nb(moeda(pix3)) : '') + '. Economia de ' + nb(moeda(base * 3 - total3)) + '.</p></div>' +
                         '</div></div>';
                 });
             }
