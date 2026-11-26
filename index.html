@@ -1154,7 +1154,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                         { t: 'Fechamento', d: 'Você paga {P1}', pag: '{P1}' },
                         { t: 'Reunião de alinhamento', d: 'Cerca de 1 h: objetivos, locais e quem posta' },
                         { t: 'Calendário editorial', d: 'A Sarpi Lab monta e você aprova. As datas já contam a captação + até 3 dias úteis de edição' },
-                        { t: 'Captações', d: '3 h no ciclo: em 1 dia (3 h seguidas) ou em 2 dias diferentes (1h30 cada). No Premium, + 1 h para os vídeos de autoridade. Material bruto na pasta em até 3 dias úteis após cada captação' }
+                        { t: 'Captações', cap: true, d: '3 h no ciclo: em 1 dia (3 h seguidas) ou em 2 dias diferentes (1h30 cada). No Premium, + 1 h para os vídeos de autoridade. Material bruto na pasta em até 3 dias úteis após cada captação' }
                     ] },
                     { t: 'Meio • dia 15', itens: [
                         { t: 'Reunião de ajuste', d: '30 a 45 min para ajustar o que for preciso', presente: true },
@@ -1167,7 +1167,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     ] }
                 ],
                 recebe: [['12', 'Postagens editadas: fotos, vídeos ou carrosséis, conforme o calendário aprovado'], ['12', 'Sugestões de legenda, uma para cada postagem'], ['~450', 'Fotos brutas no mês na pasta (em média 150 por hora, estimativa)']],
-                saber: ['No Básico, os vídeos mostram o lugar, o produto ou o evento. Vídeos de autoridade (pessoa falando para a câmera, com microfone) estão só no Premium', 'O ciclo é de 30 dias corridos, contados a partir da reunião de alinhamento; as 12 postagens saem dentro desse período', 'Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião da metade do ciclo', 'Mudança de local ou horário de captação ou reunião: até 24 h antes. Se a captação não acontecer, o calendário e as postagens daquele período são afetados, mas o pagamento da metade do ciclo segue na mesma data', 'Clima ou outro imprevisto fora do controle de qualquer das partes: reagendamos sem custo']
+                saber: ['No Básico, os vídeos mostram o lugar, o produto ou o evento. Vídeos de autoridade (pessoa falando para a câmera, com microfone) estão só no Premium', 'O ciclo é de 30 dias corridos, contados a partir da reunião de alinhamento; as 12 postagens saem dentro desse período', 'Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião da metade do ciclo', 'Mudança de local ou horário de captação ou reunião: até 24 h antes. Se a captação não acontecer, o calendário e as postagens daquele período são afetados, mas o pagamento da 2ª parte segue na data combinada', 'Clima ou outro imprevisto fora do controle de qualquer das partes: reagendamos sem custo']
             },
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>'
         },
@@ -1204,7 +1204,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     ] }
                 ],
                 recebe: [['12', 'Postagens editadas, conforme o calendário aprovado'], ['2', 'Vídeos de autoridade com roteiro, iluminação e áudio', 'premium'], ['12', 'Sugestões de legenda, uma para cada postagem'], ['~450', 'Fotos brutas no mês na pasta (estimativa)']],
-                saber: ['Os 2 vídeos de autoridade são gravados em 1 hora de captação própria, com roteiro aprovado antes', 'O ciclo é de 30 dias corridos, contados a partir da reunião de alinhamento; as 12 postagens saem dentro desse período', 'Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião da metade do ciclo', 'Mudança de local ou horário de captação ou reunião: até 24 h antes. Se a captação não acontecer, o calendário e as postagens daquele período são afetados, mas o pagamento da metade do ciclo segue na mesma data', 'Clima ou outro imprevisto fora do controle de qualquer das partes: reagendamos sem custo']
+                saber: ['Os 2 vídeos de autoridade são gravados em 1 hora de captação própria, com roteiro aprovado antes', 'O ciclo é de 30 dias corridos, contados a partir da reunião de alinhamento; as 12 postagens saem dentro desse período', 'Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião da metade do ciclo', 'Mudança de local ou horário de captação ou reunião: até 24 h antes. Se a captação não acontecer, o calendário e as postagens daquele período são afetados, mas o pagamento da 2ª parte segue na data combinada', 'Clima ou outro imprevisto fora do controle de qualquer das partes: reagendamos sem custo']
             },
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>'
         },
@@ -1893,7 +1893,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             if ($('check-svc2').checked) {
                 termos.push('Imagens aéreas dependem de clima e das condições de voo do local. Se houver impedimento, reagendamos sem custo.');
             }
-            if ($('check-svc3').checked || $('check-svc5').checked) termos.push('Vitrine Lab: ciclo de 30 dias corridos, contados a partir da reunião de alinhamento, sem fidelidade. Mudanças de local ou horário de captações e reuniões devem ser pedidas até 24 horas antes. Se uma captação não acontecer por pedido do cliente, o calendário editorial e as postagens que dependem dela são afetados. A 2ª parte do pagamento continua sendo feita na metade do ciclo (dia 15). Captações em Rio das Ostras, em locais definidos na reunião de alinhamento. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
+            if ($('check-svc3').checked || $('check-svc5').checked) termos.push('Vitrine Lab: ciclo de 30 dias corridos, contados a partir da reunião de alinhamento, sem fidelidade. Mudanças de local ou horário de captações e reuniões devem ser pedidas até 24 horas antes. Se uma captação não acontecer por pedido do cliente, o calendário editorial e as postagens que dependem dela são afetados. A 2ª parte do pagamento continua na data combinada. Captações em Rio das Ostras, em locais definidos na reunião de alinhamento. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
             if (condicoes) termos.push(condicoes);
         }
         const lista = $('pdf-termos-lista');
@@ -1911,7 +1911,10 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         const dd2 = (n) => (n < 10 ? '0' : '') + n;
         // Porcentagens do pagamento: seguem a aba Pagamento quando o total é pago junto (2+ serviços); senão, 50/50
         const pgSM = lerPag();
-        const pct1 = (pgSM.junto && sel.length > 1) ? pgSM.pct : 50;
+        const juntoSM = pgSM.junto && sel.length > 1;
+        const pct1 = juntoSM ? pgSM.pct : 50;
+        const q2 = juntoSM ? pgSM.quando2 : '';   // momento da 2ª parte escolhido na aba Pagamento
+        const q2tipo = !juntoSM ? 'padrao' : (q2.indexOf('bruto') >= 0 ? 'bruto' : (q2.indexOf('fim') >= 0 ? 'fim' : (q2.indexOf('metade') >= 0 ? 'meio' : 'outro')));
         const fx = (t) => (t || '').replace(/\{P1\}/g, pct1 + '%').replace(/\{P2\}/g, (100 - pct1) + '%');
         const notaPag = (v) => v ? '<p class="nota-pag">● Paga ' + fx(v) + '</p>' : '';
         const notaPres = (b) => b ? '<p class="nota-presente">★ De presente</p>' : '';
@@ -1937,15 +1940,32 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     '</div><p class="cmp-def"><b>★ O que são vídeos de autoridade?</b> Vídeos curtos em que você (ou alguém da sua equipe) fala direto com o seu cliente: dicas, bastidores, diferenciais e respostas às dúvidas mais comuns. Eles mostram quem está por trás do negócio e geram confiança. A Sarpi Lab cuida de tudo: escreve o roteiro com você, leva microfone e iluminação, grava e edita. Você só precisa aparecer.</p></div>' : '') +
                 '<p class="sec">Passo a passo</p>';
             if (pg.fluxo) {
+                // 2ª parte: fica no passo "Em 24 h" (entrega do bruto); se a aba Pagamento escolher outro momento, vira uma nota abaixo
+                const p2noPasso = (q2tipo === 'padrao' || q2tipo === 'bruto');
                 h += '<div class="linha-tempo">' + pg.fluxo.map((p, k) =>
-                    '<div class="etapa"><div class="nn">' + dd2(k + 1) + '</div><div class="tt">' + fx(p.t) + '</div><div class="dd">' + fx(p.d) + '</div>' + notaPag(p.pag) + '</div>').join('') + '</div>';
+                    '<div class="etapa"><div class="nn">' + dd2(k + 1) + '</div><div class="tt">' + fx(p.t) + '</div><div class="dd">' + fx(p.d) + '</div>' +
+                    notaPag(p.pag === '{P2}' && !p2noPasso ? '' : p.pag) + '</div>').join('') + '</div>' +
+                    (!p2noPasso ? '<p class="nota-pag" style="margin-top:10px">● Paga ' + (100 - pct1) + '% ' + q2 + '</p>' : '');
             } else {
                 let n = 0;
-                h += '<div class="ciclo">' + pg.fases.map(f => {
+                // 2ª parte do pagamento: segue o momento escolhido na aba Pagamento (bruto, metade ou fim do ciclo)
+                const fases = pg.fases.map(f => ({ t: f.t, itens: f.itens.slice() }));
+                let itP2 = null;
+                fases.forEach(f => { const i = f.itens.findIndex(it => it.pag === '{P2}'); if (i >= 0) itP2 = f.itens.splice(i, 1)[0]; });
+                if (itP2) {
+                    if (q2tipo === 'bruto') {
+                        fases.forEach(f => f.itens.forEach((it, i) => { if (it.cap) f.itens[i] = Object.assign({}, it, { pag: '{P2}', pagTxt: 'na entrega do material bruto' }); }));
+                    } else if (q2tipo === 'fim') {
+                        fases[2].itens.unshift(itP2);
+                    } else {
+                        fases[1].itens.push(itP2);
+                    }
+                }
+                h += '<div class="ciclo">' + fases.map(f => {
                     const partes = f.t.split('•');
                     return '<div class="ciclo-col"><div class="ciclo-dia">' + (partes[1] || f.t).trim().replace(/^d/, 'D') + '</div><div class="ciclo-sub">' + partes[0].trim() + ' do ciclo</div>' +
                         f.itens.map(it => '<div class="ciclo-item' + (it.presente ? ' presente' : '') + '">' + notaPres(it.presente) + '<div class="tt"><span class="nn-p">' + dd2(++n) + '</span> ' + fx(it.t) + '</div>' +
-                            (it.d ? '<div class="dd">' + fx(it.d) + '</div>' : '') + notaPag(it.pag) + '</div>').join('') + '</div>';
+                            (it.d ? '<div class="dd">' + fx(it.d) + '</div>' : '') + (it.pagTxt ? '<p class="nota-pag">● Paga ' + fx(it.pag) + ' ' + it.pagTxt + '</p>' : notaPag(it.pag)) + '</div>').join('') + '</div>';
                 }).join('') + '</div>';
             }
             h += '<div class="ed-bloco lilas"><p class="sec">O que você recebe</p><div class="numeros">' +
