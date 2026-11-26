@@ -562,6 +562,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .op-pacote.gold .op-preco { color: #A16207; }
         .op-mes { font-size: 10px; font-weight: 700; color: #6B7280; }
         .op-txt { font-size: 11.5px; color: #422006; line-height: 1.35; margin: 3px 0 0; }
+        .nivel-card { font-size: 10.5px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #A16207; margin: 4px 0 0 2px; }
         .linha-premium { margin: 8px 0 0; font-size: 12px; font-weight: 800; color: #A16207; }
         .modo-pdf .selo-premium > span { position: relative; top: var(--ajuste-selo, -0.25em); }
         .card-destaque {
@@ -681,6 +682,17 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .ed-bloco.lilas .numero { border-left-color: #DDD6FE; }
         .ed-bloco.premium { background: #FFFBEB; border-left: 4px solid #D4A017; }
         .ed-bloco.premium .sec { color: #A16207; border-bottom-color: #FDE68A; }
+        .cmp { display: flex; }
+        .cmp-col { flex: 1 1 0; padding: 0 16px; border-left: 1px solid #FDE68A; }
+        .cmp-col:first-child { padding-left: 0; border-left: 0; }
+        .cmp-nome { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; color: #4B5563; margin: 0; }
+        .cmp-col.gold .cmp-nome { color: #A16207; }
+        .cmp-col.ind .cmp-nome { color: #6D28D9; }
+        .cmp-col.gold.ind .cmp-nome { color: #A16207; }
+        .cmp-preco { font-size: 22px; font-weight: 900; color: #111827; margin: 4px 0 6px; line-height: 1; }
+        .cmp-col.gold .cmp-preco { color: #A16207; }
+        .cmp-preco span { font-size: 11px; font-weight: 700; color: #6B7280; }
+        .cmp-item { font-size: 12px; color: #1F2937; margin: 2px 0 0; line-height: 1.4; }
         .prem-txt { font-size: 13px; color: #422006; line-height: 1.5; margin: 0; }
         .ed-bloco.cinza { background: #F9FAFB; border: 1px solid #F3F4F6; }
         .ed-bloco.cinza .bons p { border-bottom-color: #EEF0F3; }
@@ -1327,7 +1339,8 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 '<div class="selo badge-promo hidden text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="position:absolute;bottom:-11px;left:12px;background:#FDE047;color:#111827;border:1px solid #EAB308;height:22px;line-height:1;padding:0 12px"><span class="promo-texto"></span></div>' +
                 '<div class="flex items-center gap-2 mb-3">' +
                 '<div class="bg-gray-900 p-2 rounded-lg text-white shadow shrink-0">' + s.icone + '</div>' +
-                '<h3 class="fonte-marca titulo-logo text-lg whitespace-nowrap"><span>' + s.nome + '</span></h3>' +
+                '<div><h3 class="fonte-marca titulo-logo text-lg whitespace-nowrap"><span>' + s.nome + '</span></h3>' +
+                (temPremium ? '<p class="nivel-card hidden">★ Pacote Premium</p>' : '') + '</div>' +
                 '<div class="preco-box hidden ml-auto text-right shrink-0 whitespace-nowrap"></div></div>' +
                 '<div class="corpo"></div>' +
                 (s.pagina ? '<a class="saiba-mais" href="#saiba-svc' + s.id + '" data-pagina="svc' + s.id + '">Saiba mais: como funciona ›</a>' : '') +
@@ -1707,7 +1720,10 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             const seloPrem = card.querySelector('.selo-premium');
             if (seloPrem) {
                 const dif = varPrem ? precoDe(varPrem) - precoDe(s0) : 0;
-                seloPrem.querySelector('span').textContent = premiumMarcado ? '★ Pacote Premium' : '★ Quer mais? Premium com vídeos de autoridade + ' + moeda(dif);
+                seloPrem.querySelector('span').textContent = '★ Quer mais? Vídeos de autoridade + ' + moeda(dif);
+                seloPrem.style.display = premiumMarcado ? 'none' : 'flex';
+                const nv = card.querySelector('.nivel-card');
+                if (nv) nv.classList.toggle('hidden', !premiumMarcado);
             }
             card.querySelector('.badge-recomendado').classList.toggle('hidden', !marcado);
             const seloPromo = card.querySelector('.badge-promo');
@@ -1885,12 +1901,12 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         $('pdf-p3').innerHTML = ordem.map(x0 => {
             const vP = SERVICOS.find(v => v.variante === x0.id);
             const premInd = !!(vP && $('check-svc' + vP.id).checked);
-            const x = premInd ? Object.assign({}, vP, { id: x0.id }) : x0;   // página do pacote indicado
+            const x = x0;   // a página é sempre a do Vitrine Lab; a diferença Básico x Premium aparece num quadro
             const pg = x.pagina;
             let h = '<div class="pagina-servico" id="saiba-svc' + x.id + '">' +
                 '<div class="ed-topo">Sarpi Lab  •  Como funciona</div>' +
-                '<div class="ed-cab' + (x.premium ? ' premium' : '') + '"><div>' + (x.nivel ? '<p class="nivel-pacote" style="font-size:11px">' + (x.premium ? '★ ' : '') + x.nivel + '</p>' : '') + '<h2 class="fonte-marca titulo-logo text-3xl whitespace-nowrap"><span>' + x.nome + '</span></h2></div>' +
-                '<div class="text-right">' + (premInd ? '<div class="text-2xl font-black leading-none" style="color:#111827">' + moeda(precoDe(x0)) + ' <span style="color:#A16207">+ ' + moeda(precoDe(vP) - precoDe(x0)) + '</span></div>' : '<div class="text-2xl font-black text-purple-700 leading-none">' + moeda(precoDe(x)) + '</div>') +
+                '<div class="ed-cab"><div><h2 class="fonte-marca titulo-logo text-3xl whitespace-nowrap"><span>' + x.nome + '</span></h2></div>' +
+                '<div class="text-right">' + (vP ? '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500">a partir de</div>' : '') + '<div class="text-2xl font-black text-purple-700 leading-none">' + moeda(precoDe(x)) + '</div>' +
                 '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (x.tipo === 'mensal' ? 'por mês, sem fidelidade' : 'serviço avulso') + '</div></div></div>' +
                 '<p class="ed-intro">' + x.resumo + '</p>' +
                 '<p class="sec">Passo a passo</p>';
@@ -1909,7 +1925,14 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             h += '<div class="ed-bloco lilas"><p class="sec">O que você recebe</p><div class="numeros">' +
                 pg.recebe.map(r => '<div class="numero' + (r[2] === 'bonus' ? ' bonus' : '') + (r[2] === 'premium' ? ' premium' : '') + '">' +
                     '<div class="n">' + r[0] + '</div><div class="l">' + r[1] + '</div>' + (r[2] === 'bonus' ? '<p class="nota-presente" style="margin-top:5px">★ De presente</p>' : '') + (r[2] === 'premium' ? '<p class="nota-presente" style="margin-top:5px">★ Exclusivo Premium</p>' : '') + '</div>').join('') + '</div>' +
-                '</div>' + (vP && !premInd ? '<div class="ed-bloco premium"><p class="sec">★ Pacote Premium</p><p class="prem-txt">Tudo do Básico + ' + x0.extraPremium + '. <b>+ ' + moeda(precoDe(vP) - precoDe(x0)) + '/mês</b></p></div>' : '') +
+                '</div>' + (vP ? '<div class="ed-bloco premium"><p class="sec">Pacotes</p><div class="cmp">' +
+                    '<div class="cmp-col' + (!premInd ? ' ind' : '') + '"><p class="cmp-nome">Pacote Básico' + (!premInd && $('check-svc' + x0.id).checked ? ' • indicado' : '') + '</p>' +
+                    '<p class="cmp-preco">' + moeda(precoDe(x0)) + '<span>/mês</span></p>' +
+                    '<p class="cmp-item">3 h de captação (2 × 1h30)</p><p class="cmp-item">12 postagens editadas</p></div>' +
+                    '<div class="cmp-col gold' + (premInd ? ' ind' : '') + '"><p class="cmp-nome">★ Pacote Premium' + (premInd ? ' • indicado' : '') + '</p>' +
+                    '<p class="cmp-preco">+ ' + moeda(precoDe(vP) - precoDe(x0)) + '<span>/mês</span></p>' +
+                    '<p class="cmp-item">Tudo do Básico</p><p class="cmp-item">+ 1 h de gravação: 2 vídeos de autoridade</p><p class="cmp-item">+ roteiro, iluminação e áudio pela Sarpi Lab</p><p class="cmp-item">= 4 h de captação e 14 postagens</p></div>' +
+                    '</div></div>' : '') +
                 '<div class="ed-bloco cinza"><p class="sec">Bom saber</p><div class="bons">' + pg.saber.map(t => '<p>' + t + '</p>').join('') + '</div></div>' +
                 '<div class="ed-rodape"><a href="#pdf-p1" class="voltar-proposta" data-pagina="1">‹ Voltar para a proposta</a><span>@sarpi.lab</span></div></div>';
             return h;
