@@ -689,6 +689,21 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             <input type="number" id="desconto" min="0" max="50" step="1" class="campo w-16 border-2 border-gray-200 p-1.5 rounded-lg text-sm text-right">
         </div>
 
+        <!-- Pacote de 3 meses do Vitrine Lab -->
+        <div class="mb-4 bg-gray-50 border border-gray-200 rounded-lg p-2.5">
+            <div class="flex items-center justify-between gap-3">
+                <label class="flex items-start gap-2 cursor-pointer">
+                    <input type="checkbox" id="pacote3-ativo" class="w-5 h-5 mt-0.5 rounded" checked>
+                    <span><span class="block font-bold text-gray-700 text-sm">Oferecer pacote de 3 meses do Vitrine Lab</span>
+                    <span class="block text-[11px] text-gray-500">Aparece no investimento como opção, quando o Vitrine Lab estiver marcado.</span></span>
+                </label>
+                <div class="flex items-center gap-1 shrink-0">
+                    <input type="number" id="pacote3-pct" min="1" max="40" step="1" value="10" class="campo w-14 border-2 border-gray-200 p-1.5 rounded-lg text-sm text-right">
+                    <span class="text-xs text-gray-500 font-bold">% off</span>
+                </div>
+            </div>
+        </div>
+
         <!-- Por que essas soluções? -->
         <div class="mb-4">
             <label class="block font-bold text-gray-700 mb-1 text-sm">Por que essas soluções? <span class="font-normal text-gray-400">(opcional)</span></label>
@@ -1524,6 +1539,26 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 if (mensais.length) h += linhaTotal('Vitrine Lab (mês a mês, sem fidelidade)', moeda(totalMensal), true);
             }
             h += '</table>';
+
+            // Opção: pacote de 3 meses do Vitrine Lab, com desconto
+            if ($('pacote3-ativo').checked) {
+                const pctPac = Math.min(40, Math.max(1, Math.round(Number($('pacote3-pct').value) || 10)));
+                mensais.forEach(s => {
+                    const base = precoDe(s);
+                    if (!base) return;
+                    const porMes = Math.round(base * (1 - pctPac / 100));
+                    const economia = (base - porMes) * 3;
+                    h += '<div style="margin-top:12px;background:#FFFFFF;border:2px dashed #8C52FF;border-radius:12px;padding:10px 14px;break-inside:avoid">' +
+                        '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">' +
+                        '<div><p class="text-[10px] font-black uppercase tracking-widest text-purple-600">Opção: pacote de 3 meses</p>' +
+                        '<p class="text-[13px] font-bold text-gray-900 mt-1">' + s.rotulo + ' por 3 meses, com ' + pctPac + '% de desconto</p>' +
+                        '<p class="text-[11px] text-gray-600 mt-0.5">Total de ' + moeda(porMes * 3) + ' • economia de ' + moeda(economia) + ' • cada mês pago 50% no início e 50% no meio do mês</p></div>' +
+                        '<div class="text-right whitespace-nowrap"><div class="preco-de">' + moeda(base) + '</div>' +
+                        '<div class="text-lg font-black text-purple-700 leading-none">' + moeda(porMes) + '</div>' +
+                        '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">por mês, no pacote</div></div>' +
+                        '</div></div>';
+                });
+            }
             h += blocoPagamento(sel, precoDe, pct);
             h += blocoParcelas(totalUnico, unicos.length > 0, cp);
             if (validade) h += '<p class="text-[11px] font-bold text-gray-600 mt-3">Proposta válida até ' + fmtData(validade) + '.</p>';
