@@ -1093,7 +1093,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 'Hora extra: R$ 180'
             ],
             pagina: {
-                equip: 'iPhone 18 Pro, para fotos e vídeos',
+                equip: 'iPhone 18 Pro',
                 fluxo: [
                     { t: 'Reserva', d: 'Você paga 50% e define local, data e horário', pag: '50%' },
                     { t: 'Captação', d: '1 hora no local: foto, vídeo ou os dois' },
@@ -1120,7 +1120,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 'Em até 3 dias úteis: o vídeo bônus + as 3 fotos aéreas tratadas'
             ],
             pagina: {
-                equip: 'drone, para fotos e vídeos aéreos',
+                equip: 'drone',
                 fluxo: [
                     { t: 'Reserva', d: 'Você paga 50% e define local, data e horário', pag: '50%' },
                     { t: 'Voo', d: '1 hora no local, incluindo a preparação pré-voo, com até 3 voos' },
@@ -1147,7 +1147,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 'Por mês, sem fidelidade'
             ],
             pagina: {
-                equip: 'iPhone 18 Pro, para fotos e vídeos. No Premium, + microfone e iluminação para os vídeos de autoridade',
+                equip: 'iPhone 18 Pro',
                 fases: [
                     { t: 'Início • dia 1', itens: [
                         { t: 'Fechamento', d: 'Você paga 50%', pag: '50%' },
@@ -1184,7 +1184,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 'Por mês, sem fidelidade'
             ],
             pagina: {
-                equip: 'iPhone 18 Pro, microfone e iluminação',
+                equip: 'iPhone 18 Pro',
                 fases: [
                     { t: 'Início • dia 1', itens: [
                         { t: 'Fechamento', d: 'Você paga 50%', pag: '50%' },
@@ -1919,7 +1919,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 '<div class="text-right">' + (vP ? '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500">a partir de</div>' : '') + '<div class="text-2xl font-black text-purple-700 leading-none">' + moeda(precoDe(x)) + '</div>' +
                 '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (x.tipo === 'mensal' ? 'por mês, sem fidelidade' : 'serviço avulso') + '</div></div></div>' +
                 '<p class="ed-intro">' + x.resumo + '</p>' +
-                (pg.equip ? '<p class="ed-equip"><b>Equipamento:</b> ' + pg.equip + '</p>' : '') +
+                (pg.equip ? '<p class="ed-equip"><b>Captado com ' + pg.equip + '</b></p>' : '') +
                 (vP ? '<div class="ed-bloco premium" style="margin-top:10px"><p class="sec">Pacotes</p><div class="cmp">' +
                     '<div class="cmp-col' + (!premInd ? ' ind' : '') + '"><p class="cmp-nome">Pacote Básico' + (!premInd && $('check-svc' + x0.id).checked ? ' • indicado' : '') + '</p>' +
                     '<p class="cmp-preco">' + moeda(precoDe(x0)) + '<span>/mês</span></p>' +
