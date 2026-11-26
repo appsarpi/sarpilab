@@ -807,6 +807,14 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 </div>
             </div>
 
+            <div class="mb-4 border border-gray-200 rounded-lg p-3 flex items-center justify-between gap-3">
+                <div>
+                    <label class="block font-bold text-gray-700 text-sm">Desconto no Pix (%)</label>
+                    <span class="text-[11px] text-gray-500">Os preços da proposta são no cartão. A proposta mostra também o valor no Pix, com este desconto. 0 = mesmo preço.</span>
+                </div>
+                <input type="number" id="pix-pct" min="0" max="30" step="1" value="5" class="campo w-16 border-2 border-gray-200 p-1.5 rounded-lg text-sm text-right">
+            </div>
+
             <div class="mb-4">
                 <label class="block font-bold text-gray-700 mb-1 text-sm">Proposta válida até</label>
                 <input type="date" id="validade" class="campo w-full border-2 border-gray-200 p-2.5 rounded-lg transition text-sm">
@@ -990,9 +998,9 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         { rotulo: 'Imóveis', texto: 'Imóvel bem apresentado vende mais rápido. As imagens aéreas mostram localização e entorno que fotos comuns não alcançam.' }
     ];
 
-    const CONDICOES_PADRAO = 'Pagamento via Pix ou cartão, em duas partes, conforme o quadro de investimento.';
+    const CONDICOES_PADRAO = 'Valores no cartão. Pagando no Pix, o cliente tem desconto, conforme o quadro de pagamento. Pagamento em duas partes, conforme o quadro de investimento.';
 
-    const CONDICOES_PARCELADO = 'Pagamento via Pix ou cartão, em duas partes, conforme o quadro de investimento. No cartão, os serviços avulsos também podem ser parcelados, conforme as opções acima.';
+    const CONDICOES_PARCELADO = 'Valores no cartão. Pagando no Pix, o cliente tem desconto, conforme o quadro de pagamento. Pagamento em duas partes, conforme o quadro de investimento. No cartão, os serviços avulsos também podem ser parcelados, conforme as opções acima.';
 
     /* ---------- ESTADO SALVO NO NAVEGADOR ---------- */
     const CHAVE = 'sarpi_cfg_v2';
@@ -1269,6 +1277,20 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         const pct = Math.min(90, Math.max(10, Math.round(Number($('pag-pct').value) || 50)));
         return { junto: !!m && m.value === 'junto', pct: pct, quando1: $('pag-1').value, quando2: $('pag-2').value };
     }
+    // Desconto no Pix: os preços da proposta são no cartão; no Pix o cliente paga com desconto
+    function pctPix() { return Math.min(30, Math.max(0, Number($('pix-pct').value) || 0)); }
+    function celPg(v) {
+        const pp = pctPix();
+        let h = '<td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(v) + '</td>';
+        if (pp > 0) h += '<td class="py-0.5 pl-3 text-right font-black whitespace-nowrap" style="color:#047857">' + moeda2(Math.round(v * (100 - pp)) / 100) + '</td>';
+        return h;
+    }
+    function cabPg() {
+        const pp = pctPix();
+        if (!pp) return '<tr><td></td><td class="pl-3 text-right text-[10px] font-black uppercase tracking-wider text-gray-500">Pix ou cartão</td></tr>';
+        return '<tr><td></td><td class="pl-3 text-right text-[10px] font-black uppercase tracking-wider text-gray-500 whitespace-nowrap">No cartão</td>' +
+            '<td class="pl-3 text-right text-[10px] font-black uppercase tracking-wider whitespace-nowrap" style="color:#047857">No Pix (−' + pp + '%)</td></tr>';
+    }
     function blocoPagamento(sel, precoDe, pct) {
         if (!sel.length) return '';
         const pg = lerPag();
@@ -1278,31 +1300,31 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             const segunda = Math.round((total - primeira) * 100) / 100;
             const mensais = sel.filter(s => s.tipo === 'mensal');
             let h = '<div class="mt-3 pt-3 border-t border-purple-200" style="break-inside:avoid">' +
-                '<p class="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-2">Como funciona o pagamento (Pix ou cartão)</p>' +
-                '<table class="w-full text-[12px]" style="border-collapse:collapse">' +
-                '<tr><td colspan="2" class="pt-2 font-bold text-gray-900">Todos os serviços juntos: ' + moeda2(total) +
+                '<p class="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-2">Como funciona o pagamento</p>' +
+                '<table class="w-full text-[12px]" style="border-collapse:collapse">' + cabPg() +
+                '<tr><td colspan="3" class="pt-2 font-bold text-gray-900">Todos os serviços juntos: ' + moeda2(total) +
                 (mensais.length ? ' <span class="font-normal text-gray-500">(com o 1º mês do ' + mensais.map(s => s.rotulo).join(' e ') + ')</span>' : '') + '</td></tr>' +
-                '<tr><td class="py-0.5 pl-3 text-gray-700">' + pg.pct + '% ' + pg.quando1 + '</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(primeira) + '</td></tr>' +
-                '<tr><td class="py-0.5 pl-3 text-gray-700">' + (100 - pg.pct) + '% ' + pg.quando2 + '</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(segunda) + '</td></tr>';
+                '<tr><td class="py-0.5 pl-3 text-gray-700">' + pg.pct + '% ' + pg.quando1 + '</td>' + celPg(primeira) + '</tr>' +
+                '<tr><td class="py-0.5 pl-3 text-gray-700">' + (100 - pg.pct) + '% ' + pg.quando2 + '</td>' + celPg(segunda) + '</tr>';
             mensais.forEach(s => {
                 const v = precoDe(s), a = Math.round(v * 50) / 100;
-                h += '<tr><td colspan="2" class="pt-3 font-bold text-gray-900">Se renovar o ' + s.rotulo + ' para o mês seguinte <span class="font-normal text-gray-500">(sem fidelidade)</span></td></tr>' +
-                    '<tr><td class="py-0.5 pl-3 text-gray-700">50% no início do mês</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(a) + '</td></tr>' +
-                    '<tr><td class="py-0.5 pl-3 text-gray-700">50% no meio do mês</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(Math.round((v - a) * 100) / 100) + '</td></tr>';
+                h += '<tr><td colspan="3" class="pt-3 font-bold text-gray-900">Se renovar o ' + s.rotulo + ' para o mês seguinte <span class="font-normal text-gray-500">(sem fidelidade)</span></td></tr>' +
+                    '<tr><td class="py-0.5 pl-3 text-gray-700">50% no início do mês</td>' + celPg(a) + '</tr>' +
+                    '<tr><td class="py-0.5 pl-3 text-gray-700">50% no meio do mês</td>' + celPg(Math.round((v - a) * 100) / 100) + '</tr>';
             });
             return h + '</table></div>';
         }
         let h = '<div class="mt-3 pt-3 border-t border-purple-200" style="break-inside:avoid">' +
-            '<p class="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-2">Como funciona o pagamento (Pix ou cartão)</p>' +
-            '<table class="w-full text-[12px]" style="border-collapse:collapse">';
+            '<p class="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-2">Como funciona o pagamento</p>' +
+            '<table class="w-full text-[12px]" style="border-collapse:collapse">' + cabPg();
         sel.forEach(s => {
             const valor = s.tipo === 'mensal' ? precoDe(s) : precoDe(s) * (1 - pct / 100);
             const primeira = Math.round(valor * 50) / 100;
             const segunda = Math.round((valor - primeira) * 100) / 100;
             const m = MOMENTOS[s.tipo] || MOMENTOS.unico;
-            h += '<tr><td colspan="2" class="pt-2 font-bold text-gray-900">' + s.rotulo + (s.tipo === 'mensal' ? ' <span class="font-normal text-gray-500">(mês a mês, sem fidelidade)</span>' : '') + '</td></tr>' +
-                '<tr><td class="py-0.5 pl-3 text-gray-700">' + m[0] + '</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(primeira) + '</td></tr>' +
-                '<tr><td class="py-0.5 pl-3 text-gray-700">' + m[1] + '</td><td class="py-0.5 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' + moeda2(segunda) + '</td></tr>';
+            h += '<tr><td colspan="3" class="pt-2 font-bold text-gray-900">' + s.rotulo + (s.tipo === 'mensal' ? ' <span class="font-normal text-gray-500">(mês a mês, sem fidelidade)</span>' : '') + '</td></tr>' +
+                '<tr><td class="py-0.5 pl-3 text-gray-700">' + m[0] + '</td>' + celPg(primeira) + '</tr>' +
+                '<tr><td class="py-0.5 pl-3 text-gray-700">' + m[1] + '</td>' + celPg(segunda) + '</tr>';
         });
         return h + '</table></div>';
     }
