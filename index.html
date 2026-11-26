@@ -1066,7 +1066,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     ] }
                 ],
                 recebe: [['12', 'Postagens editadas: fotos, vídeos ou carrosséis, conforme o calendário aprovado'], ['12', 'Sugestões de legenda, uma para cada postagem'], ['~600', 'Fotos brutas no mês na pasta (em média 150 por hora, estimativa)']],
-                saber: ['O ciclo é de 30 dias, contados a partir da reunião de alinhamento; as 12 postagens saem dentro desse período', 'Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião do meio do mês', 'Remarcar uma captação pode mudar as datas das postagens']
+                saber: ['O ciclo é de 30 dias corridos, contados a partir da reunião de alinhamento; as 12 postagens saem dentro desse período', 'Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião do meio do mês', 'Remarcar uma captação pode mudar as datas das postagens']
             },
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>'
         },
@@ -1716,7 +1716,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             if ($('check-svc2').checked) {
                 termos.push('Imagens aéreas dependem de clima e das condições de voo do local. Se houver impedimento, reagendamos sem custo.');
             }
-            if ($('check-svc3').checked) termos.push('Vitrine Lab: ciclo de 30 dias, contados a partir da reunião de alinhamento, sem fidelidade. Captações em Rio das Ostras, em locais definidos na reunião de alinhamento. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
+            if ($('check-svc3').checked) termos.push('Vitrine Lab: ciclo de 30 dias corridos, contados a partir da reunião de alinhamento, sem fidelidade. Captações em Rio das Ostras, em locais definidos na reunião de alinhamento. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
             if (condicoes) termos.push(condicoes);
         }
         const lista = $('pdf-termos-lista');
