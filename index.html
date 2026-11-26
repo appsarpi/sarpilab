@@ -637,6 +637,8 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .ciclo-sub { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #6B7280; margin: 4px 0 8px; }
         .ciclo-item { padding: 9px 0; border-top: 1px solid #F3F4F6; }
         .nn-p { color: #8C52FF; }
+        .ciclo-item.presente { background: #FEFCE8; border: 1.5px solid #FACC15; border-radius: 10px; padding: 9px 11px 11px; margin: 4px 0; }
+        .ciclo-item.presente + .ciclo-item { border-top: 0; }
         .numeros { display: flex; }
         .numero { flex: 1 1 0; padding: 0 14px; border-left: 1px solid #E5E7EB; }
         .numero:first-child { padding-left: 0; border-left: 0; }
@@ -1803,7 +1805,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 h += '<div class="ciclo">' + pg.fases.map(f => {
                     const partes = f.t.split('•');
                     return '<div class="ciclo-col"><div class="ciclo-dia">' + (partes[1] || f.t).trim().replace(/^d/, 'D') + '</div><div class="ciclo-sub">' + partes[0].trim() + ' do ciclo</div>' +
-                        f.itens.map(it => '<div class="ciclo-item">' + notaPres(it.presente) + '<div class="tt"><span class="nn-p">' + dd2(++n) + '</span> ' + it.t + '</div>' +
+                        f.itens.map(it => '<div class="ciclo-item' + (it.presente ? ' presente' : '') + '">' + notaPres(it.presente) + '<div class="tt"><span class="nn-p">' + dd2(++n) + '</span> ' + it.t + '</div>' +
                             (it.d ? '<div class="dd">' + it.d + '</div>' : '') + notaPag(it.pag) + '</div>').join('') + '</div>';
                 }).join('') + '</div>';
             }
