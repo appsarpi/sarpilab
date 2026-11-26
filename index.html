@@ -540,12 +540,23 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             break-inside: avoid;
             page-break-inside: avoid;
         }
+        /* VITRINE LAB: nível do pacote; Premium em dourado */
+        .nivel-pacote { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.14em; color: #6D28D9; margin: 0 0 6px; }
+        .card-premium .nivel-pacote, .ed-cab.premium .nivel-pacote { color: #A16207; }
+        .card-premium { border: 2px solid #D4A017 !important; background-color: #FFFBEB !important; }
+        .card-premium .titulo-logo, .ed-cab.premium .titulo-logo { background: #B8860B; }
+        .card-premium .preco-box .text-purple-700, .ed-cab.premium .text-purple-700 { color: #A16207 !important; }
+        .ed-cab.premium { border-bottom-color: #D4A017; }
+        .numero.premium .n { color: #B8860B; }
         .card-destaque {
             border: 2px solid #8C52FF !important;
             background-color: #F5F3FF !important;
             box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.15) !important;
         }
 
+        .card-premium.card-destaque { border: 2px solid #D4A017 !important; background-color: #FEF3C7 !important; box-shadow: 0 4px 6px -1px rgba(184, 134, 11, 0.2) !important; }
+        .card-premium .lista-entregas li.bonus { color: #A16207; }
+        .card-premium .lista-entregas li.bonus::before { color: #B8860B; }
         .lista-entregas { list-style: none; margin: 0; padding: 0; }
         .lista-entregas li {
             position: relative;
@@ -770,7 +781,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         </div>
         <div class="space-y-2 mb-2" id="lista-servicos"></div>
         <p id="aviso-sobreposicao" class="hidden text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-2 mb-2">
-            O Vitrine Lab já inclui 3 horas de captação por mês. Com o Lab Express junto, a sessão dele conta como captação extra.
+            O Vitrine Lab já inclui captação no ciclo (3 h no Básico, 4 h no Premium). Com o Lab Express junto, a sessão dele conta como captação extra.
         </p>
         <div class="flex items-center justify-between gap-3 mb-4 bg-gray-50 border border-gray-200 rounded-lg p-2.5">
             <div>
@@ -1087,7 +1098,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9.5" y="10" width="5" height="4" rx="1"></rect><path d="M9.5 10.5L6.5 7.5M14.5 10.5l3-3M9.5 13.5l-3 3M14.5 13.5l3 3"></path><circle cx="5.5" cy="6.5" r="2"></circle><circle cx="18.5" cy="6.5" r="2"></circle><circle cx="5.5" cy="17.5" r="2"></circle><circle cx="18.5" cy="17.5" r="2"></circle></svg>'
         },
         {
-            id: 3, nome: 'VITRINE LAB', rotulo: 'Vitrine Lab', curto: '3 h de captação + 12 postagens',
+            id: 3, nome: 'VITRINE LAB', nivel: 'Pacote Básico', rotulo: 'Vitrine Lab Básico', curto: '3 h de captação + 12 postagens',
             preco: 697, tipo: 'mensal',
             resumo: 'O seu Instagram em movimento o mês inteiro. Planejamos o calendário editorial, captamos, editamos e acompanhamos os resultados com você, para o perfil ganhar seguidores e clientes.',
             beneficio: 'Um perfil movimentado o mês todo, com estratégia e acompanhamento.',
@@ -1120,6 +1131,41 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 ],
                 recebe: [['12', 'Postagens editadas: fotos, vídeos ou carrosséis, conforme o calendário aprovado'], ['12', 'Sugestões de legenda, uma para cada postagem'], ['~450', 'Fotos brutas no mês na pasta (em média 150 por hora, estimativa)']],
                 saber: ['O ciclo é de 30 dias corridos, contados a partir da reunião de alinhamento; as 12 postagens saem dentro desse período', 'Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião da metade do ciclo', 'Mudança de local ou horário de captação ou reunião: até 24 h antes. Se a captação não acontecer, o calendário e as postagens daquele período são afetados, mas o pagamento da metade do ciclo segue na mesma data', 'Clima ou outro imprevisto fora do controle de qualquer das partes: reagendamos sem custo']
+            },
+            icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>'
+        },
+        {
+            id: 5, nome: 'VITRINE LAB', nivel: 'Pacote Premium', premium: true, rotulo: 'Vitrine Lab Premium', curto: '4 h de captação + 12 postagens + 2 vídeos falados',
+            preco: 947, tipo: 'mensal',
+            resumo: 'Tudo do Vitrine Lab Básico, mais 2 vídeos falados com você ou a sua equipe, com roteiro, iluminação e áudio feitos pela Sarpi Lab, para o perfil ganhar voz, confiança e autoridade.',
+            beneficio: 'O perfil movimentado o mês todo e você falando direto com o seu cliente.',
+            entregas: [
+                'Tudo do Vitrine Lab Básico',
+                '+ 2 vídeos falados, gravados em 1 hora extra (4 horas de captação no ciclo)',
+                'Roteiro, iluminação e áudio feitos pela Sarpi Lab',
+                'BÔNUS: reunião na metade do ciclo para ajustar o que for preciso',
+                'Por mês, sem fidelidade'
+            ],
+            pagina: {
+                fases: [
+                    { t: 'Início • dia 1', itens: [
+                        { t: 'Fechamento', d: 'Você paga 50%', pag: '50%' },
+                        { t: 'Reunião de alinhamento', d: 'Cerca de 1 h: objetivos, locais e quem posta' },
+                        { t: 'Calendário e roteiros', d: 'A Sarpi Lab monta o calendário e o roteiro dos 2 vídeos falados, e você aprova' },
+                        { t: 'Captações', d: '2 sessões de 1h30 + 1 h para os vídeos falados (4 h no ciclo). Material bruto em até 3 dias úteis após cada captação' }
+                    ] },
+                    { t: 'Meio • dia 15', itens: [
+                        { t: 'Reunião de ajuste', d: '30 a 45 min para ajustar o que for preciso', presente: true },
+                        { t: 'Postagens no ar', d: '3 por semana, conforme o calendário' },
+                        { t: 'Você paga os outros 50%', d: '', pag: '50%' }
+                    ] },
+                    { t: 'Fim • dia 30', itens: [
+                        { t: 'Reunião de resultados', d: '30 a 45 min: o que funcionou e próximos passos' },
+                        { t: 'Renova se quiser', d: 'Sem fidelidade' }
+                    ] }
+                ],
+                recebe: [['12', 'Postagens editadas, conforme o calendário aprovado'], ['2', 'Vídeos falados com roteiro, iluminação e áudio', 'premium'], ['12', 'Sugestões de legenda, uma para cada postagem'], ['~450', 'Fotos brutas no mês na pasta (estimativa)']],
+                saber: ['Os 2 vídeos falados são gravados em 1 hora de captação própria, com roteiro aprovado antes', 'O ciclo é de 30 dias corridos, contados a partir da reunião de alinhamento; as 12 postagens saem dentro desse período', 'Só as postagens do calendário são editadas; o resto vai bruto na pasta', 'Depois de aprovado, o calendário só muda na reunião da metade do ciclo', 'Mudança de local ou horário de captação ou reunião: até 24 h antes. Se a captação não acontecer, o calendário e as postagens daquele período são afetados, mas o pagamento da metade do ciclo segue na mesma data', 'Clima ou outro imprevisto fora do controle de qualquer das partes: reagendamos sem custo']
             },
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>'
         },
@@ -1245,11 +1291,12 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         const grid = $('pdf-servicos');
         SERVICOS.forEach(s => {
             const card = document.createElement('div');
-            card.className = 'card-servico rounded-xl p-5 relative';
+            card.className = 'card-servico rounded-xl p-5 relative' + (s.premium ? ' card-premium' : '');
             card.id = 'pdf-svc' + s.id;
             card.innerHTML =
                 '<div class="selo badge-recomendado hidden absolute -top-3 -right-2 text-white text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="background:#8C52FF;height:22px;line-height:1;padding:0 12px"><span>★ Indicado para o seu momento</span></div>' +
                 '<div class="selo badge-promo hidden text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="position:absolute;bottom:-11px;left:12px;background:#FDE047;color:#111827;border:1px solid #EAB308;height:22px;line-height:1;padding:0 12px"><span class="promo-texto"></span></div>' +
+                (s.nivel ? '<p class="nivel-pacote">' + (s.premium ? '★ ' : '') + s.nivel + '</p>' : '') +
                 '<div class="flex items-center gap-2 mb-3">' +
                 '<div class="bg-gray-900 p-2 rounded-lg text-white shadow shrink-0">' + s.icone + '</div>' +
                 '<h3 class="fonte-marca titulo-logo text-lg whitespace-nowrap"><span>' + s.nome + '</span></h3>' +
@@ -1679,7 +1726,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         atualizarResumoParcelas(totalUnico, unicos.length > 0, cp);
 
         // Aviso de sobreposição no formulário
-        $('aviso-sobreposicao').classList.toggle('hidden', !($('check-svc1').checked && $('check-svc3').checked));
+        $('aviso-sobreposicao').classList.toggle('hidden', !($('check-svc1').checked && ($('check-svc3').checked || $('check-svc5').checked)));
 
         // 8. Caixa de investimento (só aparece se houver serviço marcado)
         const invest = $('pdf-invest-box');
@@ -1771,7 +1818,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             if ($('check-svc2').checked) {
                 termos.push('Imagens aéreas dependem de clima e das condições de voo do local. Se houver impedimento, reagendamos sem custo.');
             }
-            if ($('check-svc3').checked) termos.push('Vitrine Lab: ciclo de 30 dias corridos, contados a partir da reunião de alinhamento, sem fidelidade. Mudanças de local ou horário de captações e reuniões devem ser pedidas até 24 horas antes. Se uma captação não acontecer por pedido do cliente, o calendário editorial e as postagens que dependem dela são afetados. A 2ª parte do pagamento continua sendo feita na metade do ciclo (dia 15). Captações em Rio das Ostras, em locais definidos na reunião de alinhamento. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
+            if ($('check-svc3').checked || $('check-svc5').checked) termos.push('Vitrine Lab: ciclo de 30 dias corridos, contados a partir da reunião de alinhamento, sem fidelidade. Mudanças de local ou horário de captações e reuniões devem ser pedidas até 24 horas antes. Se uma captação não acontecer por pedido do cliente, o calendário editorial e as postagens que dependem dela são afetados. A 2ª parte do pagamento continua sendo feita na metade do ciclo (dia 15). Captações em Rio das Ostras, em locais definidos na reunião de alinhamento. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
             if (condicoes) termos.push(condicoes);
         }
         const lista = $('pdf-termos-lista');
@@ -1792,7 +1839,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             const pg = x.pagina;
             let h = '<div class="pagina-servico" id="saiba-svc' + x.id + '">' +
                 '<div class="ed-topo">Sarpi Lab  •  Como funciona</div>' +
-                '<div class="ed-cab"><h2 class="fonte-marca titulo-logo text-3xl whitespace-nowrap"><span>' + x.nome + '</span></h2>' +
+                '<div class="ed-cab' + (x.premium ? ' premium' : '') + '"><div>' + (x.nivel ? '<p class="nivel-pacote" style="font-size:11px">' + (x.premium ? '★ ' : '') + x.nivel + '</p>' : '') + '<h2 class="fonte-marca titulo-logo text-3xl whitespace-nowrap"><span>' + x.nome + '</span></h2></div>' +
                 '<div class="text-right"><div class="text-2xl font-black text-purple-700 leading-none">' + moeda(precoDe(x)) + '</div>' +
                 '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (x.tipo === 'mensal' ? 'por mês, sem fidelidade' : 'serviço avulso') + '</div></div></div>' +
                 '<p class="ed-intro">' + x.resumo + '</p>' +
@@ -1810,8 +1857,8 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 }).join('') + '</div>';
             }
             h += '<div class="ed-bloco lilas"><p class="sec">O que você recebe</p><div class="numeros">' +
-                pg.recebe.map(r => '<div class="numero' + (r[2] === 'bonus' ? ' bonus' : '') + '">' +
-                    '<div class="n">' + r[0] + '</div><div class="l">' + r[1] + '</div>' + (r[2] === 'bonus' ? '<p class="nota-presente" style="margin-top:5px">★ De presente</p>' : '') + '</div>').join('') + '</div>' +
+                pg.recebe.map(r => '<div class="numero' + (r[2] === 'bonus' ? ' bonus' : '') + (r[2] === 'premium' ? ' premium' : '') + '">' +
+                    '<div class="n">' + r[0] + '</div><div class="l">' + r[1] + '</div>' + (r[2] === 'bonus' ? '<p class="nota-presente" style="margin-top:5px">★ De presente</p>' : '') + (r[2] === 'premium' ? '<p class="nota-presente" style="margin-top:5px">★ Exclusivo Premium</p>' : '') + '</div>').join('') + '</div>' +
                 '</div><div class="ed-bloco cinza"><p class="sec">Bom saber</p><div class="bons">' + pg.saber.map(t => '<p>' + t + '</p>').join('') + '</div></div>' +
                 '<div class="ed-rodape"><a href="#pdf-p1" class="voltar-proposta" data-pagina="1">‹ Voltar para a proposta</a><span>@sarpi.lab</span></div></div>';
             return h;
