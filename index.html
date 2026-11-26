@@ -617,6 +617,35 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .chip-pag, .selo-bonus, .chip-presente { display: inline-flex !important; align-items: center; justify-content: center; height: 20px; padding: 0 10px !important; line-height: 1; }
         .chip-pag { margin-top: 9px !important; }
         .modo-pdf .chip-pag > span, .modo-pdf .selo-bonus > span, .modo-pdf .chip-presente > span { position: relative; top: -0.42em; }
+        /* SAIBA MAIS: estilo editorial (sem caixas), no mesmo tom do papel timbrado */
+        .ed-topo { margin-bottom: 18px; padding-bottom: 8px; border-bottom: 1px solid #E5E7EB; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #6B7280; white-space: pre; }
+        .ed-cab { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 16px; border-bottom: 4px solid #8C52FF; }
+        .ed-intro { font-size: 14px; line-height: 1.6; color: #1F2937; margin: 16px 0 6px; }
+        .sec { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.16em; color: #8C52FF; margin: 22px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #E5E7EB; }
+        .linha-tempo { display: flex; }
+        .etapa { flex: 1 1 0; padding: 0 12px; border-left: 1px solid #E5E7EB; }
+        .etapa:first-child { padding-left: 0; border-left: 0; }
+        .etapa .nn { font-size: 24px; font-weight: 900; color: #8C52FF; line-height: 1; margin-bottom: 8px; }
+        .etapa .tt, .ciclo-item .tt { font-size: 13px; font-weight: 900; color: #111827; line-height: 1.25; }
+        .etapa .dd, .ciclo-item .dd { font-size: 11.5px; color: #4B5563; line-height: 1.4; margin-top: 4px; }
+        .nota-pag { font-size: 10.5px; font-weight: 900; color: #A16207; margin: 6px 0 0; text-transform: uppercase; letter-spacing: 0.04em; }
+        .nota-presente { font-size: 10.5px; font-weight: 900; color: #CA8A04; margin: 0 0 3px; text-transform: uppercase; letter-spacing: 0.06em; }
+        .ciclo { display: flex; }
+        .ciclo-col { flex: 1 1 0; padding: 0 14px; border-left: 1px solid #E5E7EB; }
+        .ciclo-col:first-child { padding-left: 0; border-left: 0; }
+        .ciclo-dia { font-size: 22px; font-weight: 900; color: #8C52FF; line-height: 1; }
+        .ciclo-sub { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #6B7280; margin: 4px 0 8px; }
+        .ciclo-item { padding: 9px 0; border-top: 1px solid #F3F4F6; }
+        .nn-p { color: #8C52FF; }
+        .numeros { display: flex; }
+        .numero { flex: 1 1 0; padding: 0 14px; border-left: 1px solid #E5E7EB; }
+        .numero:first-child { padding-left: 0; border-left: 0; }
+        .numero .n { font-size: 30px; font-weight: 900; color: #8C52FF; line-height: 1.05; }
+        .numero.bonus .n { color: #CA8A04; }
+        .numero .l { font-size: 12px; font-weight: 600; color: #1F2937; line-height: 1.35; margin-top: 4px; }
+        .bons p { font-size: 12.5px; color: #1F2937; line-height: 1.45; margin: 0; padding: 7px 0 7px 14px; border-bottom: 1px solid #F3F4F6; position: relative; }
+        .bons p::before { content: '•'; position: absolute; left: 0; top: 7px; color: #8C52FF; font-weight: 900; }
+        .ed-rodape { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; padding-top: 10px; border-top: 1px solid #E5E7EB; font-size: 11px; color: #6B7280; font-weight: 700; }
         .rotulo-sec { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.12em; color: #8C52FF; margin-bottom: 8px; }
         .voltar-proposta { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; color: #6D28D9; text-decoration: none; }
 
@@ -1731,32 +1760,37 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         });
         $('pdf-termos').classList.toggle('hidden', termos.length === 0);
 
-        // 9b. Páginas "Saiba mais": uma por serviço (indicados primeiro), com fluxo visual
+        // 9b. Páginas "Saiba mais": uma por serviço (indicados primeiro), em estilo editorial, sem caixas
         const ordem = SERVICOS.filter(x => x.pagina).sort((a, b) => ($('check-svc' + b.id).checked ? 1 : 0) - ($('check-svc' + a.id).checked ? 1 : 0));
-        const cardPasso = (p, n) => '<div class="passo"><div class="num">PASSO ' + n + '</div><div class="pt">' + p.t + '</div><div class="pd">' + p.d + '</div>' +
-            (p.pag ? '<span class="chip-pag"><span>PAGA ' + p.pag + '</span></span>' : '') + '</div>';
+        const dd2 = (n) => (n < 10 ? '0' : '') + n;
+        const notaPag = (v) => v ? '<p class="nota-pag">● Paga ' + v + '</p>' : '';
+        const notaPres = (b) => b ? '<p class="nota-presente">★ De presente</p>' : '';
         $('pdf-p3').innerHTML = ordem.map(x => {
             const pg = x.pagina;
             let h = '<div class="pagina-servico" id="saiba-svc' + x.id + '">' +
-                '<div class="flex items-center justify-between mb-5 border-b-4 border-purple-500" style="padding-bottom:18px">' +
-                '<div class="flex items-center gap-3"><div class="bg-gray-900 p-2 rounded-lg text-white shadow shrink-0">' + x.icone + '</div>' +
-                '<h2 class="fonte-marca titulo-logo text-2xl whitespace-nowrap"><span>' + x.nome + '</span></h2></div>' +
-                '<div class="text-right"><div class="text-xl font-black text-purple-700 leading-none">' + moeda(precoDe(x)) + '</div>' +
+                '<div class="ed-topo">Sarpi Lab  •  Como funciona</div>' +
+                '<div class="ed-cab"><h2 class="fonte-marca titulo-logo text-3xl whitespace-nowrap"><span>' + x.nome + '</span></h2>' +
+                '<div class="text-right"><div class="text-2xl font-black text-purple-700 leading-none">' + moeda(precoDe(x)) + '</div>' +
                 '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (x.tipo === 'mensal' ? 'por mês, sem fidelidade' : 'serviço avulso') + '</div></div></div>' +
-                '<p class="rotulo-sec">Como funciona, passo a passo</p>';
+                '<p class="ed-intro">' + x.resumo + '</p>' +
+                '<p class="sec">Passo a passo</p>';
             if (pg.fluxo) {
-                h += '<div class="fluxo">' + pg.fluxo.map((p, k) => (k ? '<div class="seta">›</div>' : '') + cardPasso(p, k + 1)).join('') + '</div>';
+                h += '<div class="linha-tempo">' + pg.fluxo.map((p, k) =>
+                    '<div class="etapa"><div class="nn">' + dd2(k + 1) + '</div><div class="tt">' + p.t + '</div><div class="dd">' + p.d + '</div>' + notaPag(p.pag) + '</div>').join('') + '</div>';
             } else {
                 let n = 0;
-                h += '<div class="fases">' + pg.fases.map(f => '<div class="fase"><div class="fase-topo">' + f.t + '</div>' +
-                    f.itens.map(it => '<div class="fase-item' + (it.presente ? ' presente' : '') + '">' + (it.presente ? '<span class="chip-presente"><span>★ De presente</span></span>' : '') + '<div class="pt">' + (++n) + '. ' + it.t + '</div>' + (it.d ? '<div class="pd">' + it.d + '</div>' : '') +
-                        (it.pag ? '<span class="chip-pag"><span>PAGA ' + it.pag + '</span></span>' : '') + '</div>').join('') + '</div>').join('') + '</div>';
+                h += '<div class="ciclo">' + pg.fases.map(f => {
+                    const partes = f.t.split('•');
+                    return '<div class="ciclo-col"><div class="ciclo-dia">' + (partes[1] || f.t).trim().replace(/^d/, 'D') + '</div><div class="ciclo-sub">' + partes[0].trim() + ' do ciclo</div>' +
+                        f.itens.map(it => '<div class="ciclo-item">' + notaPres(it.presente) + '<div class="tt"><span class="nn-p">' + dd2(++n) + '</span> ' + it.t + '</div>' +
+                            (it.d ? '<div class="dd">' + it.d + '</div>' : '') + notaPag(it.pag) + '</div>').join('') + '</div>';
+                }).join('') + '</div>';
             }
-            h += '<p class="rotulo-sec">O que você recebe</p><div class="recebe">' +
-                pg.recebe.map(r => '<div class="recebe-item' + (r[2] === 'bonus' ? ' bonus' : '') + '">' + (r[2] === 'bonus' ? '<span class="selo-bonus"><span>★ De presente</span></span>' : '') + '<div class="n">' + r[0] + '</div><div class="l">' + r[1] + '</div></div>').join('') + '</div>' +
-                '<div class="saber"><p class="rotulo-sec" style="color:#A16207;margin-bottom:4px">Bom saber</p><ul style="margin:0;padding-left:16px">' +
-                pg.saber.map(t => '<li>' + t + '</li>').join('') + '</ul></div>' +
-                '<div class="mt-5 text-center"><a href="#pdf-p1" class="voltar-proposta" data-pagina="1">‹ Voltar para a proposta</a></div></div>';
+            h += '<p class="sec">O que você recebe</p><div class="numeros">' +
+                pg.recebe.map(r => '<div class="numero' + (r[2] === 'bonus' ? ' bonus' : '') + '">' +
+                    '<div class="n">' + r[0] + '</div><div class="l">' + r[1] + '</div>' + (r[2] === 'bonus' ? '<p class="nota-presente" style="margin-top:5px">★ De presente</p>' : '') + '</div>').join('') + '</div>' +
+                '<p class="sec">Bom saber</p><div class="bons">' + pg.saber.map(t => '<p>' + t + '</p>').join('') + '</div>' +
+                '<div class="ed-rodape"><a href="#pdf-p1" class="voltar-proposta" data-pagina="1">‹ Voltar para a proposta</a><span>@sarpi.lab</span></div></div>';
             return h;
         }).join('');
 
