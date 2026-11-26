@@ -1720,7 +1720,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             const seloPrem = card.querySelector('.selo-premium');
             if (seloPrem) {
                 const dif = varPrem ? precoDe(varPrem) - precoDe(s0) : 0;
-                seloPrem.querySelector('span').textContent = '★ Quer mais? Vídeos de autoridade + ' + moeda(dif);
+                seloPrem.querySelector('span').textContent = '★ Quer mais? Pacote Premium por + ' + moeda(dif) + '/mês';
                 seloPrem.style.display = premiumMarcado ? 'none' : 'flex';
                 const nv = card.querySelector('.nivel-card');
                 if (nv) nv.classList.toggle('hidden', !premiumMarcado);
@@ -1851,7 +1851,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     const pixL = (v) => temPixPac ? '<p style="font-size:11px;font-weight:800;color:#047857;margin:4px 0 0">No Pix: ' + moeda(v) + ' /mês</p>' : '';
                     const como = (t) => '<p style="font-size:11px;font-weight:600;color:#422006;margin:6px 0 0">' + t + '</p>';
                     h += '<div style="margin-top:14px;padding:12px;background:#FEF9C3;border:1px solid #FACC15;border-radius:0;color:#713F12;break-inside:avoid">' +
-                        '<p style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;text-align:center">★ Extra: simule como fechar o ' + s.rotulo + '</p>' +
+                        '<p style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;text-align:center">★ Melhor custo-benefício: feche 3 meses e pague menos</p>' +
                         '<div style="display:flex;gap:10px">' +
                         '<div ' + caixaOp(false) + '>' + rot('Por mês') + grande(base, '#111827') + pixL(precoPix(s)) + como('Paga um mês por vez, sem fidelidade') + '</div>' +
                         '<div ' + caixaOp(true) + '>' + rot('Pacote de 3 meses • −' + pctPac + '%') + grande(porMes, '#A16207') + pixL(pixMes) +
