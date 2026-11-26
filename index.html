@@ -1399,8 +1399,6 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             const c = partes(totC, pg.pct), p = partes(totP, pg.pct);
             const mensais = sel.filter(s => s.tipo === 'mensal');
             let h = topo +
-                '<tr><td colspan="3" class="pt-2 font-bold text-gray-900">Todos os serviços juntos: ' + moeda2(totC) +
-                (mensais.length ? ' <span class="font-normal text-gray-500">(com o 1º mês do ' + mensais.map(s => s.rotulo).join(' e ') + ')</span>' : '') + '</td></tr>' +
                 '<tr><td class="py-0.5 pl-3 text-gray-700">' + pg.pct + '% ' + pg.quando1 + '</td>' + celPg(c[0], p[0]) + '</tr>' +
                 '<tr><td class="py-0.5 pl-3 text-gray-700">' + (100 - pg.pct) + '% ' + pg.quando2 + '</td>' + celPg(c[1], p[1]) + '</tr>';
             return h + '</table></div>';
