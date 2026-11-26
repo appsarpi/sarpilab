@@ -645,6 +645,13 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .numero .l { font-size: 12px; font-weight: 600; color: #1F2937; line-height: 1.35; margin-top: 4px; }
         .bons p { font-size: 12.5px; color: #1F2937; line-height: 1.45; margin: 0; padding: 7px 0 7px 14px; border-bottom: 1px solid #F3F4F6; position: relative; }
         .bons p::before { content: '•'; position: absolute; left: 0; top: 7px; color: #8C52FF; font-weight: 900; }
+        .ed-bloco { margin-top: 22px; border-radius: 14px; padding: 4px 18px 16px; }
+        .ed-bloco .sec { margin-top: 14px; }
+        .ed-bloco.lilas { background: #F5F3FF; border-top: 4px solid #8C52FF; }
+        .ed-bloco.lilas .sec { border-bottom-color: #DDD6FE; }
+        .ed-bloco.lilas .numero { border-left-color: #DDD6FE; }
+        .ed-bloco.cinza { background: #F9FAFB; border: 1px solid #F3F4F6; }
+        .ed-bloco.cinza .bons p { border-bottom-color: #EEF0F3; }
         .ed-rodape { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; padding-top: 10px; border-top: 1px solid #E5E7EB; font-size: 11px; color: #6B7280; font-weight: 700; }
         .rotulo-sec { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.12em; color: #8C52FF; margin-bottom: 8px; }
         .voltar-proposta { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; color: #6D28D9; text-decoration: none; }
@@ -1786,10 +1793,10 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                             (it.d ? '<div class="dd">' + it.d + '</div>' : '') + notaPag(it.pag) + '</div>').join('') + '</div>';
                 }).join('') + '</div>';
             }
-            h += '<p class="sec">O que você recebe</p><div class="numeros">' +
+            h += '<div class="ed-bloco lilas"><p class="sec">O que você recebe</p><div class="numeros">' +
                 pg.recebe.map(r => '<div class="numero' + (r[2] === 'bonus' ? ' bonus' : '') + '">' +
                     '<div class="n">' + r[0] + '</div><div class="l">' + r[1] + '</div>' + (r[2] === 'bonus' ? '<p class="nota-presente" style="margin-top:5px">★ De presente</p>' : '') + '</div>').join('') + '</div>' +
-                '<p class="sec">Bom saber</p><div class="bons">' + pg.saber.map(t => '<p>' + t + '</p>').join('') + '</div>' +
+                '</div><div class="ed-bloco cinza"><p class="sec">Bom saber</p><div class="bons">' + pg.saber.map(t => '<p>' + t + '</p>').join('') + '</div></div>' +
                 '<div class="ed-rodape"><a href="#pdf-p1" class="voltar-proposta" data-pagina="1">‹ Voltar para a proposta</a><span>@sarpi.lab</span></div></div>';
             return h;
         }).join('');
