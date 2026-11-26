@@ -697,6 +697,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .cmp-item { font-size: 12px; color: #1F2937; margin: 2px 0 0; line-height: 1.4; }
         .cmp-def { font-size: 12px; color: #422006; line-height: 1.5; margin: 12px 0 0; padding-top: 10px; border-top: 1px solid #FDE68A; }
         .prem-txt { font-size: 13px; color: #422006; line-height: 1.5; margin: 0; }
+        .nota-estimativa { font-size: 11px; color: #6B7280; margin: 12px 0 0; line-height: 1.4; }
         .ed-bloco.cinza { background: #F9FAFB; border: 1px solid #F3F4F6; }
         .ed-bloco.cinza .bons p { border-bottom-color: #EEF0F3; }
         /* FECHAMENTO DA PROPOSTA */
@@ -1881,6 +1882,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         const termos = [];
         if (temSel) {
             termos.push('Deslocamento incluso em Rio das Ostras. Fora da cidade, sob consulta.');
+            termos.push('Material bruto: a quantidade de fotos e vídeos brutos informada é uma estimativa e pode variar para mais ou para menos. As quantidades editadas são as combinadas na proposta.');
             termos.push('Imprevistos: se uma captação ou reunião precisar mudar por clima ou outro fator externo, fora do controle do cliente e da Sarpi Lab, ela é reagendada sem multa para nenhuma das partes. Contam como fatores externos: chuva, vento forte ou mau tempo; proibição de voo no local; interdição do local ou falta de energia; e doença ou emergência familiar de qualquer das partes, avisada o quanto antes. Atraso, esquecimento ou mudança de planos não contam.');
             if ($('check-svc1').checked) termos.push('Hora extra de captação: R$ 180 por hora.');
             if ($('check-svc1').checked || $('check-svc2').checked) {
@@ -1944,6 +1946,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             h += '<div class="ed-bloco lilas"><p class="sec">O que você recebe</p><div class="numeros">' +
                 pg.recebe.map(r => '<div class="numero' + (r[2] === 'bonus' ? ' bonus' : '') + (r[2] === 'premium' ? ' premium' : '') + '">' +
                     '<div class="n">' + r[0] + '</div><div class="l">' + r[1] + '</div>' + (r[2] === 'bonus' ? '<p class="nota-presente" style="margin-top:5px">★ De presente</p>' : '') + (r[2] === 'premium' ? '<p class="nota-presente" style="margin-top:5px">★ Exclusivo Premium</p>' : '') + '</div>').join('') + '</div>' +
+                '<p class="nota-estimativa">* A quantidade de fotos e vídeos brutos é uma estimativa e pode variar para mais ou para menos, conforme o local e o tipo de captação. As quantidades editadas (fotos tratadas, vídeos e postagens) são as combinadas na proposta.</p>' +
                 '</div>' +
                 '<div class="ed-bloco cinza"><p class="sec">Bom saber</p><div class="bons">' + pg.saber.map(t => '<p>' + t + '</p>').join('') + '</div></div>' +
                 '<div class="ed-rodape"><a href="#pdf-p1" class="voltar-proposta" data-pagina="1">‹ Voltar para a proposta</a><span>@sarpi.lab</span></div></div>';
