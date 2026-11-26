@@ -1554,11 +1554,10 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             });
             if (sel.length > 1 || descValor > 0) {
                 if (unicos.length && descValor > 0) {
-                    h += linhaTotal('Subtotal (serviços avulsos)', moeda(subUnico), false);
+                    h += linhaTotal('Subtotal', moeda(subUnico + totalMensal), false);
                     h += linhaTotal('Desconto combo (' + pct + '%)', '− ' + moeda(descValor), false, 'text-green-700');
                 }
-                if (unicos.length) h += linhaTotal('Total (serviços avulsos)', moeda(totalUnico), true);
-                if (mensais.length) h += linhaTotal('Vitrine Lab (por mês, sem fidelidade)', moeda(totalMensal), true);
+                h += linhaTotal('Total', moeda(totalUnico + totalMensal), true);
             }
             h += '</table>';
 
