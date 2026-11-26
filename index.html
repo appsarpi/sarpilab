@@ -877,20 +877,20 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
     // PREÇOS DE TABELA para Rio das Ostras (R$). Dá para ajustar cada um no painel, proposta a proposta:
     // se o valor digitado ficar diferente da tabela, o gerador mostra um alerta. Abaixo da tabela, dá para
     // sinalizar como promoção (ex.: "Preço de lançamento"), que aparece em amarelo na proposta.
-    // Referência: 4 h no Lab Express (R$ 297 + 2 h extras de R$ 180) = R$ 657, abaixo do Vitrine Lab (R$ 697),
-    // que além das 4 h inclui calendário, 12 postagens editadas e reuniões.
+    // Referência: 4 h no Lab Express (R$ 197 + 3 h extras de R$ 180) = R$ 737. O Vitrine Lab (R$ 697) sai um pouco
+    // abaixo disso mesmo incluindo calendário, 12 postagens editadas e reuniões: é o incentivo para fechar o mensal.
     const SERVICOS = [
         {
-            id: 1, nome: 'LAB EXPRESS', rotulo: 'Lab Express', curto: '2 h de captação + 15 fotos + vídeo bônus',
-            preco: 297, tipo: 'unico',
+            id: 1, nome: 'LAB EXPRESS', rotulo: 'Lab Express', curto: '1 h de captação + 8 fotos + vídeo bônus',
+            preco: 197, tipo: 'unico',
             resumo: 'Sessão ágil de foto e vídeo. Você recebe todo o material bruto em até 24 horas e, em até 3 dias úteis, as fotos tratadas e um vídeo editado de bônus.',
             beneficio: 'Material em mãos em 24 horas e conteúdo editado em até 3 dias.',
             entregas: [
-                '2 horas de captação: foto, vídeo ou os dois',
-                '15 fotos tratadas, selecionadas pela Sarpi Lab',
+                '1 hora de captação: foto, vídeo ou os dois',
+                '8 fotos tratadas, selecionadas pela Sarpi Lab',
                 'BÔNUS: 1 vídeo editado para o Instagram',
                 'Em até 24 h: todo o material bruto, sem edição',
-                'Em até 3 dias úteis: o vídeo bônus + as 15 fotos tratadas',
+                'Em até 3 dias úteis: o vídeo bônus + as 8 fotos tratadas',
                 'Hora extra: R$ 180'
             ],
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>'
