@@ -973,7 +973,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 'Pasta com todo o material captado',
                 'Reunião de alinhamento e reunião de resultados no fim do mês',
                 'BÔNUS: reunião na metade do mês para ajustar o que for preciso',
-                'Mês a mês, sem fidelidade'
+                'Por mês, sem fidelidade'
             ],
             icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>'
         },
@@ -1064,7 +1064,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 '<div class="text-right"><div class="flex items-center gap-1">' +
                 '<span class="text-xs text-gray-500 font-bold">R$</span>' +
                 '<input type="number" min="0" step="1" id="preco' + s.id + '" value="' + s.preco + '" class="campo w-20 border-2 border-gray-200 p-1.5 rounded-lg text-sm text-right"></div>' +
-                '<div class="text-[10px] text-gray-400 mt-0.5">' + (s.tipo === 'mensal' ? 'mês a mês' : 'serviço avulso') + '</div></div>';
+                '<div class="text-[10px] text-gray-400 mt-0.5">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div></div>';
             lista.appendChild(linha);
 
             // Alerta de preço fora da tabela + sinalização de promoção (aparece só quando o preço muda)
@@ -1322,7 +1322,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             const primeira = Math.round(valor * 50) / 100;
             const segunda = Math.round((valor - primeira) * 100) / 100;
             const m = MOMENTOS[s.tipo] || MOMENTOS.unico;
-            h += '<tr><td colspan="3" class="pt-2 font-bold text-gray-900">' + s.rotulo + (s.tipo === 'mensal' ? ' <span class="font-normal text-gray-500">(mês a mês, sem fidelidade)</span>' : '') + '</td></tr>' +
+            h += '<tr><td colspan="3" class="pt-2 font-bold text-gray-900">' + s.rotulo + (s.tipo === 'mensal' ? ' <span class="font-normal text-gray-500">(por mês, sem fidelidade)</span>' : '') + '</td></tr>' +
                 '<tr><td class="py-0.5 pl-3 text-gray-700">' + m[0] + '</td>' + celPg(primeira) + '</tr>' +
                 '<tr><td class="py-0.5 pl-3 text-gray-700">' + m[1] + '</td>' + celPg(segunda) + '</tr>';
         });
@@ -1485,7 +1485,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 precoBox.innerHTML =
                     (promo && promo.de ? '<div class="preco-de">de ' + moeda(promo.de) + '</div>' : '') +
                     '<div class="text-lg font-black text-purple-700 leading-none' + (promo ? ' preco-promo' : '') + '">' + (promo && promo.de ? 'por ' : '') + moeda(precoDe(s)) + '</div>' +
-                    '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'mês a mês' : 'serviço avulso') + '</div>';
+                    '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div>';
                 corpo.innerHTML =
                     '<p class="text-[13px] text-gray-800 leading-relaxed mb-2 font-semibold">' + s.beneficio + '</p>' +
                     '<ul class="lista-entregas">' + s.entregas.map(e => e.startsWith('BÔNUS:') ? '<li class="bonus"><b>Bônus:</b>' + e.slice(6) + '</li>' : '<li>' + e + '</li>').join('') + '</ul>' +
@@ -1499,7 +1499,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     precoBox.classList.remove('hidden');
                     precoBox.innerHTML =
                         '<div class="text-base font-black text-gray-800 leading-none">' + moeda(precoDe(s)) + '</div>' +
-                        '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'mês a mês' : 'serviço avulso') + '</div>';
+                        '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div>';
                 }
                 corpo.innerHTML = '<p class="text-[13px] text-gray-800 leading-relaxed">' + s.resumo + '</p>';
             }
@@ -1547,7 +1547,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     '<td class="py-2 pr-3"><span class="font-bold text-gray-900">' + s.rotulo + '</span>' +
                     '<span class="block text-[11px] text-gray-500">' + s.curto + '</span>' +
                     (promo ? '<span class="tag-promo">★ ' + escHtml(promo.rotulo) + '</span>' : '') + '</td>' +
-                    '<td class="py-2 px-2 text-[11px] text-gray-500 whitespace-nowrap">' + (s.tipo === 'mensal' ? 'mês a mês' : 'serviço avulso') + '</td>' +
+                    '<td class="py-2 px-2 text-[11px] text-gray-500 whitespace-nowrap">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</td>' +
                     '<td class="py-2 pl-3 text-right font-bold text-gray-900 whitespace-nowrap">' +
                     (promo && promo.de ? '<div class="preco-de">de ' + moeda(promo.de) + '</div>' : '') +
                     '<span' + (promo ? ' class="preco-promo"' : '') + '>' + moeda(precoDe(s)) + '</span></td></tr>';
@@ -1558,7 +1558,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     h += linhaTotal('Desconto combo (' + pct + '%)', '− ' + moeda(descValor), false, 'text-green-700');
                 }
                 if (unicos.length) h += linhaTotal('Total (serviços avulsos)', moeda(totalUnico), true);
-                if (mensais.length) h += linhaTotal('Vitrine Lab (mês a mês, sem fidelidade)', moeda(totalMensal), true);
+                if (mensais.length) h += linhaTotal('Vitrine Lab (por mês, sem fidelidade)', moeda(totalMensal), true);
             }
             h += '</table>';
 
@@ -1601,7 +1601,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             if ($('check-svc2').checked) {
                 termos.push('Imagens aéreas dependem de clima e das condições de voo do local. Se houver impedimento, reagendamos sem custo.');
             }
-            if ($('check-svc3').checked) termos.push('Vitrine Lab: captações em Rio das Ostras, em locais definidos na reunião de alinhamento. Mês a mês, sem fidelidade. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
+            if ($('check-svc3').checked) termos.push('Vitrine Lab: captações em Rio das Ostras, em locais definidos na reunião de alinhamento. Por mês, sem fidelidade. São editadas apenas as postagens do calendário editorial; o restante do material é entregue bruto na pasta.');
             if (condicoes) termos.push(condicoes);
         }
         const lista = $('pdf-termos-lista');
