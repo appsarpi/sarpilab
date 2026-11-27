@@ -471,14 +471,14 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .alerta-preco.acima { background: #DBEAFE; border: 1px solid #3B82F6; color: #1E3A8A; }
         .campo.preco-abaixo { border-color: #F59E0B !important; background: #FFFBEB; }
         .campo.preco-acima { border-color: #3B82F6 !important; background: #EFF6FF; }
-        .promo-box { background: #FEFCE8; border: 1px dashed #EAB308; border-radius: 8px; padding: 8px 10px; margin-top: 6px; }
-        .promo-box input[type="checkbox"] { accent-color: #CA8A04; }
+        .promo-box { background: #FFF1EB; border: 1px dashed #FF9F7A; border-radius: 8px; padding: 8px 10px; margin-top: 6px; }
+        .promo-box input[type="checkbox"] { accent-color: #C2522B; }
         .btn-tabela { font-size: 11px; font-weight: 700; text-decoration: underline; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; margin-left: 6px; }
-        .card-promo { border: 2px solid #EAB308 !important; background-color: #FEFCE8 !important; }
-        .preco-promo { background: #FDE047; color: #111827 !important; border-radius: 6px; padding: 2px 6px; display: inline-block; }
+        .card-promo { border: 2px solid #FF9F7A !important; background-color: #FFF1EB !important; }
+        .preco-promo { background: #FF9F7A; color: #1E1433 !important; border-radius: 6px; padding: 2px 6px; display: inline-block; }
         .preco-de { font-size: 11px; font-weight: 700; color: #6B7280; text-decoration: line-through; margin-bottom: 2px; }
-        .tag-promo { display: inline-block; background: #FDE047; color: #111827; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; border-radius: 999px; padding: 2px 8px; margin-top: 3px; }
-        .nota-promo { background: #FEF9C3; border: 1px solid #FACC15; border-left: 4px solid #EAB308; border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 700; color: #713F12; margin-top: 8px; line-height: 1.35; }
+        .tag-promo { display: inline-block; background: #FF9F7A; color: #1E1433; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; border-radius: 999px; padding: 2px 8px; margin-top: 3px; }
+        .nota-promo { background: #FFF1EB; border: 1px solid #FFC2AA; border-left: 4px solid #FF9F7A; border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 700; color: #7A2E14; margin-top: 8px; line-height: 1.35; }
         .modo-pdf .titulo-logo > span { position: relative; top: var(--ajuste-pdf, -0.35em); }
         .modo-pdf .card-servico .titulo-logo > span { top: -0.48em !important; }
         .titulo-logo {
@@ -543,38 +543,45 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         }
         /* VITRINE LAB: nível do pacote; Premium em dourado */
         .nivel-pacote { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.14em; color: #6D28D9; margin: 0 0 6px; }
-        .card-premium .nivel-pacote, .ed-cab.premium .nivel-pacote { color: #A16207; }
-        .card-premium { border: 2px solid #D4A017 !important; background-color: #FFFBEB !important; }
-        .card-premium .titulo-logo, .ed-cab.premium .titulo-logo { background: #B8860B; }
-        .card-premium .preco-box .text-purple-700, .ed-cab.premium .text-purple-700 { color: #A16207 !important; }
-        .ed-cab.premium { border-bottom-color: #D4A017; }
-        .numero.premium .n { color: #B8860B; }
+        .card-premium .nivel-pacote, .ed-cab.premium .nivel-pacote { color: #A67C00; }
+        .card-premium { border: 2px solid #A67C00 !important; background-color: #FBF5E1 !important; }
+        .card-premium .titulo-logo, .ed-cab.premium .titulo-logo { background: #A67C00; }
+        .card-premium .preco-box .text-purple-700, .ed-cab.premium .text-purple-700 { color: #A67C00 !important; }
+        .ed-cab.premium { border-bottom-color: #A67C00; }
+        .numero.premium .n { color: #A67C00; }
         .op-pacotes { margin-top: 10px; border-top: 1px solid #E5E7EB; }
         .op-pacote { padding: 7px 0; border-bottom: 1px solid #F3F4F6; }
-        .op-pacote.gold { background: #FFFBEB; border-left: 3px solid #D4A017; padding: 7px 8px; }
+        .op-pacote.gold { background: #FBF5E1; border-left: 3px solid #A67C00; padding: 7px 8px; }
         .op-topo { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
         .op-nome { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; color: #4B5563; }
-        .op-pacote.gold .op-nome { color: #A16207; }
+        .op-pacote.gold .op-nome { color: #A67C00; }
         .op-pacote.ind .op-nome { color: #6D28D9; }
-        .op-pacote.gold.ind .op-nome { color: #A16207; }
+        .op-pacote.gold.ind .op-nome { color: #A67C00; }
         .op-ind { font-size: 10px; letter-spacing: 0.04em; }
-        .op-preco { font-size: 13px; font-weight: 900; color: #111827; white-space: nowrap; }
-        .op-pacote.gold .op-preco { color: #A16207; }
+        .op-preco { font-size: 13px; font-weight: 900; color: #1E1433; white-space: nowrap; }
+        .op-pacote.gold .op-preco { color: #A67C00; }
         .op-mes { font-size: 10px; font-weight: 700; color: #6B7280; }
-        .op-txt { font-size: 11.5px; color: #422006; line-height: 1.35; margin: 3px 0 0; }
-        .nivel-card { font-size: 10.5px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #A16207; margin: 4px 0 0 2px; }
-        .quer-mais { margin: 10px 0 -4px; font-size: 12px; font-weight: 900; color: #A16207; }
-        .linha-premium { margin: 8px 0 0; font-size: 12px; font-weight: 800; color: #A16207; }
+        .op-txt { font-size: 11.5px; color: #1E1433; line-height: 1.35; margin: 3px 0 0; }
+        .nivel-card { font-size: 10.5px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #A67C00; margin: 4px 0 0 2px; }
+        .quer-mais { margin: 10px 0 -4px; font-size: 12px; font-weight: 900; color: #A67C00; }
+        .linha-premium { margin: 8px 0 0; font-size: 12px; font-weight: 800; color: #A67C00; }
         .modo-pdf .selo-premium > span { position: relative; top: var(--ajuste-selo, -0.25em); }
+        /* IDENTIDADE VISUAL: texto em roxo-noite, caixas em lilás claro, coral nos destaques, dourado só no Premium */
+        #pdf-template .text-gray-900, #pdf-template .text-black { color: #1E1433 !important; }
+        #pdf-template .text-gray-800 { color: #2A2140 !important; }
+        #pdf-template .text-gray-700 { color: #4A4060 !important; }
+        #pdf-template .bg-purple-50 { background-color: #F3EEFF !important; }
+        #pdf-template .text-purple-700, #pdf-template .text-purple-600 { color: #8C52FF !important; }
+        #pdf-template { color: #1E1433; }
         .card-destaque {
             border: 2px solid #8C52FF !important;
             background-color: #F5F3FF !important;
             box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.15) !important;
         }
 
-        .card-premium.card-destaque { border: 2px solid #D4A017 !important; background-color: #FEF3C7 !important; box-shadow: 0 4px 6px -1px rgba(184, 134, 11, 0.2) !important; }
-        .card-premium .lista-entregas li.bonus { color: #A16207; }
-        .card-premium .lista-entregas li.bonus::before { color: #B8860B; }
+        .card-premium.card-destaque { border: 2px solid #A67C00 !important; background-color: #FBF5E1 !important; box-shadow: 0 4px 6px -1px rgba(184, 134, 11, 0.2) !important; }
+        .card-premium .lista-entregas li.bonus { color: #A67C00; }
+        .card-premium .lista-entregas li.bonus::before { color: #A67C00; }
         .lista-entregas { list-style: none; margin: 0; padding: 0; }
         .lista-entregas li {
             position: relative;
@@ -582,7 +589,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             margin-bottom: 4px;
             font-size: 12.5px;
             line-height: 1.35;
-            color: #1f2937;
+            color: #2A2140;
         }
         .lista-entregas li.bonus { color: #6D28D9; font-weight: 700; }
         .lista-entregas li.bonus::before { content: '★'; color: #8C52FF; }
@@ -615,28 +622,28 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .fluxo { display: flex; align-items: stretch; gap: 0; margin: 6px 0 18px; }
         .passo { flex: 1 1 0; background: #F5F3FF; border: 2px solid #DDD6FE; border-top: 6px solid #8C52FF; border-radius: 14px; padding: 10px 8px 12px; text-align: center; }
         .passo .num { font-size: 10px; font-weight: 900; letter-spacing: 0.12em; color: #8C52FF; margin-bottom: 4px; }
-        .passo .pt { font-size: 12.5px; font-weight: 900; color: #111827; line-height: 1.2; }
+        .passo .pt { font-size: 12.5px; font-weight: 900; color: #1E1433; line-height: 1.2; }
         .passo .pd { font-size: 11px; color: #4B5563; margin-top: 4px; line-height: 1.3; }
         .seta { flex: 0 0 18px; display: flex; align-items: center; justify-content: center; color: #8C52FF; font-weight: 900; font-size: 20px; }
-        .chip-pag { display: inline-block; white-space: nowrap; margin-top: 6px; background: #FDE047; color: #111827; font-size: 10px; font-weight: 900; border-radius: 999px; padding: 2px 8px; letter-spacing: 0.04em; }
+        .chip-pag { display: inline-block; white-space: nowrap; margin-top: 6px; background: #FF9F7A; color: #1E1433; font-size: 10px; font-weight: 900; border-radius: 999px; padding: 2px 8px; letter-spacing: 0.04em; }
         .fases { display: flex; gap: 10px; margin: 6px 0 18px; }
         .fase { flex: 1 1 0; border-radius: 14px; overflow: hidden; border: 2px solid #DDD6FE; background: #FFFFFF; }
         .fase-topo { background: #8C52FF; color: #fff; font-weight: 900; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; padding: 8px 10px; text-align: center; }
         .fase-item { margin: 8px; background: #F5F3FF; border-radius: 10px; padding: 8px 10px; }
-        .fase-item.presente { background: #FEFCE8; border: 2px solid #EAB308; }
-        .chip-presente { display: inline-block; white-space: nowrap; background: #FDE047; color: #111827; border: 1px solid #EAB308; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; border-radius: 999px; padding: 2px 8px; margin-bottom: 4px; }
-        .fase-item .pt { font-size: 12.5px; font-weight: 900; color: #111827; }
+        .fase-item.presente { background: #FFF1EB; border: 2px solid #FF9F7A; }
+        .chip-presente { display: inline-block; white-space: nowrap; background: #FF9F7A; color: #1E1433; border: 1px solid #FF9F7A; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; border-radius: 999px; padding: 2px 8px; margin-bottom: 4px; }
+        .fase-item .pt { font-size: 12.5px; font-weight: 900; color: #1E1433; }
         .fase-item .pd { font-size: 11px; color: #4B5563; margin-top: 2px; line-height: 1.3; }
         .recebe { display: flex; gap: 10px; margin: 16px 0 16px; }
         .recebe-item { flex: 1 1 0; border-radius: 14px; background: #FFFFFF; border: 2px solid #DDD6FE; padding: 12px; text-align: center; }
         .recebe-item .n { font-size: 26px; font-weight: 900; color: #8C52FF; line-height: 1; }
         .recebe-item { position: relative; }
-        .recebe-item.bonus { background: #FEFCE8; border: 2px solid #EAB308; }
-        .recebe-item.bonus .n { color: #CA8A04; }
-        .selo-bonus { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); white-space: nowrap; background: #FDE047; color: #111827; border: 1px solid #EAB308; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; border-radius: 999px; padding: 2px 10px; }
-        .recebe-item .l { font-size: 11.5px; font-weight: 700; color: #1F2937; margin-top: 6px; line-height: 1.25; }
-        .saber { background: #FEFCE8; border: 1px solid #FACC15; border-left: 5px solid #EAB308; border-radius: 12px; padding: 10px 14px; }
-        .saber li { font-size: 12px; color: #422006; margin: 3px 0; font-weight: 600; }
+        .recebe-item.bonus { background: #FFF1EB; border: 2px solid #FF9F7A; }
+        .recebe-item.bonus .n { color: #C2522B; }
+        .selo-bonus { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); white-space: nowrap; background: #FF9F7A; color: #1E1433; border: 1px solid #FF9F7A; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; border-radius: 999px; padding: 2px 10px; }
+        .recebe-item .l { font-size: 11.5px; font-weight: 700; color: #2A2140; margin-top: 6px; line-height: 1.25; }
+        .saber { background: #FFF1EB; border: 1px solid #FFC2AA; border-left: 5px solid #FF9F7A; border-radius: 12px; padding: 10px 14px; }
+        .saber li { font-size: 12px; color: #1E1433; margin: 3px 0; font-weight: 600; }
         /* No PDF (html2canvas) o texto desce um pouco: compensa nos selos e caixas pequenas */
         .modo-pdf .fase-item { padding-bottom: 16px; }
         .modo-pdf .fase-topo { padding: 4px 10px 12px; }
@@ -650,16 +657,16 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .ed-topo { margin-bottom: 18px; padding-bottom: 8px; border-bottom: 1px solid #E5E7EB; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #6B7280; white-space: pre; }
         .ed-cab { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 16px; border-bottom: 4px solid #8C52FF; }
         .ed-equip { font-size: 12.5px; color: #4B5563; margin: 0 0 6px; }
-        .ed-intro { font-size: 14px; line-height: 1.6; color: #1F2937; margin: 16px 0 6px; }
+        .ed-intro { font-size: 14px; line-height: 1.6; color: #2A2140; margin: 16px 0 6px; }
         .sec { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.16em; color: #8C52FF; margin: 22px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #E5E7EB; }
         .linha-tempo { display: flex; }
         .etapa { flex: 1 1 0; padding: 0 12px; border-left: 1px solid #E5E7EB; }
         .etapa:first-child { padding-left: 0; border-left: 0; }
         .etapa .nn { font-size: 24px; font-weight: 900; color: #8C52FF; line-height: 1; margin-bottom: 8px; }
-        .etapa .tt, .ciclo-item .tt { font-size: 13px; font-weight: 900; color: #111827; line-height: 1.25; }
+        .etapa .tt, .ciclo-item .tt { font-size: 13px; font-weight: 900; color: #1E1433; line-height: 1.25; }
         .etapa .dd, .ciclo-item .dd { font-size: 11.5px; color: #4B5563; line-height: 1.4; margin-top: 4px; }
-        .nota-pag { font-size: 10.5px; font-weight: 900; color: #A16207; margin: 6px 0 0; text-transform: uppercase; letter-spacing: 0.04em; }
-        .nota-presente { font-size: 10.5px; font-weight: 900; color: #CA8A04; margin: 0 0 3px; text-transform: uppercase; letter-spacing: 0.06em; }
+        .nota-pag { font-size: 10.5px; font-weight: 900; color: #C2522B; margin: 6px 0 0; text-transform: uppercase; letter-spacing: 0.04em; }
+        .nota-presente { font-size: 10.5px; font-weight: 900; color: #C2522B; margin: 0 0 3px; text-transform: uppercase; letter-spacing: 0.06em; }
         .ciclo { display: flex; }
         .ciclo-col { flex: 1 1 0; padding: 0 14px; border-left: 1px solid #E5E7EB; }
         .ciclo-col:first-child { padding-left: 0; border-left: 0; }
@@ -667,43 +674,43 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         .ciclo-sub { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #6B7280; margin: 4px 0 8px; }
         .ciclo-item { padding: 9px 0; border-top: 1px solid #F3F4F6; }
         .nn-p { color: #8C52FF; }
-        .ciclo-item.presente { background: #FEF9C3; border: 0; border-left: 4px solid #EAB308; border-radius: 0; padding: 9px 11px 11px; margin: 4px 0; }
+        .ciclo-item.presente { background: #FFF1EB; border: 0; border-left: 4px solid #FF9F7A; border-radius: 0; padding: 9px 11px 11px; margin: 4px 0; }
         .ciclo-item.presente + .ciclo-item { border-top: 0; }
         .numeros { display: flex; }
         .numero { flex: 1 1 0; padding: 0 14px; border-left: 1px solid #E5E7EB; }
         .numero:first-child { padding-left: 0; border-left: 0; }
         .numero .n { font-size: 30px; font-weight: 900; color: #8C52FF; line-height: 1.05; }
-        .numero.bonus .n { color: #CA8A04; }
-        .numero .l { font-size: 12px; font-weight: 600; color: #1F2937; line-height: 1.35; margin-top: 4px; }
-        .bons p { font-size: 12.5px; color: #1F2937; line-height: 1.45; margin: 0; padding: 7px 0 7px 14px; border-bottom: 1px solid #F3F4F6; position: relative; }
+        .numero.bonus .n { color: #C2522B; }
+        .numero .l { font-size: 12px; font-weight: 600; color: #2A2140; line-height: 1.35; margin-top: 4px; }
+        .bons p { font-size: 12.5px; color: #2A2140; line-height: 1.45; margin: 0; padding: 7px 0 7px 14px; border-bottom: 1px solid #F3F4F6; position: relative; }
         .bons p::before { content: '•'; position: absolute; left: 0; top: 7px; color: #8C52FF; font-weight: 900; }
         .ed-bloco { margin-top: 22px; border-radius: 0; padding: 4px 18px 16px; }
         .ed-bloco .sec { margin-top: 14px; }
         .ed-bloco.lilas { background: #F5F3FF; border-top: 4px solid #8C52FF; }
         .ed-bloco.lilas .sec { border-bottom-color: #DDD6FE; }
         .ed-bloco.lilas .numero { border-left-color: #DDD6FE; }
-        .ed-bloco.premium { background: #FFFBEB; border-left: 4px solid #D4A017; }
-        .ed-bloco.premium .sec { color: #A16207; border-bottom-color: #FDE68A; }
+        .ed-bloco.premium { background: #FBF5E1; border-left: 4px solid #A67C00; }
+        .ed-bloco.premium .sec { color: #A67C00; border-bottom-color: #E8D9A8; }
         .cmp { display: flex; }
-        .cmp-col { flex: 1 1 0; padding: 0 16px; border-left: 1px solid #FDE68A; }
+        .cmp-col { flex: 1 1 0; padding: 0 16px; border-left: 1px solid #E8D9A8; }
         .cmp-col:first-child { padding-left: 0; border-left: 0; }
         .cmp-nome { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; color: #4B5563; margin: 0; }
-        .cmp-col.gold .cmp-nome { color: #A16207; }
+        .cmp-col.gold .cmp-nome { color: #A67C00; }
         .cmp-col.ind .cmp-nome { color: #6D28D9; }
-        .cmp-col.gold.ind .cmp-nome { color: #A16207; }
-        .cmp-preco { font-size: 22px; font-weight: 900; color: #111827; margin: 4px 0 6px; line-height: 1; }
-        .cmp-col.gold .cmp-preco { color: #A16207; }
+        .cmp-col.gold.ind .cmp-nome { color: #A67C00; }
+        .cmp-preco { font-size: 22px; font-weight: 900; color: #1E1433; margin: 4px 0 6px; line-height: 1; }
+        .cmp-col.gold .cmp-preco { color: #A67C00; }
         .cmp-preco span { font-size: 11px; font-weight: 700; color: #6B7280; }
-        .cmp-item { font-size: 12px; color: #1F2937; margin: 2px 0 0; line-height: 1.4; }
-        .cmp-def { font-size: 12px; color: #422006; line-height: 1.5; margin: 12px 0 0; padding-top: 10px; border-top: 1px solid #FDE68A; }
-        .prem-txt { font-size: 13px; color: #422006; line-height: 1.5; margin: 0; }
+        .cmp-item { font-size: 12px; color: #2A2140; margin: 2px 0 0; line-height: 1.4; }
+        .cmp-def { font-size: 12px; color: #422006; line-height: 1.5; margin: 12px 0 0; padding-top: 10px; border-top: 1px solid #E8D9A8; }
+        .prem-txt { font-size: 13px; color: #1E1433; line-height: 1.5; margin: 0; }
         .nota-estimativa { font-size: 11px; color: #6B7280; margin: 12px 0 0; line-height: 1.4; }
         .ed-bloco.cinza { background: #F9FAFB; border: 1px solid #F3F4F6; }
         .ed-bloco.cinza .bons p { border-bottom-color: #EEF0F3; }
         /* FECHAMENTO DA PROPOSTA */
         .cta-final { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; background: #F5F3FF; border-top: 4px solid #8C52FF; border-radius: 0; padding: 18px 22px; }
         .cta-kicker { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.16em; color: #8C52FF; margin: 0 0 4px; }
-        .cta-frase { font-size: 19px; font-weight: 900; color: #111827; line-height: 1.2; margin: 0; }
+        .cta-frase { font-size: 19px; font-weight: 900; color: #1E1433; line-height: 1.2; margin: 0; }
         .cta-sub { font-size: 12.5px; color: #4B5563; margin: 4px 0 0; }
         .cta-acao { text-align: center; flex-shrink: 0; }
         .cta-whats { display: inline-block; background: #25D366; color: #FFFFFF; font-weight: 900; font-size: 14px; letter-spacing: 0.02em; border-radius: 2px; padding: 11px 18px; text-decoration: none; white-space: nowrap; }
@@ -1287,7 +1294,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                 return;
             }
             linha.className = 'flex items-center gap-2 p-2.5 border rounded-lg hover:bg-purple-50 transition' + (s.variante ? ' ml-6' : '');
-            if (s.variante) linha.style.cssText = 'border-color:#D4A017;background:#FFFBEB';
+            if (s.variante) linha.style.cssText = 'border-color:#A67C00;background:#FBF5E1';
             linha.innerHTML =
                 '<label class="flex items-start gap-3 flex-1 cursor-pointer">' +
                 '<input type="checkbox" id="check-svc' + s.id + '" class="w-5 h-5 mt-0.5 rounded">' +
@@ -1342,9 +1349,9 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
             card.id = 'pdf-svc' + s.id;
             const temPremium = SERVICOS.some(v => v.variante === s.id);
             card.innerHTML =
-                (temPremium ? '<div class="selo selo-premium font-black rounded-full" style="position:absolute;bottom:-11px;right:12px;max-width:calc(100% - 24px);font-size:10px;white-space:nowrap;background:#D4A017;color:#FFFFFF;border:1px solid #A16207;height:22px;line-height:1;padding:0 12px;display:flex;align-items:center"><span></span></div>' : '') +
+                (temPremium ? '<div class="selo selo-premium font-black rounded-full" style="position:absolute;bottom:-11px;right:12px;max-width:calc(100% - 24px);font-size:10px;white-space:nowrap;background:#A67C00;color:#FFFFFF;border:1px solid #A67C00;height:22px;line-height:1;padding:0 12px;display:flex;align-items:center"><span></span></div>' : '') +
                 '<div class="selo badge-recomendado hidden absolute -top-3 -right-2 text-white text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="background:#8C52FF;height:22px;line-height:1;padding:0 12px"><span>★ Indicado para o seu momento</span></div>' +
-                '<div class="selo badge-promo hidden text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="position:absolute;bottom:-11px;left:12px;background:#FDE047;color:#111827;border:1px solid #EAB308;height:22px;line-height:1;padding:0 12px"><span class="promo-texto"></span></div>' +
+                '<div class="selo badge-promo hidden text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm" style="position:absolute;bottom:-11px;left:12px;background:#FF9F7A;color:#1E1433;border:1px solid #FF9F7A;height:22px;line-height:1;padding:0 12px"><span class="promo-texto"></span></div>' +
                 '<div class="flex items-center gap-2 mb-3">' +
                 '<div class="bg-gray-900 p-2 rounded-lg text-white shadow shrink-0">' + s.icone + '</div>' +
                 '<div><h3 class="fonte-marca titulo-logo text-lg whitespace-nowrap"><span>' + s.nome + '</span></h3>' +
@@ -1750,8 +1757,8 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     (promo && promo.de ? '<div class="preco-de">de ' + moeda(promo.de) + '</div>' : '') +
                     (premiumMarcado && !promo
                         ? '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500">Básico</div>' +
-                          '<div class="text-lg font-black leading-none" style="color:#111827">' + moeda(precoDe(s0)) + '</div>' +
-                          '<div class="text-[13px] font-black mt-1" style="color:#A16207">+ ' + moeda(precoDe(s) - precoDe(s0)) + ' Premium</div>' +
+                          '<div class="text-lg font-black leading-none" style="color:#1E1433">' + moeda(precoDe(s0)) + '</div>' +
+                          '<div class="text-[13px] font-black mt-1" style="color:#A67C00">+ ' + moeda(precoDe(s) - precoDe(s0)) + ' Premium</div>' +
                           '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">por mês</div>'
                         : '<div class="text-lg font-black text-purple-700 leading-none' + (promo ? ' preco-promo' : '') + '">' + (promo && promo.de ? 'por ' : '') + moeda(precoDe(s)) + '</div>' +
                           '<div class="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-1">' + (s.tipo === 'mensal' ? 'por mês' : 'serviço avulso') + '</div>');
@@ -1818,7 +1825,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     '<td class="pl-3 text-right text-[10px] font-black uppercase tracking-wider whitespace-nowrap" style="' + corPix + '">No Pix</td></tr>' : '');
             sel.forEach(s => {
                 const promo = promoDe[s.id];
-                h += '<tr class="border-b border-purple-100"' + (promo ? ' style="background:#FEFCE8"' : '') + '>' +
+                h += '<tr class="border-b border-purple-100"' + (promo ? ' style="background:#FFF1EB"' : '') + '>' +
                     '<td class="py-2 pr-3"><span class="font-bold text-gray-900">' + s.rotulo + '</span>' +
                     '<span class="block text-[11px] text-gray-500">' + s.curto + '</span>' +
                     (promo ? '<span class="tag-promo">★ ' + escHtml(promo.rotulo) + '</span>' : '') + '</td>' +
@@ -1856,16 +1863,16 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                     // Duas opções lado a lado, com a mesma estrutura: rótulo, preço por mês, Pix e como paga
                     const pixMes = Math.round(precoPix(s) * (1 - pctPac / 100));
                     const temPixPac = precoPix(s) < base;
-                    const caixaOp = (destaque) => 'style="flex:1 1 0;border-radius:0;padding:10px 12px;text-align:center;background:#FFFFFF;border:2px solid ' + (destaque ? '#EAB308' : '#FDE68A') + '"';
-                    const rot = (t) => '<p style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.06em;color:#854D0E;margin:0">' + t + '</p>';
+                    const caixaOp = (destaque) => 'style="flex:1 1 0;border-radius:0;padding:10px 12px;text-align:center;background:#FFFFFF;border:2px solid ' + (destaque ? '#FF9F7A' : '#FFD9C9') + '"';
+                    const rot = (t) => '<p style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.06em;color:#7A2E14;margin:0">' + t + '</p>';
                     const grande = (v, cor) => '<p style="font-size:20px;font-weight:900;color:' + cor + ';margin:5px 0 0;line-height:1">' + moeda(v) + '<span style="font-size:11px;font-weight:700"> /mês</span></p>';
                     const pixL = (v) => temPixPac ? '<p style="font-size:11px;font-weight:800;color:#047857;margin:4px 0 0">No Pix: ' + moeda(v) + ' /mês</p>' : '';
-                    const como = (t) => '<p style="font-size:11px;font-weight:600;color:#422006;margin:6px 0 0">' + t + '</p>';
-                    h += '<div style="margin-top:14px;padding:12px;background:#FEF9C3;border:1px solid #FACC15;border-radius:0;color:#713F12;break-inside:avoid">' +
+                    const como = (t) => '<p style="font-size:11px;font-weight:600;color:#1E1433;margin:6px 0 0">' + t + '</p>';
+                    h += '<div style="margin-top:14px;padding:12px;background:#FFF1EB;border:1px solid #FFC2AA;border-radius:0;color:#7A2E14;break-inside:avoid">' +
                         '<p style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 10px;text-align:center">★ Melhor custo-benefício: feche 3 meses e pague menos</p>' +
                         '<div style="display:flex;gap:10px">' +
-                        '<div ' + caixaOp(false) + '>' + rot('Por mês') + grande(base, '#111827') + pixL(precoPix(s)) + como('Paga um mês por vez, sem fidelidade') + '</div>' +
-                        '<div ' + caixaOp(true) + '>' + rot('Pacote de 3 meses • −' + pctPac + '%') + grande(porMes, '#A16207') + pixL(pixMes) +
+                        '<div ' + caixaOp(false) + '>' + rot('Por mês') + grande(base, '#1E1433') + pixL(precoPix(s)) + como('Paga um mês por vez, sem fidelidade') + '</div>' +
+                        '<div ' + caixaOp(true) + '>' + rot('Pacote de 3 meses • −' + pctPac + '%') + grande(porMes, '#C2522B') + pixL(pixMes) +
                         como('3 meses pagos no fechamento: <b style="white-space:nowrap">' + moeda(total3) + '</b>') + '</div>' +
                         '</div></div>';
                 });
