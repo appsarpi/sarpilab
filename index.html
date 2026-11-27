@@ -724,6 +724,8 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         /* Na tela, mostra onde começa a página 2 */
         @media screen {
             .pagina-servico { margin-top: 30px; padding-top: 26px; border-top: 2px dashed #C4B5FD; position: relative; }
+            .pagina-continua { margin-top: 22px; padding-top: 0; border-top: none; }
+            .pagina-continua::before { content: none !important; }
             .pagina-servico::before { content: 'SAIBA MAIS'; position: absolute; top: -9px; left: 0; background: #fff; padding-right: 8px; font-size: 10px; font-weight: 900; letter-spacing: 2px; color: #8C52FF; }
             #pdf-p2.nova-pagina {
                 margin-top: 30px;
@@ -1975,6 +1977,12 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
                             (it.d ? '<div class="dd">' + fx(it.d) + '</div>' : '') + (it.pagTxt ? '<p class="nota-pag">● Paga ' + fx(it.pag) + ' ' + it.pagTxt + '</p>' : notaPag(it.pag)) + '</div>').join('') + '</div>';
                 }).join('') + '</div>';
             }
+            // Vitrine Lab não cabe numa folha: divide em 2 páginas (pacotes + passo a passo | o que recebe + bom saber)
+            if (vP) {
+                h += '<div class="ed-rodape"><a href="#pdf-p1" class="voltar-proposta" data-pagina="1">‹ Voltar para a proposta</a><span>Continua na próxima página ›</span></div></div>' +
+                    '<div class="pagina-servico pagina-continua">' +
+                    '<div class="ed-topo">Sarpi Lab  •  Como funciona  •  ' + x.nome + ' (continuação)</div>';
+            }
             h += '<div class="ed-bloco lilas"><p class="sec">O que você recebe</p><div class="numeros">' +
                 pg.recebe.map(r => '<div class="numero' + (r[2] === 'bonus' ? ' bonus' : '') + (r[2] === 'premium' ? ' premium' : '') + '">' +
                     '<div class="n">' + r[0] + '</div><div class="l">' + r[1] + '</div>' + (r[2] === 'bonus' ? '<p class="nota-presente" style="margin-top:5px">★ De presente</p>' : '') + (r[2] === 'premium' ? '<p class="nota-presente" style="margin-top:5px">★ Exclusivo Premium</p>' : '') + '</div>').join('') + '</div>' +
@@ -2070,7 +2078,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
         const paginaDe = { '1': 1 };
         $('pdf-p3').querySelectorAll('.pagina-servico').forEach(pgSvc => {
             paginas.push([pgSvc]);
-            paginaDe['svc' + pgSvc.id.replace('saiba-svc', '')] = paginas.length;
+            if (pgSvc.id) paginaDe['svc' + pgSvc.id.replace('saiba-svc', '')] = paginas.length;   // continuação não muda o destino do "Saiba mais"
         });
 
         const palco = document.createElement('div');
